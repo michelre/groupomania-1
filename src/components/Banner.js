@@ -1,11 +1,11 @@
-
+import logo from './logos/icon-left-font-monochrome-white.png'
+import '../styles/Banner.css'
 
 export default function Banner(){
     return(
-        <div>
-            <img src="public/logos/" alt="Logo Groupomania"/>
-            <h1>Votre réseau social Groupomania</h1>
+        <div className="banner">
+            <img className="banner-img" src={logo} alt="Logo Groupomania"/>
+            <h1 className="banner-title">Votre réseau social d'entreprise</h1>
         </div>
-        
     )
 }
