@@ -1,9 +1,13 @@
 
 import Banner from './Banner';
+import Nav from './Nav';
 
 export default function App() {
   return (
-    <Banner />
+    <div>
+    <Banner />,
+    <Nav />
+    </div>
   );
 }
 

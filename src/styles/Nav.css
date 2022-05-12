@@ -1,0 +1,17 @@
+.nav{
+    background-color:#AEAEAF;
+    padding: 30px;
+}
+
+.nav-list {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    list-style: none;
+}
+.nav-list a{
+    text-decoration: none;
+    color: #091F43;
+    padding: 30px;
+    font-size: 20px;
+}
