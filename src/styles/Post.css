@@ -1,0 +1,11 @@
+.post-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+    background-color:#D1515A;
+    border-radius:5px;
+    box-sizing: border-box;
+    
+}
