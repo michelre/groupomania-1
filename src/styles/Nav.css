@@ -1,17 +1,35 @@
 .nav{
     background-color:#AEAEAF;
-    padding: 30px;
+    padding: 20px;
+    max-width: 1920px;
+    margin:auto;
 }
 
 .nav-list {
     display: flex;
-    flex-direction: row;
     justify-content:space-evenly;
     list-style: none;
+    margin:0;
+    padding: 0;
 }
 .nav-list a{
     text-decoration: none;
     color: #091F43;
-    padding: 30px;
-    font-size: 20px;
+    font-size: 16px;
+    text-align: center;
+}
+.nav-list a:hover {
+    font-weight: bold;
+    border-bottom: #091F43 solid 2px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .nav-list a {
+        font-size: 18px;
+    }
+}
+@media screen and  (min-width: 992px) {
+    .nav-list a {
+        font-size: 22px;
+    }
 }
