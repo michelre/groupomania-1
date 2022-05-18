@@ -1,4 +1,4 @@
-import logo from './logos/icon-left-font-monochrome-white.png'
+import logo from '../logos/icon-left-font-monochrome-white.png'
 import '../styles/Banner.css'
 
 export default function Banner(){
