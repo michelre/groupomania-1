@@ -4,6 +4,7 @@ import Nav from './components/Nav';
 import Footer from './components/Footer';
 import Post from './components/Post';
 import data from './data';
+import FormLogin from './components/FormLogin';
 
 
 
@@ -13,16 +14,13 @@ export default function App() {
     return <Post
     key={post.id}
     item={post}
-    /*img={post.img}
-    title={post.title}
-    description={post.description}
-    alt={post.alt}*/
     />
   })
   return (
     <div>
     <Banner />
     <Nav />
+    <FormLogin />
     {posts}
     <Footer />
     </div>

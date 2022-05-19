@@ -8,10 +8,6 @@ export default function Wall () {
       return <Post
       key={post.id}
       item={post}
-      /*img={post.img}
-      title={post.title}
-      description={post.description}
-      alt={post.alt}*/
       />
     })
     return (
