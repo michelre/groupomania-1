@@ -4,9 +4,11 @@ function loginClick() {
   console.log('Utilisateur veut se connecter')
 }
 
-function createAccountClick() {
-  console.log('Utilisateur veut créer un compte')
+function createAccountClick(e) {
+  console.log('Utilisateur veut créer un compte:', e)
 }
+
+
 
 export default function Nav() {
     return(

@@ -6,11 +6,12 @@ import Footer from './components/Footer';
 export default function Wall () {
     const posts = data.map(post => {
       return <Post
-      id={post.id}
-      img={post.img}
+      key={post.id}
+      item={post}
+      /*img={post.img}
       title={post.title}
       description={post.description}
-      alt={post.alt}
+      alt={post.alt}*/
       />
     })
     return (
