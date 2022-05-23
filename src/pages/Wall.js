@@ -1,19 +1,26 @@
 import Banner from '../components/Banner';
 import Post from '../components/Post';
-import data from '../data';
+import Api from '../Api';
 import Footer from '../components/Footer';
+import {useEffect, useState} from "react";
+
+const api = new Api()
+
 
 export default function Wall () {
-    const posts = data.map(post => {
-      return <Post
-      key={post.id}
-      item={post}
-      />
+  const [posts, setPosts] = useState([])
+  useEffect(() => {
+    api.getAllPosts().then(p => {
+      setPosts(p)
     })
+  }, [])
     return (
       <div>
       <Banner />
-      {posts}
+      {posts.map(post => <Post
+        key={post.id}
+        item={post}/>
+        )}
       <Footer />
       </div>
     );

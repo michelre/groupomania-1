@@ -4,6 +4,7 @@ import Wall from './pages/Wall';
 import Login from './pages/Login';
 import CreateAccount from './pages/CreateAccount';
 import CreatePost from './pages/CreatePost';
+import Error from './pages/Error';
 
 export default function App() {
     return (
@@ -14,6 +15,7 @@ export default function App() {
           <Route path="login" element={ <Login /> } />
           <Route path="createaccount" element={ <CreateAccount /> } />
           <Route path="create post" element={ <CreatePost /> } />
+          <Route path="*" element={ <Error /> } />
         </Routes>
       </div>
     )
