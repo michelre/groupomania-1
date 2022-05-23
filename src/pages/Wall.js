@@ -12,9 +12,9 @@ export default function Wall () {
     })
     return (
       <div>
-      <Banner />,
-      {posts},
-      <Footer />,
+      <Banner />
+      {posts}
+      <Footer />
       </div>
     );
   }
