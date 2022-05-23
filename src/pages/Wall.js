@@ -1,7 +1,7 @@
-import Banner from './components/Banner';
-import Post from './components/Post';
-import data from './data';
-import Footer from './components/Footer';
+import Banner from '../components/Banner';
+import Post from '../components/Post';
+import data from '../data';
+import Footer from '../components/Footer';
 
 export default function Wall () {
     const posts = data.map(post => {

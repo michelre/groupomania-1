@@ -1,10 +1,10 @@
 
-import Banner from './components/Banner';
-import Nav from './components/Nav';
-import Footer from './components/Footer';
-import Post from './components/Post';
-import data from './data';
-import FormLogin from './components/FormLogin';
+import Banner from '../components/Banner';
+import Nav from '../components/Nav';
+import Footer from '../components/Footer';
+import Post from '../components/Post';
+import data from '../data';
+import FormLogin from '../components/FormLogin';
 
 
 
