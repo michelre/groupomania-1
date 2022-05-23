@@ -29,8 +29,30 @@ getAllPosts(){
     )
 }
 
-signIn(){
-    return Promise.resolve()
+login(){
+    return Promise.resolve(
+        [
+            {
+                id:"a1",
+                email:"ma@test.fr",
+                password:"1234",
+            }
+        ]
+    )
 }
 
+signin(){
+    return Promise.resolve(
+        [
+            {
+                id:"a1x",
+                firstname:"Maria",
+                email:"ma@test.fr",
+                password:"1234",
+                picture:"https://pngimg.com/uploads/pokemon/pokemon_PNG14.png",
+                department:"Marketing",
+            }
+        ]
+    )
+}
 } 
