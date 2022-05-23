@@ -55,4 +55,17 @@ signin(){
         ]
     )
 }
+createPost(){
+    return Promise.resolve(
+        [
+            {
+                id: "1",
+                img:"team.webp",
+                title:"Team Building",
+                description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                alt:"Photo d'un groupe de collègues",
+            }
+        ]    
+    )
 } 
+}

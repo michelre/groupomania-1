@@ -14,7 +14,7 @@ export default function App() {
           <Route path="wall" element={ <Wall /> } />
           <Route path="login" element={ <Login /> } />
           <Route path="signin" element={ <Signin /> } />
-          <Route path="create post" element={ <CreatePost /> } />
+          <Route path="wall/createpost" element={ <CreatePost /> } />
           <Route path="*" element={ <Error /> } />
         </Routes>
       </div>

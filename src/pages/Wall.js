@@ -3,6 +3,7 @@ import Post from '../components/Post';
 import Api from '../Api';
 import Footer from '../components/Footer';
 import {useEffect, useState} from "react";
+import { Link } from "react-router-dom";
 
 const api = new Api()
 
@@ -17,6 +18,9 @@ export default function Wall () {
     return (
       <div>
       <Banner />
+      <Link to="createpost">
+        <button type="submit" className="form-login-btn">Créer un post</button>
+      </Link>
       {posts.map(post => <Post
         key={post.id}
         item={post}/>
