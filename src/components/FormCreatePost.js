@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const api = new Api();
 
 export default function FormCreatePost() {
-  const [img, setImg] = useState('');
+  const [file, setFile] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
@@ -22,11 +22,10 @@ export default function FormCreatePost() {
     <form className="form-login" onSubmit={handleSubmit}>
       <h2>De quoi souhaitez-vous discuter?</h2>
       <input
-        type="image"
+        type="file"
         placeholder="Télécharger une image ou vidéo"
-        value={img}
-        onChange={(e) => setImg(e.target.value)}
-        alt="Photo postée"
+        value={file}
+        onChange={(e) => setFile(e.target.value)}
       />
       <input
         type="text"

@@ -22,6 +22,7 @@ export default function Signin() {
   }
   return (
     <form className="form-login" onSubmit={handleSubmit}>
+      <img src="../images/welcome.jpg" alt="Welcome" />
       <h2>Créez votre compte en quelques minutes!</h2>
       <input
         type="text"
