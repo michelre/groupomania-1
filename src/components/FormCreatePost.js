@@ -42,6 +42,7 @@ export default function FormCreatePost() {
       <button type="submit" className="form-login-btn">
         Poster
       </button>
+      <img src="..\images\discuss.jpg" alt="Bavardages" />
     </form>
   );
 }

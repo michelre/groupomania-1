@@ -4,9 +4,9 @@ export default class Api {
       {
         id: '1',
         img: 'team.webp',
-        title: 'Team Building',
+        title: 'Team',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        alt: "Photo d'un groupe de collègues",
+        alt: 'Team',
       },
       {
         id: '2',
@@ -62,6 +62,9 @@ export default class Api {
     return Promise.resolve();
   }
   deletePost() {
+    return Promise.resolve();
+  }
+  likePost() {
     return Promise.resolve();
   }
 }

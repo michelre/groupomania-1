@@ -22,7 +22,7 @@ export default function Signin() {
   }
   return (
     <form className="form-login" onSubmit={handleSubmit}>
-      <img src="../images/welcome.jpg" alt="Welcome" />
+      <img src="../images/team.webp" alt="Team Check" />
       <h2>Créez votre compte en quelques minutes!</h2>
       <input
         type="text"
@@ -43,7 +43,7 @@ export default function Signin() {
         onChange={(e) => setPassword(e.target.value)}
       />
       <input
-        type="image"
+        type="file"
         placeholder="Photo"
         alt="Photo de l'utilisateur"
         value={picture}

@@ -17,6 +17,7 @@ export default function FormLogin() {
   }
   return (
     <form className="form-login" onSubmit={handleSubmit}>
+      <img src="..\images\welcome.jpg" alt="Welcome" />
       <h2>Welcome back!</h2>
       <input
         type="email"
