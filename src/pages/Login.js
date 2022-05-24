@@ -3,12 +3,11 @@ import FormLogin from '../components/FormLogin';
 import Footer from '../components/Footer';
 
 export default function Login() {
-    return (
-      <div>
+  return (
+    <div>
       <Banner />
       <FormLogin />
       <Footer />
-      </div>
-    );
-  }
-  
+    </div>
+  );
+}

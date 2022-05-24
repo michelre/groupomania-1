@@ -3,11 +3,11 @@ import FormCreatePost from '../components/FormCreatePost';
 import Footer from '../components/Footer';
 
 export default function CreatePost() {
-    return (
-      <div>
+  return (
+    <div>
       <Banner />
       <FormCreatePost />
       <Footer />
-      </div>
-    );
-  }
+    </div>
+  );
+}
