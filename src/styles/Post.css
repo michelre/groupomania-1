@@ -11,6 +11,17 @@
     max-width: 1920px;    
 }
 
+.post-author{
+    display: flex;
+    align-items: center;
+    
+}
+
+h3 {
+    margin:0;
+    font-size: small;
+}
+
 .post-img {
     object-fit: cover;
     border-radius:9px;
@@ -30,6 +41,13 @@
     font-size: 1em;
 }
 
+.post-functions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    gap: 6px;
+}
 
 @media screen and (min-width: 768px) and (max-width: 992px) {
     .post-img {

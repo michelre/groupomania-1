@@ -7,6 +7,10 @@ import ModifyPost from '../routes/ModifyPost';
 export default function Post(props) {
   return (
     <article className="post-container">
+      <div className="post-author">
+        <img alt="utilisateur" />
+        <h3>"prénom" a posté:</h3>
+      </div>
       <img
         className="post-img"
         alt={props.item.alt}
@@ -14,9 +18,11 @@ export default function Post(props) {
       />
       <h1 className="post-title">{props.item.title}</h1>
       <p className="post-description">{props.item.description}</p>
-      <LikePost />
-      <ModifyPost />
-      <DeletePost />
+      <div className="post-functions">
+        <LikePost />
+        <ModifyPost />
+        <DeletePost />
+      </div>
     </article>
   );
 }
