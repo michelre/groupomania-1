@@ -26,19 +26,19 @@ export default function Signin() {
       <h2>Créez votre compte en quelques minutes!</h2>
       <input
         type="text"
-        placeholder="Prénom"
+        placeholder="Votre prénom"
         value={firstname}
         onChange={(e) => setFirstName(e.target.value)}
       />
       <input
         type="email"
-        placeholder="Email"
+        placeholder="Votre email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
         type="password"
-        placeholder="Mot de passe"
+        placeholder="Votre mot de passe"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
@@ -49,12 +49,18 @@ export default function Signin() {
         value={picture}
         onChange={(e) => setPicture(e.target.value)}
       />
-      <input
-        type="text"
-        placeholder="Département"
+      <label for="department-select">Choisir votre département:</label>
+      <select
+        name="department-select"
+        id="department"
         value={department}
         onChange={(e) => setDepartment(e.target.value)}
-      />
+      >
+        <option value="Marketing">Marketing</option>
+        <option value="Sales">Sales</option>
+        <option value="Tech">Tech</option>
+        <option value="Ops">Ops</option>
+      </select>
       <button type="submit" className="form-login-btn">
         Créer un compte
       </button>

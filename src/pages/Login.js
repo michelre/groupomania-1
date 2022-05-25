@@ -1,5 +1,5 @@
 import Banner from '../components/Banner';
-import FormLogin from '../components/FormLogin';
+import FormLogin from '../routes/FormLogin';
 import Footer from '../components/Footer';
 
 export default function Login() {

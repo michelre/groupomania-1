@@ -10,6 +10,11 @@
     color:#091F43;
 }
 
+.like-icon:hover {
+    color:#792026;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
 .like-count {
     font-size: 1.2em;
     padding: 10px 0 0 10px;

@@ -1,6 +1,8 @@
 import '../styles/Post.css';
 import PropTypes from 'prop-types';
-import Like from './Like';
+import LikePost from '../routes/LikePost';
+import DeletePost from '../routes/DeletePost';
+import ModifyPost from '../routes/ModifyPost';
 
 export default function Post(props) {
   return (
@@ -12,7 +14,9 @@ export default function Post(props) {
       />
       <h1 className="post-title">{props.item.title}</h1>
       <p className="post-description">{props.item.description}</p>
-      <Like />
+      <LikePost />
+      <ModifyPost />
+      <DeletePost />
     </article>
   );
 }

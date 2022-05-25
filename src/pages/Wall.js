@@ -17,6 +17,7 @@ export default function Wall() {
   return (
     <div>
       <Banner />
+      <h2>De quoi souhaitez-vous discuter?</h2>
       <Link to="createpost">
         <button type="submit" className="form-login-btn form-login">
           Créer un post

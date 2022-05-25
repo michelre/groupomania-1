@@ -67,4 +67,7 @@ export default class Api {
   likePost() {
     return Promise.resolve();
   }
+  deleteUser() {
+    return Promise.resolve();
+  }
 }

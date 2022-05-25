@@ -1,13 +1,13 @@
 import Banner from '../components/Banner';
-import FormSignin from '../components/FormSignin';
+import FormSignin from '../routes/FormSignin';
 import Footer from '../components/Footer';
 
 export default function Signin() {
-    return (
-      <div>
+  return (
+    <div>
       <Banner />
       <FormSignin />
       <Footer />
-      </div>
-    );
-  }
+    </div>
+  );
+}

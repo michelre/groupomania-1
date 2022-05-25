@@ -20,7 +20,7 @@ export default function FormCreatePost() {
   }
   return (
     <form className="form-login" onSubmit={handleSubmit}>
-      <h2>De quoi souhaitez-vous discuter?</h2>
+      <h2>C'est parti! Créez ou modifiez vos posts!</h2>
       <input
         type="file"
         placeholder="Télécharger une image ou vidéo"
@@ -33,14 +33,14 @@ export default function FormCreatePost() {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <input
+      <textarea
         type="text"
         placeholder="Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
       <button type="submit" className="form-login-btn">
-        Poster
+        Publier
       </button>
       <img src="..\images\discuss.jpg" alt="Bavardages" />
     </form>

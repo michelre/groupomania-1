@@ -1,12 +1,12 @@
 import Banner from '../components/Banner';
-import FormCreatePost from '../components/FormCreatePost';
+import CreatePost from '../routes/CreatePost';
 import Footer from '../components/Footer';
 
-export default function CreatePost() {
+export default function Post() {
   return (
     <div>
       <Banner />
-      <FormCreatePost />
+      <CreatePost />
       <Footer />
     </div>
   );
