@@ -1,0 +1,18 @@
+
+.like-container {
+    display:flex;
+    align-items: center;
+}
+
+.like-icon {
+    font-size: 2em;
+    padding-top: 10px;
+    color:#091F43;
+}
+
+.like-count {
+    font-size: 1.2em;
+    padding: 10px 0 0 10px;
+    color:#091F43;
+    margin:0;
+}
