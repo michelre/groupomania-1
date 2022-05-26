@@ -3,6 +3,9 @@
     padding: 20px;
     max-width: 1920px;
     margin:auto;
+    background-image: url("../images/office.jpg");
+    background-size: cover;
+    height: 400px;
 }
 
 .nav-list {

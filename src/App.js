@@ -1,37 +1,22 @@
-
-import Banner from './components/Banner';
-import Nav from './components/Nav';
-import Footer from './components/Footer';
-import Post from './components/Post';
-import data from './data';
-import FormLogin from './components/FormLogin';
-import Api from './Api'
-import {useEffect, useState} from "react";
-const api = new Api()
-
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Wall from './pages/Wall';
+import Login from './pages/Login';
+import Signin from './pages/Signin';
+import Post from './pages/Post';
+import Error from './pages/Error';
 
 export default function App() {
-
-  const [posts, setPosts] = useState([])
-
-  useEffect(() => {
-    api.getAllPosts().then(p => {
-      setPosts(p)
-    })
-  }, [])
-
   return (
-    <div>
-    <Banner />
-    <Nav />
-    <FormLogin />
-    {posts.map(post => <Post
-        key={post.id}
-        item={post}/>
-        )}
-    <Footer />
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="wall" element={<Wall />} />
+        <Route path="login" element={<Login />} />
+        <Route path="signin" element={<Signin />} />
+        <Route path="wall/createpost" element={<Post />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
     </div>
   );
 }
-
-

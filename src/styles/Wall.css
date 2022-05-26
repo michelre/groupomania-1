@@ -1,0 +1,18 @@
+.container {
+    display:flex;
+    flex-direction: column;
+    max-width: 1920px;
+    box-sizing: border-box;
+    align-items: center;
+    margin: auto;
+    padding:20px;
+
+}
+
+/*@media screen and  (min-width: 992px) {
+    .container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    }
+}*/
+
