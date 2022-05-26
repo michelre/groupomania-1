@@ -22,14 +22,17 @@ export default function FormLogin() {
       <input
         type="email"
         placeholder="Email"
+        className="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        required
       />
       <input
         type="password"
         placeholder="Mot de passe"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        required
       />
       <button type="submit" className="form-login-btn">
         Se connecter

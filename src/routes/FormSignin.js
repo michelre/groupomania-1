@@ -29,18 +29,21 @@ export default function Signin() {
         placeholder="Votre prénom"
         value={firstname}
         onChange={(e) => setFirstName(e.target.value)}
+        required
       />
       <input
         type="email"
         placeholder="Votre email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        required
       />
       <input
         type="password"
         placeholder="Votre mot de passe"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        required
       />
       <input
         type="file"
