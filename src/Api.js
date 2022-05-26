@@ -1,12 +1,14 @@
 export default class Api {
-  getAllPosts() {
-    return Promise.resolve([
+
+  constructor() {
+    this.data = [
       {
         id: '1',
         img: 'team.webp',
         title: 'Team',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         alt: 'Team',
+        likes: 2
       },
       {
         id: '2',
@@ -14,6 +16,7 @@ export default class Api {
         title: 'Nouvelle pizzeria',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         alt: "Photo d'une pizza",
+        likes: 1
       },
       {
         id: '3',
@@ -21,8 +24,19 @@ export default class Api {
         title: 'Working From Home',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         alt: "Photo d'un chat sur ordi",
+        likes: 0
       },
-    ]);
+    ]
+  }
+
+
+  getAllPosts() {
+    return Promise.resolve(this.data);
+  }
+
+  getPostById(id){
+    const post = this.data.find(p => p.id === id)
+    return Promise.resolve(post)
   }
 
   login() {

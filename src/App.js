@@ -3,7 +3,8 @@ import Home from './pages/Home';
 import Wall from './pages/Wall';
 import Login from './pages/Login';
 import Signin from './pages/Signin';
-import Post from './pages/Post';
+import CreatePost from './pages/CreatePost';
+import UpdatePost from './pages/UpdatePost';
 import Error from './pages/Error';
 
 export default function App() {
@@ -14,7 +15,8 @@ export default function App() {
         <Route path="wall" element={<Wall />} />
         <Route path="login" element={<Login />} />
         <Route path="signin" element={<Signin />} />
-        <Route path="wall/createpost" element={<Post />} />
+        <Route path="wall/posts" element={<CreatePost />} />
+        <Route path="wall/posts/:id" element={<UpdatePost />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </div>
