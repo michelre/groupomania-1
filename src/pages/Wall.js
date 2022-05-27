@@ -3,8 +3,7 @@ import Post from '../components/Post';
 import Api from '../Api';
 import Footer from '../components/Footer';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import DeleteUser from '../components/DeleteUser';
+import CreatePost from '../components/CreatePost';
 import '../styles/Wall.css';
 
 const api = new Api();
@@ -42,11 +41,7 @@ export default function Wall() {
       <Banner />
       <main className="container">
         <h2>De quoi souhaitez-vous discuter?</h2>
-        <Link to="posts">
-          <button type="submit" className="form-login-btn form-login">
-            Créer un post
-          </button>
-        </Link>
+        <CreatePost />
         {posts.map((post) => (
           <Post
             alt={post.alt}
@@ -60,7 +55,6 @@ export default function Wall() {
             onLike={onLikePost}
           />
         ))}
-        <DeleteUser />
       </main>
       <Footer />
     </div>
