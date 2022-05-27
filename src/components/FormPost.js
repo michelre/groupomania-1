@@ -1,21 +1,16 @@
 import '../styles/FormLogin.css';
 import { useState } from 'react';
-import Api from '../Api';
-import { useNavigate } from 'react-router-dom';
 
-const api = new Api();
-
-export default function FormCreatePost() {
+export default function FormPost({ onCreatePost, post }) {
   const [file, setFile] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
-  const navigate = useNavigate();
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    api.createPost().then(() => {
-      navigate(`/wall/`);
+  function handleSubmit() {
+    onCreatePost({
+      title,
+      file,
+      description,
     });
   }
   return (
@@ -38,6 +33,7 @@ export default function FormCreatePost() {
         placeholder="Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
+        required
       />
       <button type="submit" className="form-login-btn">
         Publier
