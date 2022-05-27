@@ -1,23 +1,20 @@
 import '../styles/FormLogin.css';
 import { useState } from 'react';
-import Api from '../Api';
-import { useNavigate } from 'react-router-dom';
 
-const api = new Api();
-
-export default function Signin() {
+export default function Signin({ onSignin }) {
   const [firstname, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [picture, setPicture] = useState('');
   const [department, setDepartment] = useState('');
 
-  const navigate = useNavigate();
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    api.signin().then(() => {
-      navigate(`/wall/`);
+  function handleSubmit() {
+    onSignin({
+      firstname,
+      email,
+      password,
+      picture,
+      department,
     });
   }
   return (

@@ -1,7 +1,7 @@
 import '../styles/FormLogin.css';
 import { useState } from 'react';
 
-export default function FormPost({ onCreatePost, post }) {
+export default function FormPost({ onCreatePost }) {
   const [file, setFile] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');

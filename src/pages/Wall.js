@@ -4,7 +4,7 @@ import Api from '../Api';
 import Footer from '../components/Footer';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import DeleteUser from '../routes/DeleteUser';
+import DeleteUser from '../components/DeleteUser';
 import '../styles/Wall.css';
 
 const api = new Api();

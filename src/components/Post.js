@@ -1,8 +1,8 @@
 import '../styles/Post.css';
 import PropTypes from 'prop-types';
-import LikePost from '../routes/LikePost';
+import LikePost from '../components/LikePost';
 import DeletePost from '../components/DeletePost';
-import ModifyPost from '../routes/ModifyPost';
+import ModifyPost from '../components/ModifyPost';
 
 export default function Post({
   id,
