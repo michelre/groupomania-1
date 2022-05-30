@@ -13,12 +13,14 @@ export default function Post({
   likes,
   onDelete,
   onLike,
+  firstname = 'Pikachu',
+  picture = 'https://pngimg.com/uploads/pokemon/pokemon_PNG14.png',
 }) {
   return (
     <article className="post-container">
       <div className="post-author">
-        <img alt="utilisateur" />
-        <h3>"prénom" a posté:</h3>
+        <img alt="utilisateur" src={picture} className="post-author-img" />
+        <h3>{firstname} a posté:</h3>
       </div>
       <img className="post-img" alt={alt} src={`../images/${img}`} />
       <h1 className="post-title">{title}</h1>
@@ -42,4 +44,6 @@ Post.propTypes = {
   likes: PropTypes.number,
   onDeletePost: PropTypes.func,
   onLike: PropTypes.func,
+  firstname: PropTypes.string,
+  picture: PropTypes.string,
 };

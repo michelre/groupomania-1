@@ -14,12 +14,20 @@
 .post-author{
     display: flex;
     align-items: center;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
+    gap: 4px;
+}
+
+.post-author-img {
+    object-fit: cover;
+    border-radius:9px;
+    height: 30px;
+    width: auto;
 }
 
 h3 {
     margin:0;
-    font-size: small;
+    font-size: 10px;
     color: #091F43;
 }
 
