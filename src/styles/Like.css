@@ -2,10 +2,11 @@
 .like-container {
     display:flex;
     align-items: center;
+    gap: 6px;
 }
 
 .like-icon {
-    font-size: 2em;
+    font-size: 1.2em;
     color:#091F43;
 }
 
@@ -15,7 +16,7 @@
 }
 
 .like-count {
-    font-size: 1.2em;
+    font-size: 1em;
     color:#091F43;
     margin:0;
 }

@@ -14,12 +14,13 @@
 .post-author{
     display: flex;
     align-items: center;
-    
+    padding-bottom: 10px;
 }
 
 h3 {
     margin:0;
     font-size: small;
+    color: #091F43;
 }
 
 .post-img {
@@ -30,7 +31,7 @@ h3 {
 }
 
 .post-title {
-    margin:0;
+    margin: 6px 0;
     color:#091F43;
     font-size: 1.2em;
 }
@@ -43,16 +44,27 @@ h3 {
 
 .post-functions {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 10px;
-    gap: 16px;
+    padding-top: 10px;
+}
+
+.post-buttons {
+    display: flex;
+    gap: 10px;
 }
 
 .post-button {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    font-size: 10px;
+    background-color:#091F43;
+    border:none;
+    border-radius:50px;
+    color:white;
+    text-align: center;
+    padding: 4px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 @media screen and (min-width: 768px) and (max-width: 992px) {

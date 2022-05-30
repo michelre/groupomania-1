@@ -25,7 +25,7 @@ export default function Post({
       <p className="post-description">{description}</p>
       <div className="post-functions">
         <LikePost onLike={() => onLike(id)} count={likes} />
-        <div className="post-button">
+        <div className="post-buttons">
           <ModifyPost postId={id} />
           <DeletePost onDelete={() => onDelete(id)} />
         </div>

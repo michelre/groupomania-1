@@ -49,19 +49,21 @@ export default function Wall() {
       <main className="container">
         <h2>De quoi souhaitez-vous discuter?</h2>
         <CreatePost />
-        {posts.map((post) => (
-          <Post
-            alt={post.alt}
-            title={post.title}
-            description={post.description}
-            img={post.img}
-            id={post.id}
-            key={post.id}
-            likes={post.likes}
-            onDelete={onDeletePost}
-            onLike={onLikePost}
-          />
-        ))}
+        <section className="container-post">
+          {posts.map((post) => (
+            <Post
+              alt={post.alt}
+              title={post.title}
+              description={post.description}
+              img={post.img}
+              id={post.id}
+              key={post.id}
+              likes={post.likes}
+              onDelete={onDeletePost}
+              onLike={onLikePost}
+            />
+          ))}
+        </section>
       </main>
       <Footer />
     </div>
