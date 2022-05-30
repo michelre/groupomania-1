@@ -46,7 +46,13 @@ h3 {
     align-items: center;
     justify-content: space-between;
     padding: 10px;
-    gap: 6px;
+    gap: 16px;
+}
+
+.post-button {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 @media screen and (min-width: 768px) and (max-width: 992px) {
@@ -59,8 +65,11 @@ h3 {
     .post-description {
         font-size: 1.3em;
     }
+    .post-button {
+        flex-direction: row;
 }
-@media screen and  (min-width: 992px) {
+}
+@media screen and  (min-width: 992px) {    
     .post-img {
         height: 600px;
     }
@@ -70,4 +79,7 @@ h3 {
     .post-description {
         font-size: 2em;
     }
+    .post-button {
+        flex-direction: row;
+}
 }    

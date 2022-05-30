@@ -40,13 +40,13 @@ export default function Wall() {
   return (
     <div>
       <Banner />
+      <Nav
+        navName1={'Mon compte'}
+        navPath1={'user'}
+        navName2={'Se déconnecter'}
+        navPath2={'/'}
+      />
       <main className="container">
-        <Nav
-          navName1={'Mon compte'}
-          navPath1={'user'}
-          navName2={'Se déconnecter'}
-          navPath2={'/'}
-        />
         <h2>De quoi souhaitez-vous discuter?</h2>
         <CreatePost />
         {posts.map((post) => (
