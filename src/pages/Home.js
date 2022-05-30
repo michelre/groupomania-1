@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 
 export default function Home() {
   return (
-    <div>
+    <body>
       <Banner />
       <Nav
         navName1={'Se connecter'}
@@ -12,7 +12,8 @@ export default function Home() {
         navName2={'Créer un compte'}
         navPath2={'signin'}
       />
+      <img src={'../images/office.jpg'} alt="office" className="home-img" />
       <Footer />
-    </div>
+    </body>
   );
 }
