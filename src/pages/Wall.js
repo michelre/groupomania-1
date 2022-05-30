@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import { useEffect, useState } from 'react';
 import CreatePost from '../components/CreatePost';
 import '../styles/Wall.css';
+import Nav from '../components/Nav';
 
 const api = new Api();
 
@@ -40,6 +41,12 @@ export default function Wall() {
     <div>
       <Banner />
       <main className="container">
+        <Nav
+          navName1={'Mon compte'}
+          navPath1={'user'}
+          navName2={'Se déconnecter'}
+          navPath2={'/'}
+        />
         <h2>De quoi souhaitez-vous discuter?</h2>
         <CreatePost />
         {posts.map((post) => (

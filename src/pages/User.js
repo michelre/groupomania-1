@@ -4,6 +4,7 @@ import Api from '../Api';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Account from '../components/Account';
+import Nav from '../components/Nav';
 
 const api = new Api();
 
@@ -22,6 +23,12 @@ export default function User() {
   return (
     <div>
       <Banner />
+      <Nav
+        navName1={'Mur'}
+        navPath1={'/wall'}
+        navName2={'Se déconnecter'}
+        navPath2={'/'}
+      />
       <Account
         firstname="Maria"
         picture="https://pngimg.com/uploads/pokemon/pokemon_PNG14.png"

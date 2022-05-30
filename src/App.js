@@ -16,7 +16,7 @@ export default function App() {
         <Route path="wall" element={<Wall />} />
         <Route path="login" element={<Login />} />
         <Route path="signin" element={<Signin />} />
-        <Route path="user" element={<User />} />
+        <Route path="wall/user" element={<User />} />
         <Route path="wall/posts" element={<CreatePost />} />
         <Route path="wall/posts/:id" element={<UpdatePost />} />
         <Route path="*" element={<Error />} />
