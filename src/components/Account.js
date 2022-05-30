@@ -1,6 +1,5 @@
 import '../styles/Account.css';
 import PropTypes from 'prop-types';
-import CreatePost from '../components/CreatePost';
 import DeleteUser from '../components/DeleteUser';
 
 export default function Account({
@@ -13,15 +12,18 @@ export default function Account({
 }) {
   return (
     <article className="account-container">
-      <h1>Mon compte</h1>
-      <img src={picture} className="account-img" alt={alt} />
-      <h2 className="account-title">Salut {firstname}!</h2>
-      <p className="account-email">Email: {email}</p>
-      <p>Département: {department}</p>
+      <h1 className="account-title">Mon compte</h1>
+      <div className="account-info">
+        <img src={picture} className="account-img" alt={alt} />
+        <div className="account-description">
+          <h2 className="account-name">Salut {firstname}!</h2>
+          <p className="account-email">Email: {email}</p>
+          <p className="account-department">Département: {department}</p>
+        </div>
+      </div>
       <div className="account-functions">
         {/*<ModifyAccount accountId={id} />*/}
         <DeleteUser onDeleteUser={onDeleteUser} />
-        <CreatePost />
       </div>
     </article>
   );
