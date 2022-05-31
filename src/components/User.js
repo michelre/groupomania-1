@@ -1,8 +1,10 @@
 import '../styles/Account.css';
 import PropTypes from 'prop-types';
-import DeleteUser from '../components/DeleteUser';
+import DeleteUser from './DeleteUser';
+import ModifyUser from './ModifyUser';
 
-export default function Account({
+export default function User({
+  id,
   firstname,
   email,
   picture,
@@ -22,18 +24,19 @@ export default function Account({
         </div>
       </div>
       <div className="account-functions">
-        {/*<ModifyAccount accountId={id} />*/}
-        <DeleteUser onDeleteUser={onDeleteUser} />
+        <ModifyUser userId={id} />
+        <DeleteUser onDeleteUser={() => onDeleteUser(id)} />
       </div>
     </article>
   );
 }
 
-Account.propTypes = {
+User.propTypes = {
   alt: PropTypes.string,
   firstname: PropTypes.string,
   email: PropTypes.string,
   picture: PropTypes.string,
   department: PropTypes.string,
   onDeleteUser: PropTypes.func,
+  id: PropTypes.number,
 };

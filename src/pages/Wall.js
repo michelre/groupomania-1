@@ -42,7 +42,7 @@ export default function Wall() {
       <Banner />
       <Nav
         navName1={'Mon compte'}
-        navPath1={'user'}
+        navPath1={'account'}
         navName2={'Se déconnecter'}
         navPath2={'/'}
       />

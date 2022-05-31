@@ -64,4 +64,8 @@ export default class Api {
   deleteUser() {
     return Promise.resolve();
   }
+
+  ModifyUser() {
+    return Promise.resolve();
+  }
 }
