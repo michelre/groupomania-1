@@ -8,6 +8,7 @@ export default class Api {
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         alt: 'Team',
         likes: 2,
+        loves: 1,
       },
       {
         id: '2',
@@ -16,6 +17,7 @@ export default class Api {
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         alt: "Photo d'une pizza",
         likes: 1,
+        loves: 0,
       },
       {
         id: '3',
@@ -24,6 +26,7 @@ export default class Api {
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         alt: "Photo d'un chat sur ordi",
         likes: 0,
+        loves: 3,
       },
     ];
   }
@@ -63,6 +66,10 @@ export default class Api {
   }
 
   likePost() {
+    return Promise.resolve();
+  }
+
+  lovePost() {
     return Promise.resolve();
   }
 

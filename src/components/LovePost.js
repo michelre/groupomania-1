@@ -1,9 +1,9 @@
 import '../styles/Like.css';
 
-export default function LikePost({ count, onLike }) {
+export default function LovePost({ count, onHeart }) {
   return (
     <div className="like-container">
-      <i onClick={onLike} className="like-icon fas fa-thumbs-up"></i>
+      <i onClick={onHeart} className="like-icon fas fa-heart"></i>
       <p className="like-count">{count}</p>
     </div>
   );

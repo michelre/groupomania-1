@@ -37,6 +37,18 @@ export default function Wall() {
       setPosts(newPosts);
     });
   };
+
+  const onHeartPost = (id) => {
+    api.lovePost(id).then(() => {
+      const newPosts = posts.map((p) => {
+        if (p.id === id) {
+          return { ...p, loves: p.loves + 1 };
+        }
+        return p;
+      });
+      setPosts(newPosts);
+    });
+  };
   return (
     <div>
       <Banner />
@@ -59,8 +71,10 @@ export default function Wall() {
               id={post.id}
               key={post.id}
               likes={post.likes}
+              loves={post.loves}
               onDelete={onDeletePost}
               onLike={onLikePost}
+              onHeart={onHeartPost}
             />
           ))}
         </section>

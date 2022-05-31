@@ -48,4 +48,9 @@
     color:#091F43;
 }
    
-
+.account-functions {
+    display:flex;
+    justify-content: space-between;
+    padding:10px;
+    
+}

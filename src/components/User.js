@@ -1,4 +1,4 @@
-import '../styles/Account.css';
+import '../styles/User.css';
 import PropTypes from 'prop-types';
 import DeleteUser from './DeleteUser';
 import ModifyUser from './ModifyUser';
@@ -19,8 +19,18 @@ export default function User({
         <img src={picture} className="account-img" alt={alt} />
         <div className="account-description">
           <h2 className="account-name">Salut {firstname}!</h2>
-          <p className="account-email">Email: {email}</p>
-          <p className="account-department">Département: {department}</p>
+          <br />
+          <i className="fas fa-at"></i>
+          <p className="account-email">
+            Email:
+            <br />
+            {email}
+          </p>
+          <br />
+          <p className="account-department">
+            Département: <br />
+            {department}
+          </p>
         </div>
       </div>
       <div className="account-functions">
