@@ -30,10 +30,10 @@ export default function User() {
         navPath2={'/'}
       />
       <Account
-        firstname="Maria"
+        firstname="Pikachu"
         picture="https://pngimg.com/uploads/pokemon/pokemon_PNG14.png"
         onDeleteUser={onDeleteUser}
-        email="ma@groupomania.com"
+        email="pika@groupomania.com"
         department="Tech"
         alt="Pikachu"
       />

@@ -20,7 +20,7 @@ export default function Post({
     <article className="post-container">
       <div className="post-author">
         <img alt="utilisateur" src={picture} className="post-author-img" />
-        <h3>{firstname} a posté:</h3>
+        <p className="post-author-name">{firstname} a posté:</p>
       </div>
       <img className="post-img" alt={alt} src={`../images/${img}`} />
       <h1 className="post-title">{title}</h1>
