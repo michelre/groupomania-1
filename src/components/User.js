@@ -19,14 +19,16 @@ export default function User({
         <img src={picture} className="account-img" alt={alt} />
         <div className="account-description">
           <h2 className="account-name">Salut {firstname}!</h2>
+          <i className="like-icon far fa-smile-beam"></i>
           <br />
-          <i className="fas fa-at"></i>
+          <i className="like-icon fas fa-at"></i>
           <p className="account-email">
             Email:
             <br />
             {email}
           </p>
           <br />
+          <i className="like-icon fas fa-building"></i>
           <p className="account-department">
             Département: <br />
             {department}
