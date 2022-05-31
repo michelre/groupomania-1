@@ -36,7 +36,7 @@ export default function Account() {
         email="pika@groupomania.com"
         department="Tech"
         alt="Pikachu"
-        id="1"
+        id={1}
       />
       <Footer />
     </div>

@@ -1,18 +1,24 @@
 import '../styles/FormLogin.css';
 import { useState } from 'react';
 
-export default function Signin({ onSignin }) {
+export default function Signin({ onSignin, onModifyUser }) {
   const [firstname, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [picture, setPicture] = useState('');
   const [department, setDepartment] = useState('');
 
-  function handleSubmit() {
+  function handleSubmit(e) {
+    e.preventDefault();
     onSignin({
       firstname,
       email,
       password,
+      picture,
+      department,
+    });
+    onModifyUser({
+      firstname,
       picture,
       department,
     });

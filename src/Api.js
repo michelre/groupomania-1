@@ -37,6 +37,11 @@ export default class Api {
     return Promise.resolve(post);
   }
 
+  getUserById(id) {
+    const user = this.data.find((p) => p.id === id);
+    return Promise.resolve(user);
+  }
+
   login() {
     return Promise.resolve();
   }
@@ -65,7 +70,7 @@ export default class Api {
     return Promise.resolve();
   }
 
-  ModifyUser() {
+  modifyUser() {
     return Promise.resolve();
   }
 }

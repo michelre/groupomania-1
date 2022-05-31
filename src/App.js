@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Signin from './pages/Signin';
 import CreatePost from './pages/CreatePost';
 import UpdatePost from './pages/UpdatePost';
+import UpdateUser from './pages/UpdateUser';
 import Error from './pages/Error';
 import Account from './pages/Account';
 
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="wall/account" element={<Account />} />
         <Route path="wall/posts" element={<CreatePost />} />
         <Route path="wall/posts/:id" element={<UpdatePost />} />
+        <Route path="wall/account/signin/:id" element={<UpdateUser />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </div>

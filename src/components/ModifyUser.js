@@ -1,7 +1,9 @@
-export default function ModifyUser({ onModifyUser }) {
+import { Link } from 'react-router-dom';
+
+export default function ModifyUser({ userId }) {
   return (
-    <button onClick={onModifyUser} className="form-login-btn">
+    <Link to={`signin/${userId}`} className="post-button">
       Modifier mon compte
-    </button>
+    </Link>
   );
 }
