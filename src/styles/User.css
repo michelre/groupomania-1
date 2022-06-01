@@ -6,6 +6,10 @@
     box-sizing: border-box;
     margin:10px auto;
     width:90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
 }
 
 .account-title {
@@ -17,8 +21,11 @@
 .account-info {
     display:flex;
     padding:5px;
-   
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;    
 }
+
 .account-img {
     object-fit: cover;
     width: 40%;
@@ -27,6 +34,9 @@
 
 .account-description {
     padding:10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .account-name {
@@ -34,23 +44,41 @@
     margin: 0;
     font-size: 14px;
     padding-bottom: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.account-icon{
+    display: flex;
+    gap:4px;
+}
+
+.user-icon{
+    color:#792026;
+    font-size: 1em;
 }
 
 .account-email{
     margin: 0;
     font-size: 12px;
     color:#091F43;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .account-department {
     margin: 0;
     font-size: 12px;
     color:#091F43;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
    
 .account-functions {
     display:flex;
     justify-content: space-between;
-    padding:10px;
-    
+    padding:10px;    
 }

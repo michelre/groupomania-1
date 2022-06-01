@@ -18,21 +18,27 @@ export default function User({
       <div className="account-info">
         <img src={picture} className="account-img" alt={alt} />
         <div className="account-description">
-          <h2 className="account-name">Salut {firstname}!</h2>
-          <i className="like-icon far fa-smile-beam"></i>
+          <h2 className="account-name">
+            Salut {firstname}
+            <i className="user-icon far fa-smile-beam"></i>!
+          </h2>
           <br />
-          <i className="like-icon fas fa-at"></i>
-          <p className="account-email">
-            Email:
-            <br />
-            {email}
-          </p>
+          <div className="account-icon">
+            <i className="user-icon fas fa-at"></i>
+            <p className="account-email">
+              Email:
+              <br />
+              {email}
+            </p>
+          </div>
           <br />
-          <i className="like-icon fas fa-building"></i>
-          <p className="account-department">
-            Département: <br />
-            {department}
-          </p>
+          <div className="account-icon">
+            <i className="user-icon fas fa-building"></i>
+            <p className="account-department">
+              Département: <br />
+              {department}
+            </p>
+          </div>
         </div>
       </div>
       <div className="account-functions">

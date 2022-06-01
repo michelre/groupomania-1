@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 
 export default function Home() {
   return (
-    <body>
+    <div>
       <Banner />
       <Nav
         navName1={'Se connecter'}
@@ -14,6 +14,6 @@ export default function Home() {
       />
       <img src={'../images/office.jpg'} alt="office" className="home-img" />
       <Footer />
-    </body>
+    </div>
   );
 }
