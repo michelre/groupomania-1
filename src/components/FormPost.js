@@ -6,7 +6,8 @@ export default function FormPost({ onCreatePost }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
-  function handleSubmit() {
+  function handleSubmit(e) {
+    e.preventDefault();
     onCreatePost({
       title,
       file,

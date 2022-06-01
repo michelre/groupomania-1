@@ -23,7 +23,9 @@ export default function Post({
     <article className="post-container">
       <div className="post-author">
         <img alt="utilisateur" src={picture} className="post-author-img" />
-        <p className="post-author-name">{firstname} a posté:</p>
+        <p className="post-author-name">
+          {firstname} a posté le {new Date().toLocaleString('fr-FR')}:
+        </p>
       </div>
       <img className="post-img" alt={alt} src={`../images/${img}`} />
       <h1 className="post-title">{title}</h1>
