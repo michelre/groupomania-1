@@ -1,5 +1,5 @@
 import '../styles/Footer.css';
-import logo from '../logos/icon-left-font-monochrome-white.png';
+import logo from '../logos/icon-left-font-monochrome-black.svg';
 import { Link } from 'react-router-dom';
 
 export default function Footer() {

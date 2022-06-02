@@ -1,5 +1,5 @@
 .account-container {
-    border: 1px solid #AEAEAF;
+    border: 1px solid #FFD7D7;
     border-radius:50px;
     box-shadow: 1px 3px 2px 1px #e6e4e4;
     padding:10px;
@@ -13,7 +13,7 @@
 }
 
 .account-title {
-    color:#091F43;
+    color:#4E5166;
     text-align: center;
     margin: 0;
 }
@@ -40,7 +40,7 @@
 }
 
 .account-name {
-    color:#792026;
+    color:#FD2D01;
     margin: 0;
     font-size: 14px;
     padding-bottom: 6px;
@@ -55,14 +55,14 @@
 }
 
 .user-icon{
-    color:#792026;
+    color:#FD2D01;
     font-size: 1em;
 }
 
 .account-email{
     margin: 0;
     font-size: 12px;
-    color:#091F43;
+    color:#4E5166;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -71,7 +71,7 @@
 .account-department {
     margin: 0;
     font-size: 12px;
-    color:#091F43;
+    color:#4E5166;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

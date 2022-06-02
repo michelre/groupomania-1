@@ -7,16 +7,16 @@
 
 .like-icon {
     font-size: 1.2em;
-    color:#091F43;
+    color:#4E5166;
 }
 
 .like-icon:hover {
-    color:#792026;
+    color:#FD2D01;
     transition: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .like-count {
     font-size: 1em;
-    color:#091F43;
+    color:#4E5166;
     margin:0;
 }
