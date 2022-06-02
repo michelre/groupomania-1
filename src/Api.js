@@ -29,6 +29,16 @@ export default class Api {
         loves: 3,
       },
     ];
+    this.dataUser = [
+      {
+        firstname: 'Pikachu',
+        picture: 'https://pngimg.com/uploads/pokemon/pokemon_PNG14.png',
+        email: 'pika@groupomania.com',
+        department: 'Tech',
+        alt: 'Pikachu',
+        id: 1,
+      },
+    ];
   }
 
   getAllPosts() {
@@ -41,7 +51,7 @@ export default class Api {
   }
 
   getUserById(id) {
-    const user = this.data.find((p) => p.id === id);
+    const user = this.dataUser.find((u) => u.id === id);
     return Promise.resolve(user);
   }
 

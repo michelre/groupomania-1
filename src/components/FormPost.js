@@ -8,6 +8,7 @@ export default function FormPost({ onCreatePost }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+
     onCreatePost({
       title,
       file,

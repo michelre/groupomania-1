@@ -18,12 +18,12 @@ input, select, textarea {
     box-shadow: 1px 2px 2px 1px #e6e4e4;
     height:25px;
     color:#4f5c71;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Lato', sans-serif;
 }
 
 label {
     color:#4f5c71;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Lato', sans-serif;
     font-size: 12px;
 }
 
@@ -40,7 +40,7 @@ label {
     transition: all 400ms linear;
     margin:auto;
     font-size: 14px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Lato', sans-serif;
 }
 
 .form-login-btn:hover {

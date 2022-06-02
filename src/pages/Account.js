@@ -1,8 +1,8 @@
 import Banner from '../components/Banner';
 import Footer from '../components/Footer';
 import Api from '../Api';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import User from '../components/User';
 import Nav from '../components/Nav';
 
@@ -10,12 +10,20 @@ const api = new Api();
 
 export default function Account() {
   const navigate = useNavigate();
-  const [users, SetUsers] = useState([]);
+  const [users, setUsers] = useState([]);
+  const { id } = useParams();
+
+  useEffect(() => {
+    api.getUserById(id).then((u) => {
+      setUsers(u);
+    });
+  }, [id]);
+
   const onDeleteUser = (id) => {
     if (window.confirm('Êtes-vous sûr de vouloir supprimer votre compte?')) {
       api.deleteUser().then(() => {
         const newUsers = users.filter((u) => u.id !== id);
-        SetUsers(newUsers);
+        setUsers(newUsers);
         navigate(`/`);
       });
     }
