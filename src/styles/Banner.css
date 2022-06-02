@@ -14,6 +14,7 @@
     height: auto;
     object-fit: cover;
     max-width: 800px;
+    margin-left: 30px;
 }
 
 .banner-title{
@@ -28,9 +29,15 @@
     .banner-title{
         font-size: 2em;
     }
+    .banner-img{
+        margin-left: 60px;
+    }
 }
 @media screen and  (min-width: 992px) {
     .banner-title{
         font-size: 3em;
+    }
+    .banner-img{
+        margin-left: 90px;
     }
 }

@@ -31,6 +31,7 @@ export default function Signin({ onSignin, onModifyUser }) {
         type="text"
         placeholder="Votre prénom"
         value={firstname}
+        name="firstname"
         onChange={(e) => setFirstName(e.target.value)}
         required
       />
@@ -38,6 +39,7 @@ export default function Signin({ onSignin, onModifyUser }) {
         type="email"
         placeholder="Votre email"
         value={email}
+        name="email"
         onChange={(e) => setEmail(e.target.value)}
         required
       />
@@ -45,6 +47,7 @@ export default function Signin({ onSignin, onModifyUser }) {
         type="password"
         placeholder="Votre mot de passe"
         value={password}
+        name="password"
         onChange={(e) => setPassword(e.target.value)}
         required
       />
@@ -53,6 +56,7 @@ export default function Signin({ onSignin, onModifyUser }) {
         placeholder="Photo"
         alt="Photo de l'utilisateur"
         value={picture}
+        name="picture"
         onChange={(e) => setPicture(e.target.value)}
       />
       <label for="department-select">Choisir votre département:</label>
