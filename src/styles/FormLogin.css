@@ -10,22 +10,43 @@
 
 h2 {
     text-align: center;
+    color:#FD2D01;
 }
 
-input {
+input, select, textarea {
     border-radius:9px;
-    border:#AEAEAF solid 1px;
+    border:#FFD7D7 solid 1px;
     box-shadow: 1px 2px 2px 1px #e6e4e4;
+    height:25px;
+    color:rgb(117, 117, 117);;
+    font-family: 'Lato', sans-serif;
 }
+
+label {
+    color:rgb(117, 117, 117);;
+    font-family: 'Lato', sans-serif;
+    font-size: 12px;
+}
+
 
 .form-login-btn {
     cursor: pointer; 
-    border-radius:9px;
-    background: linear-gradient(#091F43,#792026);
-    color:white;
+    border-radius:50px;
     border:none;
-    box-shadow: 1px 2px 2px 1px #e6e4e4;
-    padding:6px;
+    background: linear-gradient(to left top, #091F43, #FD2D01);
+    color:white;
+    box-shadow: 1px 3px 2px 1px #e6e4e4;
+    padding:14px;
+    max-width: 600px;
+    transition: all 400ms linear;
+    margin:auto;
+    font-size: 14px;
+    font-family: 'Lato', sans-serif;
+}
+
+.form-login-btn:hover {
+    box-shadow: 2px 4px 3px 2px #7E7E7E;
+    background: linear-gradient(to right bottom, #091F43, #FD2D01);
 }
 
 @media screen and (min-width: 768px) and (max-width: 992px) {

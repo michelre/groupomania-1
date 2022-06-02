@@ -4,7 +4,7 @@
     margin: 20px auto;
     padding: 20px;
     width: 80%;
-    background-color:#AEAEAF;
+    background-color:#FFD7D7;
     border-radius:9px;
     box-sizing: border-box;
     box-shadow: 1px 2px 2px 1px #e6e4e4;
@@ -14,12 +14,22 @@
 .post-author{
     display: flex;
     align-items: center;
-    
+    padding-bottom: 5px;
+    gap: 4px;
 }
 
-h3 {
+.post-author-img {
+    object-fit: cover;
+    border-radius:9px;
+    height: 30px;
+    width: auto;
+}
+
+.post-author-name {
     margin:0;
-    font-size: small;
+    font-size: 10px;
+    color: #4E5166;
+    font-weight:bold;
 }
 
 .post-img {
@@ -30,23 +40,40 @@ h3 {
 }
 
 .post-title {
-    margin:0;
-    color:#091F43;
+    margin: 6px 0;
+    color:#4E5166;
     font-size: 1.2em;
 }
 
 .post-description {
     margin:0;
-    color:#091F43;
+    color:#4E5166;
     font-size: 1em;
 }
 
 .post-functions {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 10px;
-    gap: 6px;
+    padding-top: 10px;
+}
+
+.post-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.post-button {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 10px;
+    background-color:#4E5166;
+    border:none;
+    border-radius:50px;
+    color:white;
+    text-align: center;
+    padding: 4px;
+    font-family: 'Lato', sans-serif;
 }
 
 @media screen and (min-width: 768px) and (max-width: 992px) {
@@ -59,8 +86,11 @@ h3 {
     .post-description {
         font-size: 1.3em;
     }
+    .post-button {
+        flex-direction: row;
 }
-@media screen and  (min-width: 992px) {
+}
+@media screen and  (min-width: 992px) {    
     .post-img {
         height: 600px;
     }
@@ -70,4 +100,7 @@ h3 {
     .post-description {
         font-size: 2em;
     }
+    .post-button {
+        flex-direction: row;
+}
 }    

@@ -1,28 +1,33 @@
 import '../styles/FormLogin.css';
-import {useState} from 'react';
 import Api from '../Api';
-import {useNavigate} from 'react-router-dom';
-import FormPost from "../components/FormPost";
-import Banner from "../components/Banner";
-import Footer from "../components/Footer";
+import { useNavigate } from 'react-router-dom';
+import FormPost from '../components/FormPost';
+import Banner from '../components/Banner';
+import Footer from '../components/Footer';
+import Nav from '../components/Nav';
 
 const api = new Api();
 
 export default function FormCreatePost() {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  function createPost(post) {
+    api.createPost(post).then(() => {
+      navigate(`/wall/`);
+    });
+  }
 
-    function createPost(post) {
-        api.createPost(post).then(() => {
-            navigate(`/wall/`);
-        });
-    }
-
-    return (
-        <div>
-            <Banner/>
-            <FormPost onCreatePost={createPost}/>
-            <Footer/>
-        </div>
-    );
+  return (
+    <div>
+      <Banner />
+      <Nav
+        navName1={'Mur'}
+        navPath1={'/wall'}
+        navName2={'Se déconnecter'}
+        navPath2={'/'}
+      />
+      <FormPost onCreatePost={createPost} />
+      <Footer />
+    </div>
+  );
 }

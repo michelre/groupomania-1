@@ -1,5 +1,5 @@
 .footer {
-    background-color: #792026;
+    background-color: #FD2D01;
     display:flex;
     justify-content:center;
     align-items: center;
@@ -7,6 +7,7 @@
     padding: 20px;
     max-width: 1920px;
     margin:auto;
+    box-sizing: border-box;
 }
 .footer-img{
     width: auto;
@@ -14,8 +15,9 @@
     padding: 10px;
     object-fit: cover;
 }
+
 .footer-list {
-    color:white;
+    color:black;
     padding: 10px;
     list-style: none;
     display:flex;
@@ -28,7 +30,16 @@
 
 a {
     text-decoration: none;
-    color: white;
+    color: black;
+}
+
+.footer-social {
+    list-style: none;
+    display:flex;
+    gap:12px;
+}
+.social-icon {
+    color: black;
 }
 
 @media screen and (min-width: 768px) {

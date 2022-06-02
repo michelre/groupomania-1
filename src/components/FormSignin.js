@@ -1,23 +1,26 @@
 import '../styles/FormLogin.css';
 import { useState } from 'react';
-import Api from '../Api';
-import { useNavigate } from 'react-router-dom';
 
-const api = new Api();
-
-export default function Signin() {
+export default function Signin({ onSignin, onModifyUser }) {
   const [firstname, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [picture, setPicture] = useState('');
   const [department, setDepartment] = useState('');
 
-  const navigate = useNavigate();
-
   function handleSubmit(e) {
     e.preventDefault();
-    api.signin().then(() => {
-      navigate(`/wall/`);
+    onSignin({
+      firstname,
+      email,
+      password,
+      picture,
+      department,
+    });
+    onModifyUser({
+      firstname,
+      picture,
+      department,
     });
   }
   return (
@@ -28,6 +31,7 @@ export default function Signin() {
         type="text"
         placeholder="Votre prénom"
         value={firstname}
+        name="firstname"
         onChange={(e) => setFirstName(e.target.value)}
         required
       />
@@ -35,6 +39,7 @@ export default function Signin() {
         type="email"
         placeholder="Votre email"
         value={email}
+        name="email"
         onChange={(e) => setEmail(e.target.value)}
         required
       />
@@ -42,6 +47,7 @@ export default function Signin() {
         type="password"
         placeholder="Votre mot de passe"
         value={password}
+        name="password"
         onChange={(e) => setPassword(e.target.value)}
         required
       />
@@ -50,6 +56,7 @@ export default function Signin() {
         placeholder="Photo"
         alt="Photo de l'utilisateur"
         value={picture}
+        name="picture"
         onChange={(e) => setPicture(e.target.value)}
       />
       <label for="department-select">Choisir votre département:</label>

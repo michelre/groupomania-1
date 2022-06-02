@@ -1,5 +1,4 @@
 export default class Api {
-
   constructor() {
     this.data = [
       {
@@ -8,7 +7,8 @@ export default class Api {
         title: 'Team',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         alt: 'Team',
-        likes: 2
+        likes: 2,
+        loves: 1,
       },
       {
         id: '2',
@@ -16,7 +16,8 @@ export default class Api {
         title: 'Nouvelle pizzeria',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         alt: "Photo d'une pizza",
-        likes: 1
+        likes: 1,
+        loves: 0,
       },
       {
         id: '3',
@@ -24,64 +25,69 @@ export default class Api {
         title: 'Working From Home',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         alt: "Photo d'un chat sur ordi",
-        likes: 0
+        likes: 0,
+        loves: 3,
       },
-    ]
+    ];
+    this.dataUser = [
+      {
+        firstname: 'Pikachu',
+        picture: 'https://pngimg.com/uploads/pokemon/pokemon_PNG14.png',
+        email: 'pika@groupomania.com',
+        department: 'Tech',
+        alt: 'Pikachu',
+        id: 1,
+      },
+    ];
   }
-
 
   getAllPosts() {
     return Promise.resolve(this.data);
   }
 
-  getPostById(id){
-    const post = this.data.find(p => p.id === id)
-    return Promise.resolve(post)
+  getPostById(id) {
+    const post = this.data.find((p) => p.id === id);
+    return Promise.resolve(post);
+  }
+
+  getUserById(id) {
+    const user = this.dataUser.find((u) => u.id === id);
+    return Promise.resolve(user);
   }
 
   login() {
-    return Promise.resolve([
-      {
-        id: 'a1',
-        email: 'ma@test.fr',
-        password: '1234',
-      },
-    ]);
+    return Promise.resolve();
   }
 
   signin() {
-    return Promise.resolve([
-      {
-        id: 'a1x',
-        firstname: 'Maria',
-        email: 'ma@test.fr',
-        password: '1234',
-        picture: 'https://pngimg.com/uploads/pokemon/pokemon_PNG14.png',
-        department: 'Marketing',
-      },
-    ]);
+    return Promise.resolve();
   }
+
   createPost() {
-    return Promise.resolve([
-      {
-        id: '1',
-        img: 'team.webp',
-        title: 'Team Building',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        alt: "Photo d'un groupe de collègues",
-      },
-    ]);
+    return Promise.resolve();
   }
+
   modifyPost() {
     return Promise.resolve();
   }
+
   deletePost() {
     return Promise.resolve();
   }
+
   likePost() {
     return Promise.resolve();
   }
+
+  lovePost() {
+    return Promise.resolve();
+  }
+
   deleteUser() {
+    return Promise.resolve();
+  }
+
+  modifyUser() {
     return Promise.resolve();
   }
 }
