@@ -42,14 +42,32 @@ a {
     color: black;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 768px) and (max-width: 992px) {
     .footer{
         justify-content:space-evenly;
     }
     .footer-list {
-        font-size: 16px;
+        font-size: 20px;
+    }   
+    .footer-img{
+        height:40px;
+    } 
+    .social-icon {
+        font-size: 24px;
+}
+}
+
+@media screen and  (min-width: 992px) {
+    .footer{
+        justify-content:space-evenly;
+    }
+    .footer-list {
+        font-size: 26px;
     }   
     .footer-img{
         height:60px;
     } 
+    .social-icon {
+        font-size: 30px;
+}
 }

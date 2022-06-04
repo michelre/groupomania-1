@@ -54,7 +54,11 @@ label {
         font-size:16px;
     }
     .form-login-btn {
-        font-size:16px;
+        font-size:20px;
+        padding: 20px;
+    }
+    h2 {
+        font-size:32px;
     }
 }
 
@@ -63,6 +67,10 @@ label {
         font-size:20px;
     }
     .form-login-btn {
-        font-size:20px;
+        font-size:30px;
+        padding: 30px;
+    }
+    h2 {
+        font-size:50px;
     }
 }    
