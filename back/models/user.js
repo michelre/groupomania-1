@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize('sqlite::memory:');
 
-const User = sequelize.define('User', {
+  const User = sequelize.define('User', {
     id: {
       type:DataTypes.INTEGER,
       allowNull:false,
@@ -28,5 +28,8 @@ const User = sequelize.define('User', {
       type: DataTypes.STRING,
     },
   });
-  
   console.log(User === sequelize.models.User); // true
+
+
+  
+  
