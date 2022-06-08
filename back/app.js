@@ -35,7 +35,7 @@ app.use((req, res) => {
 
  //Lien vers les routes pour les posts
  const postRoutes = require('./routes/post');
- app.use('/api/post', postRoutes);
+ app.use('/api/posts', postRoutes);
 
  //Lien vers les routes pour les utilisateurs
  const userRoutes = require('./routes/user');
