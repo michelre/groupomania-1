@@ -19,7 +19,7 @@ export default function UpdatePost() {
     api.getPostById(id).then((p) => {
       setPost(p);
     });
-  }, [id]);
+  }, []);
 
   function createPost(post) {
     api.createPost(post).then(() => {

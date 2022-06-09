@@ -1,0 +1,48 @@
+
+.like-container {
+    display:flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.like-icon {
+    font-size: 1.2em;
+    color:#4E5166;
+}
+
+.like-icon:hover {
+    color:#FD2D01;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.like-count {
+    font-size: 1em;
+    color:#4E5166;
+    margin:0;
+}
+
+.like-count:hover {
+    color:#FD2D01;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .like-icon {
+        font-size: 2em;
+    }
+
+    .like-count {
+        font-size: 1.6em;
+    }
+}
+
+@media screen and  (min-width: 992px) {
+    .like-icon {
+        font-size: 2.8em;
+    }
+
+    .like-count {
+        font-size: 2.6em;
+    }
+}
