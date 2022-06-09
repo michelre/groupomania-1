@@ -51,23 +51,21 @@ const userRoutes = require('./routes/user');
 app.use('/api/auth', userRoutes);
 
 //Installation Sequelize et connection MySQL
-const databaseConfig = require('./database_config.js');
+const env = process.env.NODE_ENV ? process.env.NODE_ENV : 'development'
+const databaseConfig = require('./config/config')[env];
 const { Sequelize } = require('sequelize');
 const sequelize = new Sequelize(
-  databaseConfig.DB,
-  databaseConfig.USER,
-  databaseConfig.PASSWORD,
+  databaseConfig.database,
+  databaseConfig.username,
+  databaseConfig.password,
   {
-    host: databaseConfig.HOST,
+    host: databaseConfig.host,
+    port: 8889,
     dialect: databaseConfig.dialect,
-    pool: {
-      max: databaseConfig.pool.max,
-      min: databaseConfig.pool.min,
-      acquire: databaseConfig.pool.acquire,
-      idle: databaseConfig.pool.idle,
-    },
   }
 );
-sequelize.authenticate().then(() => console.log('Connected to the database !'));
+sequelize.authenticate()
+    .then(() => console.log('Connected to the database !'))
+    .catch((err) => console.log(err));
 
 module.exports = app;
