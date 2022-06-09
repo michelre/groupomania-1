@@ -10,6 +10,4 @@ const postCtrl = require('../controllers/post');
 router.post('/', auth, multer, postCtrl.createPost);
 router.get('/', auth, postCtrl.getAllPosts);
 
-
-
 module.exports = router;
