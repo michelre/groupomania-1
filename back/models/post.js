@@ -1,10 +1,8 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory:');
+/*const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = new Sequelize('sqlite::memory:');*/
 
-const Post = sequelize.define(
-  'Post',
-  {
-    // Model attributes are defined here
+module.exports = (sequelize, DataTypes) => {
+  const Post = sequelize.define('Post', {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -42,11 +40,9 @@ const Post = sequelize.define(
     imageUrl: {
       type: DataTypes.STRING,
     },
-  },
-  {
-    // Other model options go here
-  }
-);
+  });
+  return Post;
+};
 
 // `sequelize.define` also returns the model
-console.log(Post === sequelize.models.Post); // true
+//console.log(Post === sequelize.models.Post); // true
