@@ -1,23 +1,21 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory:');
-
+module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     id: {
-      type:DataTypes.INTEGER,
-      allowNull:false,
+      type: DataTypes.INTEGER,
+      allowNull: false,
       autoIncrement: true,
-      primaryKey: true
+      primaryKey: true,
     },
     firstName: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
-    password: { 
+    password: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -28,8 +26,5 @@ const sequelize = new Sequelize('sqlite::memory:');
       type: DataTypes.STRING,
     },
   });
-  console.log(User === sequelize.models.User); // true
-
-
-  
-  
+  return User;
+};

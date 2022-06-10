@@ -5,6 +5,8 @@ const app = express();
 //To parse incoming JSON requests and put the parsed data in req.body.
 app.use(express.json());
 
+app.use(express.urlencoded({ extended: true }));
+
 //installation .env
 require('dotenv').config();
 
@@ -34,13 +36,13 @@ app.use((req, res, next) => {
 const path = require('path');
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-//Test
+/*//Test
 app.use((req, res) => {
   res.json({ message: 'Votre requête a bien été reçue!' });
 });
 app.get('/', (req, res) => {
   console.log('API is up');
-});
+});*/
 
 //Lien vers les routes pour les posts
 const postRoutes = require('./routes/post');
@@ -51,23 +53,12 @@ const userRoutes = require('./routes/user');
 app.use('/api/auth', userRoutes);
 
 //Installation Sequelize et connection MySQL
-const databaseConfig = require('./database_config.js');
-const { Sequelize } = require('sequelize');
-const sequelize = new Sequelize(
-  databaseConfig.DB,
-  databaseConfig.USER,
-  databaseConfig.PASSWORD,
-  {
-    host: databaseConfig.HOST,
-    dialect: databaseConfig.dialect,
-    pool: {
-      max: databaseConfig.pool.max,
-      min: databaseConfig.pool.min,
-      acquire: databaseConfig.pool.acquire,
-      idle: databaseConfig.pool.idle,
-    },
-  }
-);
-sequelize.authenticate().then(() => console.log('Connected to the database !'));
+const db = require('./models');
+db.sequelize
+  .authenticate()
+  .then(() => console.log('Connected to the database !'));
+db.sequelize.sync({ force: true }).then(() => {
+  console.log('Drop and re-sync db.');
+});
 
 module.exports = app;
