@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Post = sequelize.define('Post', {
+  const Post = sequelize.define('post', {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -8,10 +8,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     userId: {
       type: DataTypes.INTEGER,
-      /*references: {
-        model: 'USER',
-        key: 'id',
-      },*/
     },
     title: {
       type: DataTypes.STRING,
@@ -29,10 +25,10 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 0,
     },
     usersLiked: {
-      type: DataTypes.JSON,
+      type: DataTypes.STRING,
     },
     usersLoved: {
-      type: DataTypes.JSON,
+      type: DataTypes.STRING,
     },
     imageUrl: {
       type: DataTypes.STRING,

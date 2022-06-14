@@ -1,25 +1,23 @@
-const User = require('../models/user');
+const db = require('../models');
+const User = db.user;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 
 //Route Post/Création d'un utilisateur
-exports.signin = (req, res) => {
-  bcrypt
-    .hash(req.body.password, 10)
-    .then((hash) => {
-      const user = {
-        email: req.body.email,
-        password: hash,
-        firstName: req.body.firstName,
-        department: req.body.department,
-        imageUrl: req.body.imageUrl,
-      };
-      User.create(user)
-        .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
-        .catch((error) => res.status(400).json({ error }));
-    })
-    .catch((error) => res.status(500).json({ error }));
+exports.signin = (req, res, next) => {
+  const userObject = JSON.parse(req.body.user);
+  delete userObject.id;
+  const user = new User({
+    ...userObject,
+    imageUrl: `${req.protocol}://${req.get('host')}/images/${
+      req.file.filename
+    }`,
+  });
+  user
+    .save()
+    .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
+    .catch((error) => res.status(400).json({ error }));
 };
 
 //Route Post/Connexion d'un utilisateur

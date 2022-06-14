@@ -1,17 +1,20 @@
-const Post = require('../models/post');
+//const Post = require('../models/post');
+const db = require('../models');
+const Post = db.post;
 const fs = require('fs');
 
 /*logique metier des routes post*/
 exports.createPost = (req, res) => {
   const postObject = JSON.parse(req.body.post);
   delete postObject.id;
-  const post = {
+  const post = new Post({
     ...postObject,
     imageUrl: `${req.protocol}://${req.get('host')}/images/${
       req.file.filename
     }`,
-  };
-  Post.create(post)
+  });
+  post
+    .save()
     .then(() => res.status(201).json({ message: 'Post enregistré!' }))
     .catch((error) => res.status(400).json({ error }));
 };

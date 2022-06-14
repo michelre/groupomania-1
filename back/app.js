@@ -16,7 +16,11 @@ app.use(bodyParser.json());
 
 //installation helmet
 const helmet = require('helmet');
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: false,
+  })
+);
 
 //Gestion du CORS pour que nos deux serveurs puissent communiquer entre eux
 app.use((req, res, next) => {
@@ -36,12 +40,9 @@ app.use((req, res, next) => {
 const path = require('path');
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-/*//Test
-app.use((req, res) => {
+//Test
+/*app.use((req, res) => {
   res.json({ message: 'Votre requête a bien été reçue!' });
-});
-app.get('/', (req, res) => {
-  console.log('API is up');
 });*/
 
 //Lien vers les routes pour les posts
@@ -53,10 +54,11 @@ const userRoutes = require('./routes/user');
 app.use('/api/auth', userRoutes);
 
 //Installation Sequelize et connection MySQL
-const db = require('./models');
+const db = require('./models/index.js');
 db.sequelize
   .authenticate()
-  .then(() => console.log('Connected to the database !'));
+  .then(() => console.log('Connected to the database !'))
+  .catch((err) => console.log(err));
 db.sequelize.sync({ force: true }).then(() => {
   console.log('Drop and re-sync db.');
 });

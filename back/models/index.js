@@ -46,4 +46,9 @@ db.sequelize = sequelize;
 db.post = require('./post.js')(sequelize, Sequelize);
 db.user = require('./user.js')(sequelize, Sequelize);
 
+db.user.hasMany(db.post, {
+  foreignKey: 'userId',
+});
+db.post.belongsTo(db.user);
+
 module.exports = db;
