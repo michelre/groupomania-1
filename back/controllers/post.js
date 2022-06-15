@@ -4,7 +4,7 @@ const Post = db.post;
 const fs = require('fs');
 
 /*logique metier des routes post*/
-exports.createPost = (req, res) => {
+exports.createPost = (req, res, next) => {
   const postObject = JSON.parse(req.body.post);
   delete postObject.id;
   const post = new Post({

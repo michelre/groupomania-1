@@ -59,8 +59,8 @@ db.sequelize
   .authenticate()
   .then(() => console.log('Connected to the database !'))
   .catch((err) => console.log(err));
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync(/*{ force: true }).then(() => {
   console.log('Drop and re-sync db.');
-});
+}*/);
 
 module.exports = app;
