@@ -1,12 +1,11 @@
-//const Post = require('../models/post');
 const db = require('../models');
 const Post = db.post;
 const fs = require('fs');
+const userId = require('../middleware/auth');
 
 /*logique metier des routes post*/
 exports.createPost = (req, res, next) => {
   const postObject = JSON.parse(req.body.post);
-  console.log(req.body.post);
   delete postObject.id;
   const post = new Post({
     ...postObject,
@@ -21,7 +20,7 @@ exports.createPost = (req, res, next) => {
 };
 
 exports.getAllPosts = (req, res, next) => {
-  Post.findAll()
+  Post.findAll({ order: [['createdAt', 'DESC']] })
     .then((posts) => {
       res.status(200).json(posts);
     })
@@ -32,9 +31,23 @@ exports.getAllPosts = (req, res, next) => {
     });
 };
 
-exports.likePost = (req, res, next) => {};
-
-exports.lovePost = (req, res, next) => {};
+exports.likePost = (req, res, next) => {
+  Post.findOne({ where: { postId: req.params.id } })
+    .then((post) => {
+      if (userId == post.usersLiked) {
+        Post.decrement({ likes: 1 });
+        Post.destroy({ usersLiked: userId });
+        res.status(200).json({ message: 'Like supprimé ' });
+      } else {
+        Post.increment({ likes: 1 });
+        Post.update({ usersLiked: userId });
+        res.status(201).json({ message: 'Post Liké' });
+      }
+    })
+    .catch((error) => {
+      res.status(404).json({ error: error });
+    });
+};
 
 exports.getOnePost = (req, res, next) => {
   Post.findOne({ where: { id: req.params.id } })
