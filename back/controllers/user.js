@@ -7,13 +7,13 @@ const fs = require('fs');
 
 //Route Post/Création d'un utilisateur
 exports.signin = (req, res) => {
-  const userObject = JSON.parse(req.body.user);
+  const userObject = req.body.user;
   delete userObject.id;
   const user = new User({
     ...userObject,
-    imageUrl: `${req.protocol}://${req.get('host')}/images/${
+    /*imageUrl: `${req.protocol}://${req.get('host')}/images/${
       req.file.filename
-    }`,
+    }`,*/
   });
   user
     .save()
@@ -41,9 +41,9 @@ exports.login = (req, res) => {
             }),
           });
         })
-        .catch((error) => res.status(500).json({ error }));
+        .catch((error) => res.status(500).json({ status: 'KO Bcrypt', error }));
     })
-    .catch((error) => res.status(500).json({ error }));
+    .catch((error) => res.status(500).json({ status: 'KO DB', error }));
 };
 
 //Route Delete/Supprétion d'un utilisateur
