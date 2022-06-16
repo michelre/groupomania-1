@@ -1,23 +1,26 @@
-const Post = require('../models/post');
+const db = require('../models');
+const Post = db.post;
 const fs = require('fs');
+const userId = require('../middleware/auth');
 
 /*logique metier des routes post*/
-exports.createPost = (req, res) => {
+exports.createPost = (req, res, next) => {
   const postObject = JSON.parse(req.body.post);
   delete postObject.id;
-  const post = {
+  const post = new Post({
     ...postObject,
     imageUrl: `${req.protocol}://${req.get('host')}/images/${
       req.file.filename
     }`,
-  };
-  Post.create(post)
+  });
+  post
+    .save()
     .then(() => res.status(201).json({ message: 'Post enregistré!' }))
     .catch((error) => res.status(400).json({ error }));
 };
 
-exports.getAllPosts = (res) => {
-  Post.findAll()
+exports.getAllPosts = (req, res, next) => {
+  Post.findAll({ order: [['createdAt', 'DESC']] })
     .then((posts) => {
       res.status(200).json(posts);
     })
@@ -28,11 +31,25 @@ exports.getAllPosts = (res) => {
     });
 };
 
-exports.likePost = (req, res, next) => {};
+exports.likePost = (req, res, next) => {
+  Post.findOne({ where: { postId: req.params.id } })
+    .then((post) => {
+      if (userId == post.usersLiked) {
+        Post.decrement({ likes: 1 });
+        Post.destroy({ usersLiked: userId });
+        res.status(200).json({ message: 'Like supprimé ' });
+      } else {
+        Post.increment({ likes: 1 });
+        Post.update({ usersLiked: userId });
+        res.status(201).json({ message: 'Post Liké' });
+      }
+    })
+    .catch((error) => {
+      res.status(404).json({ error: error });
+    });
+};
 
-exports.lovePost = (req, res, next) => {};
-
-exports.getOnePost = (req, res) => {
+exports.getOnePost = (req, res, next) => {
   Post.findOne({ where: { id: req.params.id } })
     .then((post) => {
       res.status(200).json(post);
@@ -44,12 +61,9 @@ exports.getOnePost = (req, res) => {
     });
 };
 
-exports.modifyPost = (req, res) => {
+exports.modifyPost = (req, res, next) => {
   Post.findOne({ where: { id: req.params.id } })
     .then((post) => {
-      if (post.id !== req.auth.id) {
-        res.status(403).json({ message: 'requête non autorisée!' });
-      }
       if (!req.file) {
         Post.update(
           { where: { id: req.params.id } },
@@ -58,7 +72,7 @@ exports.modifyPost = (req, res) => {
           .then(() => res.status(200).json({ message: 'Post modifié!' }))
           .catch((error) => res.status(400).json({ error }));
       } else {
-        const filename = user.imageUrl.split('/images/')[1];
+        const filename = post.imageUrl.split('/images/')[1];
         fs.unlink(`images/${filename}`, () => {
           const postObject = req.file
             ? {
@@ -69,9 +83,11 @@ exports.modifyPost = (req, res) => {
               }
             : { ...req.body };
           Post.update(
-            { where: { id: req.params.id } },
-            { ...postObject, id: req.params.id }
-          )
+            { ...postObject, id: req.params.id },
+            { where: { id: req.params.id } }
+          );
+          post
+            .save()
             .then(() => res.status(200).json({ message: 'Post modifié!' }))
             .catch((error) => res.status(400).json({ error }));
         });
@@ -82,22 +98,17 @@ exports.modifyPost = (req, res) => {
     });
 };
 
-exports.deletePost = (req, res) => {
-  const id = req.params.id;
-  Post.findOne({ where: { id: id } })
+exports.deletePost = (req, res, next) => {
+  Post.findOne({ where: { id: req.params.id } })
     .then((post) => {
-      if (post.id !== req.auth.id) {
-        res.status(403).json({ message: 'requête non autorisée!' });
-      } else {
-        const filename = user.imageUrl.split('/images/')[1];
-        fs.unlink(`images/${filename}`, () => {
-          Post.destroy({ where: { id: id } })
-            .then(() => res.status(204).end())
-            .catch((error) => res.status(400).json({ error }));
-        });
-      }
+      const filename = post.imageUrl.split('/images/')[1];
+      fs.unlink(`images/${filename}`, () => {
+        Post.destroy({ where: { id: req.params.id } })
+          .then(() => res.status(204).end())
+          .catch((error) => res.status(400).json({ error }));
+      });
     })
     .catch((error) => {
-      res.status(404).json({ error: error });
+      res.status(500).json({ error: error });
     });
 };

@@ -40,7 +40,22 @@ Object.keys(db).forEach((modelName) => {
   }
 });
 
-db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+db.sequelize = sequelize;
+
+//Tables
+db.post = require('./post.js')(sequelize, Sequelize);
+db.user = require('./user.js')(sequelize, Sequelize);
+
+//Associations User & Post (One-To-Many)
+db.user.hasMany(db.post, {
+  foreignKey: 'userId',
+  onDelete: 'cascade',
+});
+db.post.belongsTo(db.user);
+
+//Associations User & Post (Many-To-Many)
+db.user.belongsToMany(db.post, { through: 'Like' });
+db.post.belongsToMany(db.user, { through: 'Like' });
 
 module.exports = db;

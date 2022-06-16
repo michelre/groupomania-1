@@ -5,6 +5,8 @@ const app = express();
 //To parse incoming JSON requests and put the parsed data in req.body.
 app.use(express.json());
 
+app.use(express.urlencoded({ extended: true }));
+
 //installation .env
 require('dotenv').config();
 
@@ -14,7 +16,11 @@ app.use(bodyParser.json());
 
 //installation helmet
 const helmet = require('helmet');
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: false,
+  })
+);
 
 //Gestion du CORS pour que nos deux serveurs puissent communiquer entre eux
 app.use((req, res, next) => {
@@ -35,12 +41,9 @@ const path = require('path');
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 //Test
-app.use((req, res) => {
+/*app.use((req, res) => {
   res.json({ message: 'Votre requête a bien été reçue!' });
-});
-app.get('/', (req, res) => {
-  console.log('API is up');
-});
+});*/
 
 //Lien vers les routes pour les posts
 const postRoutes = require('./routes/post');
@@ -51,21 +54,13 @@ const userRoutes = require('./routes/user');
 app.use('/api/auth', userRoutes);
 
 //Installation Sequelize et connection MySQL
-const env = process.env.NODE_ENV ? process.env.NODE_ENV : 'development'
-const databaseConfig = require('./config/config')[env];
-const { Sequelize } = require('sequelize');
-const sequelize = new Sequelize(
-  databaseConfig.database,
-  databaseConfig.username,
-  databaseConfig.password,
-  {
-    host: databaseConfig.host,
-    port: 8889,
-    dialect: databaseConfig.dialect,
-  }
-);
-sequelize.authenticate()
-    .then(() => console.log('Connected to the database !'))
-    .catch((err) => console.log(err));
+const db = require('./models/index.js');
+db.sequelize
+  .authenticate()
+  .then(() => console.log('Connected to the database !'))
+  .catch((err) => console.log(err));
+db.sequelize.sync(/*{ force: true }).then(() => {
+  console.log('Drop and re-sync db.');
+}*/);
 
 module.exports = app;
