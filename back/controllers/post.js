@@ -6,6 +6,7 @@ const fs = require('fs');
 /*logique metier des routes post*/
 exports.createPost = (req, res, next) => {
   const postObject = JSON.parse(req.body.post);
+  console.log(req.body.post);
   delete postObject.id;
   const post = new Post({
     ...postObject,
@@ -19,7 +20,7 @@ exports.createPost = (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 };
 
-exports.getAllPosts = (res) => {
+exports.getAllPosts = (req, res, next) => {
   Post.findAll()
     .then((posts) => {
       res.status(200).json(posts);
@@ -35,7 +36,7 @@ exports.likePost = (req, res, next) => {};
 
 exports.lovePost = (req, res, next) => {};
 
-exports.getOnePost = (req, res) => {
+exports.getOnePost = (req, res, next) => {
   Post.findOne({ where: { id: req.params.id } })
     .then((post) => {
       res.status(200).json(post);
@@ -47,12 +48,9 @@ exports.getOnePost = (req, res) => {
     });
 };
 
-exports.modifyPost = (req, res) => {
+exports.modifyPost = (req, res, next) => {
   Post.findOne({ where: { id: req.params.id } })
     .then((post) => {
-      if (post.id !== req.auth.id) {
-        res.status(403).json({ message: 'requête non autorisée!' });
-      }
       if (!req.file) {
         Post.update(
           { where: { id: req.params.id } },
@@ -61,7 +59,7 @@ exports.modifyPost = (req, res) => {
           .then(() => res.status(200).json({ message: 'Post modifié!' }))
           .catch((error) => res.status(400).json({ error }));
       } else {
-        const filename = user.imageUrl.split('/images/')[1];
+        const filename = post.imageUrl.split('/images/')[1];
         fs.unlink(`images/${filename}`, () => {
           const postObject = req.file
             ? {
@@ -72,9 +70,11 @@ exports.modifyPost = (req, res) => {
               }
             : { ...req.body };
           Post.update(
-            { where: { id: req.params.id } },
-            { ...postObject, id: req.params.id }
-          )
+            { ...postObject, id: req.params.id },
+            { where: { id: req.params.id } }
+          );
+          post
+            .save()
             .then(() => res.status(200).json({ message: 'Post modifié!' }))
             .catch((error) => res.status(400).json({ error }));
         });
@@ -85,22 +85,17 @@ exports.modifyPost = (req, res) => {
     });
 };
 
-exports.deletePost = (req, res) => {
-  const id = req.params.id;
-  Post.findOne({ where: { id: id } })
+exports.deletePost = (req, res, next) => {
+  Post.findOne({ where: { id: req.params.id } })
     .then((post) => {
-      if (post.id !== req.auth.id) {
-        res.status(403).json({ message: 'requête non autorisée!' });
-      } else {
-        const filename = user.imageUrl.split('/images/')[1];
-        fs.unlink(`images/${filename}`, () => {
-          Post.destroy({ where: { id: id } })
-            .then(() => res.status(204).end())
-            .catch((error) => res.status(400).json({ error }));
-        });
-      }
+      const filename = post.imageUrl.split('/images/')[1];
+      fs.unlink(`images/${filename}`, () => {
+        Post.destroy({ where: { id: req.params.id } })
+          .then(() => res.status(204).end())
+          .catch((error) => res.status(400).json({ error }));
+      });
     })
     .catch((error) => {
-      res.status(404).json({ error: error });
+      res.status(500).json({ error: error });
     });
 };

@@ -15,6 +15,9 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notNull: { args: true, msg: 'Votre post est vide' },
+      },
     },
     likes: {
       type: DataTypes.INTEGER,
