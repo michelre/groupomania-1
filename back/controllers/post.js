@@ -1,17 +1,22 @@
 const db = require('../models');
 const Post = db.post;
 const fs = require('fs');
-const userId = require('../middleware/auth');
+const { getUserIdFromToken } = require('../middleware/auth');
 
 /*logique metier des routes post*/
 exports.createPost = (req, res, next) => {
-  const postObject = JSON.parse(req.body.post);
+  const postObject = req.body;
   delete postObject.id;
+  let imageUrl = '';
+  if (req.file) {
+    imageUrl = `${req.protocol}://${req.get('host')}/images/${
+      req.file.filename
+    }`;
+  }
   const post = new Post({
     ...postObject,
-    imageUrl: `${req.protocol}://${req.get('host')}/images/${
-      req.file.filename
-    }`,
+    imageUrl,
+    userId: getUserIdFromToken(req),
   });
   post
     .save()
@@ -62,46 +67,47 @@ exports.getOnePost = (req, res, next) => {
 };
 
 exports.modifyPost = (req, res, next) => {
+  const authUserId = getUserIdFromToken(req);
   Post.findOne({ where: { id: req.params.id } })
     .then((post) => {
-      if (!req.file) {
-        Post.update(
-          { where: { id: req.params.id } },
-          { ...req.body, id: req.params.id }
-        )
-          .then(() => res.status(200).json({ message: 'Post modifié!' }))
-          .catch((error) => res.status(400).json({ error }));
-      } else {
+      if (post.userId !== authUserId) {
+        res.status(403).end();
+        return;
+      }
+      let newPost = { ...req.body };
+      if (req.file) {
         const filename = post.imageUrl.split('/images/')[1];
         fs.unlink(`images/${filename}`, () => {
-          const postObject = req.file
-            ? {
-                ...JSON.parse(req.body.post),
-                imageUrl: `${req.protocol}://${req.get('host')}/images/${
-                  req.file.filename
-                }`,
-              }
-            : { ...req.body };
-          Post.update(
-            { ...postObject, id: req.params.id },
-            { where: { id: req.params.id } }
-          );
-          post
-            .save()
-            .then(() => res.status(200).json({ message: 'Post modifié!' }))
-            .catch((error) => res.status(400).json({ error }));
+          newPost = {
+            ...newPost,
+            imageUrl: `${req.protocol}://${req.get('host')}/images/${
+              req.file.filename
+            }`,
+          };
         });
       }
+      post.update({ ...newPost });
+      post
+        .save()
+        .then(() => res.status(200).json({ message: 'Post modifié!' }))
+        .catch((error) => res.status(400).json({ error }));
     })
     .catch((error) => {
-      res.status(404).json({ error: error });
+      console.log(error);
+      res.status(404).json({ status: 'KO', error: error });
     });
 };
 
 exports.deletePost = (req, res, next) => {
+  const authUserId = getUserIdFromToken(req);
   Post.findOne({ where: { id: req.params.id } })
     .then((post) => {
+      if (post.userId !== authUserId) {
+        res.status(403).end();
+        return;
+      }
       const filename = post.imageUrl.split('/images/')[1];
+      console.log(filename, 'here');
       fs.unlink(`images/${filename}`, () => {
         Post.destroy({ where: { id: req.params.id } })
           .then(() => res.status(204).end())

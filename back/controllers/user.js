@@ -4,16 +4,14 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 const fs = require('fs');
+const { getUserIdFromToken } = require('../middleware/auth');
 
 //Route Post/Création d'un utilisateur
 exports.signin = (req, res) => {
-  const userObject = JSON.parse(req.body.user);
+  const userObject = req.body.user;
   delete userObject.id;
   const user = new User({
     ...userObject,
-    imageUrl: `${req.protocol}://${req.get('host')}/images/${
-      req.file.filename
-    }`,
   });
   user
     .save()
