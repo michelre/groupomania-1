@@ -1,7 +1,6 @@
 import '../styles/Post.css';
 import PropTypes from 'prop-types';
 import LikePost from '../components/LikePost';
-import LovePost from '../components/LovePost';
 import DeletePost from '../components/DeletePost';
 import ModifyPost from '../components/ModifyPost';
 
@@ -12,10 +11,8 @@ export default function Post({
   img,
   description,
   likes,
-  loves,
   onDelete,
   onLike,
-  onHeart,
   firstname = 'Pikachu',
   picture = 'https://pngimg.com/uploads/pokemon/pokemon_PNG14.png',
 }) {
@@ -32,7 +29,6 @@ export default function Post({
       <p className="post-description">{description}</p>
       <div className="post-functions">
         <LikePost onLike={() => onLike(id)} count={likes} />
-        <LovePost onHeart={() => onHeart(id)} count={loves} />
         <div className="post-buttons">
           <ModifyPost postId={id} />
           <DeletePost onDelete={() => onDelete(id)} />

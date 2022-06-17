@@ -79,10 +79,6 @@ export default class Api {
     return Promise.resolve();
   }
 
-  lovePost() {
-    return Promise.resolve();
-  }
-
   deleteUser() {
     return Promise.resolve();
   }
