@@ -2,7 +2,7 @@ import '../styles/FormLogin.css';
 import { useEffect, useState } from 'react';
 import Api from '../Api';
 import { useNavigate, useParams } from 'react-router-dom';
-import FormSignin from '../components/FormSignin';
+import FormUpdateUser from '../components/FormUpdateUser';
 import Banner from '../components/Banner';
 import Footer from '../components/Footer';
 import Nav from '../components/Nav';
@@ -36,7 +36,8 @@ export default function UpdateUser() {
         navName2={'Se déconnecter'}
         navPath2={'/'}
       />
-      {user ? <FormSignin onModifyUser={updateUser} user={user} /> : ''}
+      {/*{user ? <FormUpdateUser onModifyUser={updateUser} user={user} /> : ''*/}
+      <FormUpdateUser onModifyUser={updateUser} user={user} />
       <Footer />
     </div>
   );
