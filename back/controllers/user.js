@@ -46,8 +46,13 @@ exports.login = (req, res) => {
 
 //Route Delete/Supprétion d'un utilisateur
 exports.deleteUser = (req, res) => {
+  const authUserId = getUserIdFromToken(req);
   User.findOne({ where: { id: req.params.id } })
     .then((user) => {
+      if (user.userId !== authUserId) {
+        res.status(403).end();
+        return;
+      }
       const filename = user.imageUrl.split('/images/')[1];
       fs.unlink(`images/${filename}`, () => {
         User.destroy({ where: { id: req.params.id } })
@@ -62,41 +67,36 @@ exports.deleteUser = (req, res) => {
 
 //Route Put/Modification d'un utilisateur
 exports.modifyUser = (req, res) => {
+  const authUserId = getUserIdFromToken(req);
   User.findOne({ where: { id: req.params.id } })
     .then((user) => {
-      if (!req.file) {
-        User.update(
-          { where: { id: req.params.id } },
-          { ...req.body, id: req.params.id }
-        )
-          .then(() => res.status(200).json({ message: 'Utilisateur modifié!' }))
-          .catch((error) => res.status(400).json({ error }));
-      } else {
+      if (user.id !== authUserId) {
+        res.status(403).json({ message: 'Utilisateur non autorisé!' });
+        return;
+      }
+      let newUser = { ...req.body };
+      if (req.file && user.imageUrl) {
         const filename = user.imageUrl.split('/images/')[1];
         fs.unlink(`images/${filename}`, () => {
-          const userObject = req.file
-            ? {
-                ...JSON.parse(req.body.user),
-                imageUrl: `${req.protocol}://${req.get('host')}/images/${
-                  req.file.filename
-                }`,
-              }
-            : { ...req.body };
-          User.update(
-            { ...userObject, id: req.params.id },
-            { where: { id: req.params.id } }
-          );
-          user
-            .save()
-            .then(() =>
-              res.status(200).json({ message: 'Utilisateur modifié!' })
-            )
-            .catch((error) => res.status(400).json({ error }));
+          newUser = {
+            ...newUser,
+            imageUrl: `${req.protocol}://${req.get('host')}/images/${
+              req.file.filename
+            }`,
+          };
         });
       }
+      user.update({
+        ...newUser,
+      });
+      user
+        .save()
+        .then(() => res.status(200).json({ message: 'Utilisateur modifié!' }))
+        .catch((error) => res.status(400).json({ error }));
     })
     .catch((error) => {
-      res.status(404).json({ error: error });
+      console.log(error);
+      res.status(404).json({ status: 'KO', error: error });
     });
 };
 

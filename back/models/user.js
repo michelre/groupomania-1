@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          isAlpha: { msg: "Le format de votre email n'est pas correct" },
+          isAlpha: { msg: "Le format de votre prénom n'est pas correct" },
           len: {
             args: [1, 25],
           },
