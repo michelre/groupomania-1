@@ -60,9 +60,10 @@ export default function Wall() {
               id={post.id}
               key={post.id}
               likes={post.likes}
-              loves={post.loves}
               onDelete={onDeletePost}
               onLike={onLikePost}
+              firstname={post.firstname}
+              picture={post.picture}
             />
           ))}
         </section>

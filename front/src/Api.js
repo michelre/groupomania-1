@@ -1,5 +1,9 @@
+//import Signin from './pages/Signin';
+//import FormSignin from './components/FormSignin';
+
 export default class Api {
-  constructor() {
+  /*constructor() {
+    
     this.data = [
       {
         id: '1',
@@ -39,10 +43,20 @@ export default class Api {
         id: 1,
       },
     ];
-  }
+  }*/
 
   getAllPosts() {
-    return Promise.resolve(this.data);
+    fetch('http://localhost:3001/api/posts', {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    })
+      .then((data) => data.json())
+      .then((response) => console.log(response));
+    return Promise.resolve();
   }
 
   getPostById(id) {
@@ -55,11 +69,60 @@ export default class Api {
     return Promise.resolve(user);
   }
 
-  login() {
+  login({ email, password }) {
+    fetch('http://localhost:3001/api/auth/login', {
+      method: 'POST',
+      //mode: 'cors',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    })
+      .then((data) => data.json())
+      .then((response) => {
+        try {
+          const token = response.token;
+          localStorage.setItem('token', JSON.stringify(token));
+        } catch (error) {
+          alert(
+            'Une erreur est survenue, veuillez recommencer ultérieurement.'
+          );
+        }
+      });
     return Promise.resolve();
   }
 
-  signin() {
+  signin({ email, password, firstName }) {
+    const user = {
+      firstName,
+      email,
+      password,
+    };
+    fetch('http://localhost:3001/api/auth/signin', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user,
+      }),
+    })
+      .then((data) => data.json())
+      .then((response) => {
+        try {
+          response.json();
+        } catch (error) {
+          alert(
+            'Une erreur est survenue, veuillez recommencer ultérieurement.'
+          );
+        }
+      });
     return Promise.resolve();
   }
 

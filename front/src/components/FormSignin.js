@@ -2,14 +2,14 @@ import '../styles/FormLogin.css';
 import { useState } from 'react';
 
 export default function Signin({ onSignin }) {
-  const [firstname, setFirstName] = useState('');
+  const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
     onSignin({
-      firstname,
+      firstName,
       email,
       password,
     });
@@ -21,7 +21,7 @@ export default function Signin({ onSignin }) {
       <input
         type="text"
         placeholder="Votre prénom"
-        value={firstname}
+        value={firstName}
         name="firstname"
         onChange={(e) => setFirstName(e.target.value)}
         required

@@ -9,7 +9,7 @@ const { getUserIdFromToken } = require('../middleware/auth');
 //Route Post/Création d'un utilisateur
 exports.signin = (req, res) => {
   const userObject = req.body.user;
-  delete userObject.id;
+  //delete userObject.id;
   const user = new User({
     ...userObject,
   });

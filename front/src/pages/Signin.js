@@ -8,8 +8,8 @@ const api = new Api();
 
 export default function Signin() {
   const navigate = useNavigate();
-  const onSignin = (id) => {
-    api.signin().then(() => {
+  const onSignin = ({ email, password, firstName }) => {
+    api.signin({ email, password, firstName }).then(() => {
       navigate(`/wall/`);
     });
   };
