@@ -8,7 +8,6 @@ export default function FormPost({ onCreatePost }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-
     onCreatePost({
       title,
       file,
@@ -17,7 +16,7 @@ export default function FormPost({ onCreatePost }) {
   }
   return (
     <form className="form-login" onSubmit={handleSubmit}>
-      <h2>C'est parti! Créez ou modifiez vos posts!</h2>
+      <h2>C'est parti! Créez vos posts!</h2>
       <input
         type="file"
         placeholder="Télécharger une image ou vidéo"

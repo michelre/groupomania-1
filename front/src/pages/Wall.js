@@ -51,7 +51,7 @@ export default function Wall() {
         <h2>De quoi souhaitez-vous discuter?</h2>
         <CreatePost />
         <section className="container-post">
-          {posts.map((post) => (
+          {posts?.map((post) => (
             <Post
               alt={post.alt}
               title={post.title}

@@ -1,6 +1,3 @@
-//import Signin from './pages/Signin';
-//import FormSignin from './components/FormSignin';
-
 export default class Api {
   /*constructor() {
     
@@ -51,11 +48,12 @@ export default class Api {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
       },
     })
       .then((data) => data.json())
-      .then((response) => console.log(response));
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
     return Promise.resolve();
   }
 
@@ -126,7 +124,31 @@ export default class Api {
     return Promise.resolve();
   }
 
-  createPost() {
+  createPost({ title, file, description }) {
+    fetch('http://localhost:3001/api/posts', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
+      },
+      body: JSON.stringify({
+        title,
+        file,
+        description,
+      }),
+    })
+      .then((data) => data.json())
+      .then((response) => {
+        try {
+          response.json();
+        } catch (error) {
+          alert(
+            'Une erreur est survenue, veuillez recommencer ultérieurement.'
+          );
+        }
+      });
     return Promise.resolve();
   }
 
