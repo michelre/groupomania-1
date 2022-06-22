@@ -10,11 +10,11 @@ const api = new Api();
 
 export default function FormCreatePost() {
   const navigate = useNavigate();
-  function createPost({ title, file, description }) {
+  function createPost({ title, img, description }) {
     api
       .createPost({
         title,
-        file,
+        img,
         description,
       })
       .then(() => {

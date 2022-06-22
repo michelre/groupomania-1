@@ -16,6 +16,8 @@ export default function Post({
   firstname = 'Pikachu',
   picture = 'https://pngimg.com/uploads/pokemon/pokemon_PNG14.png',
 }) {
+  console.log(id);
+
   return (
     <article className="post-container">
       <div className="post-author">
@@ -24,13 +26,13 @@ export default function Post({
           {firstname} a posté le {new Date().toLocaleString('fr-FR')}:
         </p>
       </div>
-      <img className="post-img" alt={alt} src={`../images/${img}`} />
+      <img className="post-img" alt={alt} src={img} />
       <h1 className="post-title">{title}</h1>
       <p className="post-description">{description}</p>
       <div className="post-functions">
         <LikePost onLike={() => onLike(id)} count={likes} />
         <div className="post-buttons">
-          <ModifyPost postId={id} />
+          <ModifyPost id={id} />
           <DeletePost onDelete={() => onDelete(id)} />
         </div>
       </div>

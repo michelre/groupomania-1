@@ -51,15 +51,40 @@ export default class Api {
         authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
       },
     })
-      .then((data) => data.json())
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+      .then((post) => post.json())
+      .then((response) => {
+        try {
+          console.log(response);
+        } catch (error) {
+          alert(
+            'Une erreur est survenue, veuillez recommencer ultérieurement.'
+          );
+        }
+      });
     return Promise.resolve();
   }
 
   getPostById(id) {
-    const post = this.data.find((p) => p.id === id);
-    return Promise.resolve(post);
+    fetch(`http://localhost:3001/api/posts/${id}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
+      },
+    })
+      .then((post) => {
+        return post.json();
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        alert("Le post n'a pas pu être trouvé");
+        console.log(error);
+      });
+    /*const post = this.find((p) => p.id === id);*/
+    return Promise.resolve();
   }
 
   getUserById(id) {
@@ -124,7 +149,8 @@ export default class Api {
     return Promise.resolve();
   }
 
-  createPost({ title, file, description }) {
+  createPost({ img, title, description }) {
+    console.log(img, title, description);
     fetch('http://localhost:3001/api/posts', {
       method: 'POST',
       mode: 'cors',
@@ -134,15 +160,15 @@ export default class Api {
         authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
       },
       body: JSON.stringify({
+        img,
         title,
-        file,
         description,
       }),
     })
       .then((data) => data.json())
       .then((response) => {
         try {
-          response.json();
+          console.log(response);
         } catch (error) {
           alert(
             'Une erreur est survenue, veuillez recommencer ultérieurement.'
