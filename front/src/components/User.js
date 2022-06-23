@@ -5,7 +5,7 @@ import ModifyUser from './ModifyUser';
 
 export default function User({
   id,
-  firstname,
+  firstName,
   email,
   picture,
   alt,
@@ -19,7 +19,7 @@ export default function User({
         <img src={picture} className="account-img" alt={alt} />
         <div className="account-description">
           <h2 className="account-name">
-            Salut {firstname}
+            Salut {firstName}
             <i className="user-icon far fa-smile-beam"></i>!
           </h2>
           <br />
@@ -43,7 +43,7 @@ export default function User({
       </div>
       <div className="account-functions">
         <ModifyUser userId={id} />
-        <DeleteUser onDeleteUser={() => onDeleteUser(id)} />
+        <DeleteUser userId={id} onDeleteUser={() => onDeleteUser({ id })} />
       </div>
     </article>
   );
@@ -51,7 +51,7 @@ export default function User({
 
 User.propTypes = {
   alt: PropTypes.string,
-  firstname: PropTypes.string,
+  firstName: PropTypes.string,
   email: PropTypes.string,
   picture: PropTypes.string,
   department: PropTypes.string,

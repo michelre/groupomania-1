@@ -1,26 +1,17 @@
 import '../styles/FormLogin.css';
 import { useState } from 'react';
 
-export default function Signin({ onSignin, onModifyUser }) {
-  const [firstname, setFirstName] = useState('');
+export default function Signin({ onSignin }) {
+  const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [picture, setPicture] = useState('');
-  const [department, setDepartment] = useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
     onSignin({
-      firstname,
+      firstName,
       email,
       password,
-      picture,
-      department,
-    });
-    onModifyUser({
-      firstname,
-      picture,
-      department,
     });
   }
   return (
@@ -30,7 +21,7 @@ export default function Signin({ onSignin, onModifyUser }) {
       <input
         type="text"
         placeholder="Votre prénom"
-        value={firstname}
+        value={firstName}
         name="firstname"
         onChange={(e) => setFirstName(e.target.value)}
         required
@@ -51,26 +42,6 @@ export default function Signin({ onSignin, onModifyUser }) {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      <input
-        type="file"
-        placeholder="Photo"
-        alt="Photo de l'utilisateur"
-        value={picture}
-        name="picture"
-        onChange={(e) => setPicture(e.target.value)}
-      />
-      <label for="department-select">Choisir votre département:</label>
-      <select
-        name="department-select"
-        id="department"
-        value={department}
-        onChange={(e) => setDepartment(e.target.value)}
-      >
-        <option value="Marketing">Marketing</option>
-        <option value="Sales">Sales</option>
-        <option value="Tech">Tech</option>
-        <option value="Ops">Ops</option>
-      </select>
       <button type="submit" className="form-login-btn">
         Créer un compte
       </button>

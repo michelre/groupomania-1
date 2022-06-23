@@ -39,6 +39,14 @@
     width: auto;
 }
 
+.post-img-form-update {
+    object-fit: cover;
+    border-radius:9px;
+    height: auto;
+    width: 20%;
+    align-self: center;
+}
+
 .post-title {
     margin: 6px 0;
     color:#4E5166;
