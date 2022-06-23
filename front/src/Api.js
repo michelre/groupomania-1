@@ -1,46 +1,5 @@
 export default class Api {
-  /*constructor() {
-    
-    this.data = [
-      {
-        id: '1',
-        img: 'team.webp',
-        title: 'Team',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        alt: 'Team',
-        likes: 2,
-        loves: 1,
-      },
-      {
-        id: '2',
-        img: 'pizza.jpg',
-        title: 'Nouvelle pizzeria',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        alt: "Photo d'une pizza",
-        likes: 1,
-        loves: 0,
-      },
-      {
-        id: '3',
-        img: 'cat.jpg',
-        title: 'Working From Home',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        alt: "Photo d'un chat sur ordi",
-        likes: 0,
-        loves: 3,
-      },
-    ];
-    this.dataUser = [
-      {
-        firstname: 'Pikachu',
-        picture: 'https://pngimg.com/uploads/pokemon/pokemon_PNG14.png',
-        email: 'pika@groupomania.com',
-        department: 'Tech',
-        alt: 'Pikachu',
-        id: 1,
-      },
-    ];
-  }*/
+  //constructor() {}
 
   getAllPosts() {
     fetch('http://localhost:3001/api/posts', {
@@ -83,7 +42,6 @@ export default class Api {
         alert("Le post n'a pas pu être trouvé");
         console.log(error);
       });
-    /*const post = this.find((p) => p.id === id);*/
     return Promise.resolve();
   }
 
@@ -95,7 +53,6 @@ export default class Api {
   login({ email, password }) {
     fetch('http://localhost:3001/api/auth/login', {
       method: 'POST',
-      //mode: 'cors',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -127,7 +84,6 @@ export default class Api {
     };
     fetch('http://localhost:3001/api/auth/signin', {
       method: 'POST',
-      mode: 'cors',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -153,7 +109,6 @@ export default class Api {
     console.log(img, title, description);
     fetch('http://localhost:3001/api/posts', {
       method: 'POST',
-      mode: 'cors',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -178,7 +133,31 @@ export default class Api {
     return Promise.resolve();
   }
 
-  modifyPost() {
+  modifyPost({ img, title, description, id }) {
+    console.log(img, title, description, id);
+    fetch(`http://localhost:3001/api/posts/${id}`, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
+      },
+      body: JSON.stringify({
+        img,
+        title,
+        description,
+      }),
+    })
+      .then((data) => data.json())
+      .then((response) => {
+        try {
+          console.log(response);
+        } catch (error) {
+          alert(
+            'Une erreur est survenue, veuillez recommencer ultérieurement.'
+          );
+        }
+      });
     return Promise.resolve();
   }
 

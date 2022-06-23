@@ -16,8 +16,6 @@ export default function Post({
   firstname = 'Pikachu',
   picture = 'https://pngimg.com/uploads/pokemon/pokemon_PNG14.png',
 }) {
-  console.log(id);
-
   return (
     <article className="post-container">
       <div className="post-author">

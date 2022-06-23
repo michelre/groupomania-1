@@ -1,25 +1,42 @@
 import '../styles/FormLogin.css';
 import { useEffect, useState } from 'react';
-import Api from '../Api';
+//import Api from '../Api';
 import { useParams } from 'react-router-dom';
-import FormPost from '../components/FormPost';
+import FormUpdatePost from '../components/FormUpdatePost';
 import Banner from '../components/Banner';
 import Footer from '../components/Footer';
 import Nav from '../components/Nav';
 
-const api = new Api();
+//const api = new Api();
 
 export default function UpdatePost() {
   const [post, setPost] = useState(null);
-
   const { id } = useParams();
 
   useEffect(() => {
-    api.getPostById(id).then((p) => {
-      //createPost(p);
-      setPost(p);
-    });
+    fetch(`http://localhost:3001/api/posts/${id}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
+      },
+    })
+      .then((post) => {
+        return post.json();
+      })
+      .then((response) => {
+        console.log(response);
+        setPost(response);
+      })
+      .catch((error) => {
+        alert("Le post n'a pas pu être trouvé");
+        console.log(error);
+      });
   }, [id]);
+
+  console.log(id);
+  console.log(post);
 
   return (
     <div>
@@ -30,7 +47,7 @@ export default function UpdatePost() {
         navName2={'Se déconnecter'}
         navPath2={'/'}
       />
-      {post ? <FormPost /*onCreatePost={createPost}*/ post={post} /> : ''}
+      {post ? <FormUpdatePost post={post} /> : ''}
       <Footer />
     </div>
   );
