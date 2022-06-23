@@ -25,10 +25,18 @@ exports.createPost = (req, res, next) => {
 };
 
 exports.getAllPosts = (req, res, next) => {
-  Post.findAll({ order: [['createdAt', 'DESC']] })
+    /**
+     * TODO: Remonter le fait que l'utilisateur ait déjà liké le post
+     */
+    const userId = getUserIdFromToken(req)
+  Post.findAll({
+      order: [['createdAt', 'DESC']],
+      raw: true,
+      nest: true,
+      include: [{model: db.user}] })
     .then((posts) => {
       const mappedPosts = posts.map((post) => {
-        return post;
+        return {...post, modifiable: post.userId === userId};
       });
       res.status(200).json(mappedPosts);
     })
@@ -40,6 +48,12 @@ exports.getAllPosts = (req, res, next) => {
 };
 
 exports.likePost = (req, res, next) => {
+    /**TODO: Table like
+        - Like +1 -> ajouter une ligne dans la table like
+        - LIke -1 -> supprimer une ligne dans la table like
+        - Si une utilisateur a déjà liké, le backend doit lever une erreur
+
+     **/
   Post.findOne({ where: { postId: req.params.id } })
     .then((post) => {
       if (userId == post.usersLiked) {
@@ -70,6 +84,7 @@ exports.getOnePost = (req, res, next) => {
 };
 
 exports.modifyPost = (req, res, next) => {
+    // TODO: Si je ne suis pas l'utilisateur ou admin, renvoyer une 401
   const authUserId = getUserIdFromToken(req);
   Post.findOne({ where: { id: req.params.id } })
     .then((post) => {
@@ -102,6 +117,7 @@ exports.modifyPost = (req, res, next) => {
 };
 
 exports.deletePost = (req, res, next) => {
+    // TODO: Si je ne suis pas l'utilisateur ou admin, renvoyer une 401
   const authUserId = getUserIdFromToken(req);
   Post.findOne({ where: { id: req.params.id } })
     .then((post) => {

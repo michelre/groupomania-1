@@ -1,8 +1,10 @@
+import {handleApiResponse} from "./utils";
+
 export default class Api {
   //constructor() {}
 
   getAllPosts() {
-    fetch('http://localhost:3001/api/posts', {
+    return fetch('http://localhost:3001/api/posts', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -10,21 +12,12 @@ export default class Api {
         authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
       },
     })
-      .then((post) => post.json())
-      .then((response) => {
-        try {
-          console.log(response);
-        } catch (error) {
-          alert(
-            'Une erreur est survenue, veuillez recommencer ultérieurement.'
-          );
-        }
-      });
-    return Promise.resolve();
+      .then(handleApiResponse)
+
   }
 
   getPostById(id) {
-    fetch(`http://localhost:3001/api/posts/${id}`, {
+    return fetch(`http://localhost:3001/api/posts/${id}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -32,43 +25,22 @@ export default class Api {
         authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
       },
     })
-      .then((post) => {
-        return post.json();
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        alert("Le post n'a pas pu être trouvé");
-        console.log(error);
-      });
-    return Promise.resolve();
+      .then(handleApiResponse);
   }
 
   getUserById(id) {
-    fetch(`http://localhost:3001/api/auth/users/${id}`, {
+    return fetch(`http://localhost:3001/api/auth/users/${id}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
       },
-    })
-      .then((user) => {
-        return user.json();
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        alert("L'utilisateur n'a pas pu être trouvé");
-        console.log(error);
-      });
-    return Promise.resolve();
+    }).then(handleApiResponse);
   }
 
   login({ email, password }) {
-    fetch('http://localhost:3001/api/auth/login', {
+    return fetch('http://localhost:3001/api/auth/login', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -79,20 +51,7 @@ export default class Api {
         password,
       }),
     })
-      .then((data) => data.json())
-      .then((response) => {
-        try {
-          const token = response.token;
-          localStorage.setItem('token', JSON.stringify(token));
-          const userId = response.userId;
-          localStorage.setItem('userId', JSON.stringify(userId));
-        } catch (error) {
-          alert(
-            'Une erreur est survenue, veuillez recommencer ultérieurement.'
-          );
-        }
-      });
-    return Promise.resolve();
+      .then(handleApiResponse)
   }
 
   signin({ email, password, firstName }) {
@@ -101,7 +60,7 @@ export default class Api {
       email,
       password,
     };
-    fetch('http://localhost:3001/api/auth/signin', {
+    return fetch('http://localhost:3001/api/auth/signin', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -110,23 +69,12 @@ export default class Api {
       body: JSON.stringify({
         user,
       }),
-    })
-      .then((data) => data.json())
-      .then((response) => {
-        try {
-          response.json();
-        } catch (error) {
-          alert(
-            'Une erreur est survenue, veuillez recommencer ultérieurement.'
-          );
-        }
-      });
-    return Promise.resolve();
+    }).then(handleApiResponse)
   }
 
   createPost({ img, title, description, userId }) {
     console.log(img, title, description, userId);
-    fetch('http://localhost:3001/api/posts', {
+    return fetch('http://localhost:3001/api/posts', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -139,22 +87,13 @@ export default class Api {
         description,
       }),
     })
-      .then((data) => data.json())
-      .then((response) => {
-        try {
-          console.log(response);
-        } catch (error) {
-          alert(
-            'Une erreur est survenue, veuillez recommencer ultérieurement.'
-          );
-        }
-      });
-    return Promise.resolve();
+      .then(handleApiResponse)
+
   }
 
   modifyPost({ img, title, description, id }) {
     console.log(img, title, description, id);
-    fetch(`http://localhost:3001/api/posts/${id}`, {
+    return fetch(`http://localhost:3001/api/posts/${id}`, {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
@@ -166,23 +105,12 @@ export default class Api {
         title,
         description,
       }),
-    })
-      .then((data) => data.json())
-      .then((response) => {
-        try {
-          console.log(response);
-        } catch (error) {
-          alert(
-            'Une erreur est survenue, veuillez recommencer ultérieurement.'
-          );
-        }
-      });
-    return Promise.resolve();
+    }).then(handleApiResponse)
   }
 
   deletePost(id) {
     console.log(id);
-    fetch(`http://localhost:3001/api/posts/${id}`, {
+    return fetch(`http://localhost:3001/api/posts/${id}`, {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',
@@ -190,16 +118,6 @@ export default class Api {
         authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
       },
     })
-      .then((post) => {
-        return post.json();
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    return Promise.resolve();
   }
 
   likePost(id, userId, like) {
@@ -251,9 +169,9 @@ export default class Api {
     return Promise.resolve();
   }
 
-  modifyUser({ firstName, picture, email, password, department, id }) {
-    console.log(firstName, picture, email, password, department, id);
-    fetch(`http://localhost:3001/api/auth/users/${id}`, {
+  modifyUser({ firstName, picture, email, department, id }) {
+    console.log(firstName, picture, email, department, id);
+    return fetch(`http://localhost:3001/api/auth/users/${id}`, {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
@@ -264,20 +182,9 @@ export default class Api {
         firstName,
         picture,
         email,
-        password,
         department,
       }),
     })
-      .then((data) => data.json())
-      .then((response) => {
-        try {
-          console.log(response);
-        } catch (error) {
-          alert(
-            'Une erreur est survenue, veuillez recommencer ultérieurement.'
-          );
-        }
-      });
-    return Promise.resolve();
+      .then(handleApiResponse);
   }
 }

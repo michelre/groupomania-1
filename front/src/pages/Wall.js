@@ -15,26 +15,13 @@ export default function Wall() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/posts', {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
-      },
+    api.getAllPosts().then((posts) => {
+      setIsLoaded(true);
+      setPosts(posts);
+    }).catch((err) => {
+      setIsLoaded(true);
+      setError(error);
     })
-      .then((post) => post.json())
-      .then(
-        (response) => {
-          console.log(response);
-          setIsLoaded(true);
-          setPosts(response);
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
   }, []);
 
   const onDeletePost = ({ id }) => {
@@ -87,8 +74,10 @@ export default function Wall() {
                 likes={post.likes}
                 onDelete={onDeletePost}
                 onLike={onLikePost}
-                firstname={post.firstname}
+                firstname={post.user.firstName}
                 picture={post.picture}
+                createdAt={post.createdAt}
+                modifiable={post.modifiable}
               />
             ))}
           </section>

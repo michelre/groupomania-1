@@ -15,17 +15,7 @@ export default function Account() {
   console.log(id);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/api/auth/users/${id}`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
-      },
-    })
-      .then((user) => {
-        return user.json();
-      })
+    api.getUserById(id)
       .then((response) => {
         console.log(response);
         setUser(response);

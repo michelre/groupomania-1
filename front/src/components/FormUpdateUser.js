@@ -6,27 +6,25 @@ import { useParams, useNavigate } from 'react-router-dom';
 const api = new Api();
 
 export default function UpdateUser({ user }) {
-  const [firstName, setfirstName] = useState(user.firstName);
+  const [firstName, setFirstName] = useState(user.firstName);
   const [email, setEmail] = useState(user.email);
-  const [password, setPassword] = useState(user.password);
   const [picture, setPicture] = useState(user.picture);
-  const [department, setDepartment] = useState(user.department);
+  const [department, setDepartment] = useState(user.department || '');
   const { id } = useParams();
   const navigate = useNavigate();
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
-    await api
+    api
       .modifyUser({
         firstName,
         picture,
         department,
         email,
-        password,
         id,
       })
       .then(() => {
-        navigate(`/wall/`, { replace: true });
+        navigate(`/wall/account`);
       });
   }
   return (
@@ -37,7 +35,7 @@ export default function UpdateUser({ user }) {
         placeholder="Votre prénom"
         value={firstName}
         name="firstName"
-        onChange={(e) => setfirstName(e.target.value)}
+        onChange={(e) => setFirstName(e.target.value)}
         required
       />
       <input
@@ -48,14 +46,7 @@ export default function UpdateUser({ user }) {
         onChange={(e) => setEmail(e.target.value)}
         required
       />
-      <input
-        type="password"
-        placeholder="Votre mot de passe"
-        value={password}
-        name="password"
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
+
       <input
         type="file"
         placeholder="Photo"
@@ -69,7 +60,7 @@ export default function UpdateUser({ user }) {
         alt="posted pic"
         src={user.imageUrl}
       />
-      <label for="department-select">Choisir votre département:</label>
+      <label htmlFor="department-select">Choisir votre département:</label>
       <select
         name="department-select"
         id="department"

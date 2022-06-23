@@ -6,7 +6,7 @@ module.exports = {
     password: process.env.MDP,
     database: process.env.DB,
     host: process.env.HOST,
-    port: process.env.PORT,
+    port: 8889,
     dialect: process.env.DIALECT,
   },
   test: {
