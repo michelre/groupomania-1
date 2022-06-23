@@ -45,7 +45,7 @@ export default function UpdatePost() {
         navName1={'Mur'}
         navPath1={'/wall'}
         navName2={'Se déconnecter'}
-        navPath2={'/'}
+        navPath2={'/logout'}
       />
       {post ? <FormUpdatePost post={post} /> : ''}
       <Footer />

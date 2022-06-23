@@ -1,20 +1,33 @@
 import '../styles/FormLogin.css';
 import { useState } from 'react';
+import Api from '../Api';
+import { useParams, useNavigate } from 'react-router-dom';
 
-export default function UpdateUser({ onModifyUser }) {
-  const [firstname, setFirstName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [picture, setPicture] = useState('');
-  const [department, setDepartment] = useState('');
+const api = new Api();
 
-  function handleSubmit(e) {
+export default function UpdateUser({ user }) {
+  const [firstName, setfirstName] = useState(user.firstName);
+  const [email, setEmail] = useState(user.email);
+  const [password, setPassword] = useState(user.password);
+  const [picture, setPicture] = useState(user.picture);
+  const [department, setDepartment] = useState(user.department);
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    onModifyUser({
-      firstname,
-      picture,
-      department,
-    });
+    await api
+      .modifyUser({
+        firstName,
+        picture,
+        department,
+        email,
+        password,
+        id,
+      })
+      .then(() => {
+        navigate(`/wall/`, { replace: true });
+      });
   }
   return (
     <form className="form-login" onSubmit={handleSubmit}>
@@ -22,9 +35,9 @@ export default function UpdateUser({ onModifyUser }) {
       <input
         type="text"
         placeholder="Votre prénom"
-        value={firstname}
-        name="firstname"
-        onChange={(e) => setFirstName(e.target.value)}
+        value={firstName}
+        name="firstName"
+        onChange={(e) => setfirstName(e.target.value)}
         required
       />
       <input
@@ -50,6 +63,11 @@ export default function UpdateUser({ onModifyUser }) {
         value={picture}
         name="picture"
         onChange={(e) => setPicture(e.target.value)}
+      />
+      <img
+        className="post-img-form-update"
+        alt="posted pic"
+        src={user.imageUrl}
       />
       <label for="department-select">Choisir votre département:</label>
       <select

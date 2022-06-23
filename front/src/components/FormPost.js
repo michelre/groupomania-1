@@ -5,6 +5,8 @@ export default function FormPost({ onCreatePost }) {
   const [img, setImg] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const userId = JSON.parse(localStorage.getItem('userId'));
+  console.log(userId);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -12,11 +14,12 @@ export default function FormPost({ onCreatePost }) {
       img,
       title,
       description,
+      userId,
     });
   }
 
   return (
-    <form className="form-login" onSubmit={handleSubmit}>
+    <form id={userId} className="form-login" onSubmit={handleSubmit}>
       <h2>C'est parti! Créez vos posts!</h2>
       <input
         type="file"

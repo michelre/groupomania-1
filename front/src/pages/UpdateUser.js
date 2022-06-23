@@ -1,31 +1,48 @@
 import '../styles/FormLogin.css';
 import { useEffect, useState } from 'react';
-import Api from '../Api';
-import { useNavigate, useParams } from 'react-router-dom';
+//import Api from '../Api';
+import { useParams } from 'react-router-dom';
 import FormUpdateUser from '../components/FormUpdateUser';
 import Banner from '../components/Banner';
 import Footer from '../components/Footer';
 import Nav from '../components/Nav';
 
-const api = new Api();
+//const api = new Api();
 
 export default function UpdateUser() {
   const [user, setUser] = useState(null);
-
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
-    api.getUserById(id).then((u) => {
-      setUser(u);
-    });
+    fetch(`http://localhost:3001/api/auth/users/${id}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
+      },
+    })
+      .then((user) => {
+        return user.json();
+      })
+      .then((response) => {
+        console.log(response);
+        setUser(response);
+      })
+      .catch((error) => {
+        alert("L'utilisateur n'a pas pu être trouvé");
+        console.log(error);
+      });
   }, [id]);
 
-  function updateUser(user) {
+  console.log(id);
+  console.log(user);
+  /*function updateUser(user) {
     api.modifyUser(user).then(() => {
       navigate(`/account/`);
     });
-  }
+  }*/
 
   return (
     <div>
@@ -34,10 +51,9 @@ export default function UpdateUser() {
         navName1={'Mur'}
         navPath1={'/wall'}
         navName2={'Se déconnecter'}
-        navPath2={'/'}
+        navPath2={'/logout'}
       />
-      {/*{user ? <FormUpdateUser onModifyUser={updateUser} user={user} /> : ''*/}
-      <FormUpdateUser onModifyUser={updateUser} user={user} />
+      {user ? <FormUpdateUser user={user} /> : ''}
       <Footer />
     </div>
   );

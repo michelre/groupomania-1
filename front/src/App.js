@@ -8,6 +8,7 @@ import UpdatePost from './pages/UpdatePost';
 import UpdateUser from './pages/UpdateUser';
 import Error from './pages/Error';
 import Account from './pages/Account';
+import Logout from './pages/Logout';
 
 export default function App() {
   return (
@@ -17,11 +18,12 @@ export default function App() {
         <Route path="wall" element={<Wall />} />
         <Route path="login" element={<Login />} />
         <Route path="signin" element={<Signin />} />
-        <Route path="wall/account" element={<Account />} />
+        <Route path="wall/account/" element={<Account />} />
         <Route path="wall/posts" element={<CreatePost />} />
         <Route path="wall/posts/:id" element={<UpdatePost />} />
         <Route path="wall/account/update/:id" element={<UpdateUser />} />
         <Route path="*" element={<Error />} />
+        <Route path="logout" element={<Logout />} />
       </Routes>
     </div>
   );

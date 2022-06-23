@@ -15,8 +15,6 @@ export default function Wall() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    /*api
-      .getAllPosts()*/
     fetch('http://localhost:3001/api/posts', {
       method: 'GET',
       headers: {
@@ -48,7 +46,7 @@ export default function Wall() {
     }
   };
 
-  const onLikePost = (id) => {
+  const onLikePost = ({ id }) => {
     api.likePost(id).then(() => {
       const newPosts = posts.map((p) => {
         if (p.id === id) {
@@ -72,7 +70,7 @@ export default function Wall() {
           navName1={'Mon compte'}
           navPath1={'account'}
           navName2={'Se déconnecter'}
-          navPath2={'/'}
+          navPath2={'logout'}
         />
         <main className="container">
           <h2>De quoi souhaitez-vous discuter?</h2>

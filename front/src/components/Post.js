@@ -13,15 +13,14 @@ export default function Post({
   likes,
   onDelete,
   onLike,
-  firstname = 'Pikachu',
-  picture = 'https://pngimg.com/uploads/pokemon/pokemon_PNG14.png',
+  userId,
 }) {
   return (
     <article className="post-container">
       <div className="post-author">
-        <img alt="utilisateur" src={picture} className="post-author-img" />
+        <img alt="utilisateur" src={userId} className="post-author-img" />
         <p className="post-author-name">
-          {firstname} a posté le {new Date().toLocaleString('fr-FR')}:
+          {userId} a posté le {new Date().toLocaleString('fr-FR')}:
         </p>
       </div>
       <img className="post-img" alt={alt} src={img} />
