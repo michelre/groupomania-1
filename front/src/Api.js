@@ -161,7 +161,25 @@ export default class Api {
     return Promise.resolve();
   }
 
-  deletePost() {
+  deletePost(id) {
+    console.log(id);
+    fetch(`http://localhost:3001/api/posts/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
+      },
+    })
+      .then((post) => {
+        return post.json();
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     return Promise.resolve();
   }
 

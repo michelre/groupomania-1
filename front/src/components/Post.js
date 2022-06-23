@@ -28,10 +28,10 @@ export default function Post({
       <h1 className="post-title">{title}</h1>
       <p className="post-description">{description}</p>
       <div className="post-functions">
-        <LikePost onLike={() => onLike(id)} count={likes} />
+        <LikePost onLike={() => onLike({ id })} count={likes} />
         <div className="post-buttons">
           <ModifyPost id={id} />
-          <DeletePost onDelete={() => onDelete(id)} />
+          <DeletePost id={id} onDelete={() => onDelete({ id })} />
         </div>
       </div>
     </article>

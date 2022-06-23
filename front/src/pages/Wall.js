@@ -39,7 +39,7 @@ export default function Wall() {
       );
   }, []);
 
-  const onDeletePost = (id) => {
+  const onDeletePost = ({ id }) => {
     if (window.confirm('Êtes-vous sûr de vouloir supprimer ce post?')) {
       api.deletePost(id).then(() => {
         const newPosts = posts.filter((p) => p.id !== id);
