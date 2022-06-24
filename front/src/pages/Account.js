@@ -52,7 +52,7 @@ export default function Account() {
         navName1={'Mur'}
         navPath1={'/wall'}
         navName2={'Se déconnecter'}
-        navPath2={'logout'}
+        navPath2={'/logout'}
       />
       <User
         firstName={user.firstName}

@@ -68,9 +68,9 @@ export default function Wall() {
         <Banner />
         <Nav
           navName1={'Mon compte'}
-          navPath1={'account'}
+          navPath1={'/account'}
           navName2={'Se déconnecter'}
-          navPath2={'logout'}
+          navPath2={'/logout'}
         />
         <main className="container">
           <h2>De quoi souhaitez-vous discuter?</h2>

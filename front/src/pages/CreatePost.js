@@ -30,7 +30,7 @@ export default function FormCreatePost() {
         navName1={'Mur'}
         navPath1={'/wall'}
         navName2={'Se déconnecter'}
-        navPath2={'/'}
+        navPath2={'/logout'}
       />
       <FormPost onCreatePost={createPost} />
       <Footer />
