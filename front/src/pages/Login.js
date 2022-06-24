@@ -9,9 +9,18 @@ const api = new Api();
 export default function Login() {
   const navigate = useNavigate();
   const onLogin = ({ email, password }) => {
-    api.login({ email, password }).then(() => {
-      navigate(`/wall/`);
-    });
+    api
+      .login({ email, password })
+      .then((response) => {
+        const token = response.token;
+        localStorage.setItem('token', JSON.stringify(token));
+        const userId = response.userId;
+        localStorage.setItem('userId', JSON.stringify(userId));
+        navigate(`/wall/`);
+      })
+      .catch(() => {
+        alert('Une erreur est survenue, veuillez recommencer ultérieurement.');
+      });
   };
   return (
     <div>

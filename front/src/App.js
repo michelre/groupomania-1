@@ -22,8 +22,8 @@ export default function App() {
         <Route path="wall/posts" element={<CreatePost />} />
         <Route path="wall/posts/:id" element={<UpdatePost />} />
         <Route path="wall/account/update/:id" element={<UpdateUser />} />
-        <Route path="*" element={<Error />} />
         <Route path="logout" element={<Logout />} />
+        <Route path="*" element={<Error />} />
       </Routes>
     </div>
   );

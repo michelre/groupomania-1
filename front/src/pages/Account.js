@@ -15,17 +15,8 @@ export default function Account() {
   console.log(id);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/api/auth/users/${id}`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
-      },
-    })
-      .then((user) => {
-        return user.json();
-      })
+    api
+      .getUserById(id)
       .then((response) => {
         console.log(response);
         setUser(response);
@@ -52,7 +43,7 @@ export default function Account() {
         navName1={'Mur'}
         navPath1={'/wall'}
         navName2={'Se déconnecter'}
-        navPath2={'/logout'}
+        navPath2={'logout'}
       />
       <User
         firstName={user.firstName}

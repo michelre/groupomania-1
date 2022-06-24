@@ -1,13 +1,13 @@
 import '../styles/FormLogin.css';
 import { useEffect, useState } from 'react';
-//import Api from '../Api';
+import Api from '../Api';
 import { useParams } from 'react-router-dom';
 import FormUpdateUser from '../components/FormUpdateUser';
 import Banner from '../components/Banner';
 import Footer from '../components/Footer';
 import Nav from '../components/Nav';
 
-//const api = new Api();
+const api = new Api();
 
 export default function UpdateUser() {
   const [user, setUser] = useState(null);
@@ -15,17 +15,8 @@ export default function UpdateUser() {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:3001/api/auth/users/${id}`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
-      },
-    })
-      .then((user) => {
-        return user.json();
-      })
+    api
+      .getUserById(id)
       .then((response) => {
         console.log(response);
         setUser(response);

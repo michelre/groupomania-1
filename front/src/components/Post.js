@@ -4,6 +4,18 @@ import LikePost from '../components/LikePost';
 import DeletePost from '../components/DeletePost';
 import ModifyPost from '../components/ModifyPost';
 
+const PostButton = ({ modifiable, id, onDelete }) => {
+  if (!modifiable) {
+    return null;
+  }
+  return (
+    <div className="post-buttons">
+      <ModifyPost id={id} />
+      <DeletePost id={id} onDelete={() => onDelete({ id })} />
+    </div>
+  );
+};
+
 export default function Post({
   id,
   alt,
@@ -14,13 +26,16 @@ export default function Post({
   onDelete,
   onLike,
   userId,
+  firstname,
+  createdAt,
+  modifiable,
 }) {
   return (
     <article className="post-container">
       <div className="post-author">
         <img alt="utilisateur" src={userId} className="post-author-img" />
         <p className="post-author-name">
-          {userId} a posté le {new Date().toLocaleString('fr-FR')}:
+          {firstname} a posté le {new Date(createdAt).toLocaleString('fr-FR')}
         </p>
       </div>
       <img className="post-img" alt={alt} src={img} />
@@ -28,10 +43,7 @@ export default function Post({
       <p className="post-description">{description}</p>
       <div className="post-functions">
         <LikePost onLike={() => onLike({ id })} count={likes} />
-        <div className="post-buttons">
-          <ModifyPost id={id} />
-          <DeletePost id={id} onDelete={() => onDelete({ id })} />
-        </div>
+        <PostButton modifiable={modifiable} onDelete={onDelete} id={id} />
       </div>
     </article>
   );

@@ -15,26 +15,16 @@ export default function Wall() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/posts', {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
-      },
-    })
-      .then((post) => post.json())
-      .then(
-        (response) => {
-          console.log(response);
-          setIsLoaded(true);
-          setPosts(response);
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
+    api
+      .getAllPosts()
+      .then((posts) => {
+        setIsLoaded(true);
+        setPosts(posts);
+      })
+      .catch((err) => {
+        setIsLoaded(true);
+        setError(err);
+      });
   }, []);
 
   const onDeletePost = ({ id }) => {
@@ -68,9 +58,9 @@ export default function Wall() {
         <Banner />
         <Nav
           navName1={'Mon compte'}
-          navPath1={'/account'}
+          navPath1={'account'}
           navName2={'Se déconnecter'}
-          navPath2={'/logout'}
+          navPath2={'logout'}
         />
         <main className="container">
           <h2>De quoi souhaitez-vous discuter?</h2>
@@ -87,8 +77,10 @@ export default function Wall() {
                 likes={post.likes}
                 onDelete={onDeletePost}
                 onLike={onLikePost}
-                firstname={post.firstname}
+                firstname={post.user.firstName}
                 picture={post.picture}
+                createdAt={post.createdAt}
+                modifiable={post.modifiable}
               />
             ))}
           </section>

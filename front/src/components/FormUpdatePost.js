@@ -13,9 +13,9 @@ export default function FormUpdatePost({ post }) {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
-    await api
+    api
       .modifyPost({
         title,
         img,
@@ -23,7 +23,7 @@ export default function FormUpdatePost({ post }) {
         id,
       })
       .then(() => {
-        navigate(`/wall/`, { replace: true });
+        navigate(`/wall/`);
       });
   }
 

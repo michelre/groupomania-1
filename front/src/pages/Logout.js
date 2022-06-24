@@ -7,7 +7,12 @@ export default function Logout() {
   return (
     <div>
       <Banner />
-      <Nav />
+      <Nav
+        navName1={'Se connecter'}
+        navPath1={'/login'}
+        navName2={'Créer un compte'}
+        navPath2={'/signin'}
+      />
       <h1>A Bientôt!</h1>
       <Footer />
     </div>

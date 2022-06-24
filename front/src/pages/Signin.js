@@ -9,9 +9,14 @@ const api = new Api();
 export default function Signin() {
   const navigate = useNavigate();
   const onSignin = ({ email, password, firstName }) => {
-    api.signin({ email, password, firstName }).then(() => {
-      navigate(`/wall/`);
-    });
+    api
+      .signin({ email, password, firstName })
+      .then((res) => {
+        navigate(`/login/`);
+      })
+      .catch(() => {
+        alert('Une erreur est survenue, veuillez recommencer ultérieurement.');
+      });
   };
   return (
     <div>
