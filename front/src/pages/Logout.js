@@ -13,7 +13,8 @@ export default function Logout() {
         navName2={'Créer un compte'}
         navPath2={'/signin'}
       />
-      <h1>A Bientôt!</h1>
+      <h2>A Bientôt!</h2>
+      <img src="../images/escalator.jpg" alt="escalator" className="home-img" />
       <Footer />
     </div>
   );
