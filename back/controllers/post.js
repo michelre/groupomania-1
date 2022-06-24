@@ -6,12 +6,14 @@ const { getUserIdFromToken } = require('../middleware/auth');
 /*logique metier des routes post*/
 exports.createPost = (req, res, next) => {
   const postObject = req.body;
+  console.log(req.body);
   delete postObject.id;
   let imageUrl = '';
   if (req.file) {
     imageUrl = `${req.protocol}://${req.get('host')}/images/${
       req.file.filename
     }`;
+    console.log(imageUrl);
   }
   const post = new Post({
     ...postObject,

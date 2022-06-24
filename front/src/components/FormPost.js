@@ -19,13 +19,21 @@ export default function FormPost({ onCreatePost }) {
   }
 
   return (
-    <form id={userId} className="form-login" onSubmit={handleSubmit}>
+    <form
+      id={userId}
+      encType="multipart/form-data"
+      className="form-login"
+      onSubmit={handleSubmit}
+      action="/api/file"
+      method="post"
+    >
       <h2>C'est parti! Créez vos posts!</h2>
       <input
         type="file"
         placeholder="Télécharger une image ou vidéo"
         value={img}
         onChange={(e) => setImg(e.target.value)}
+        name="file"
       />
       <input
         type="text"

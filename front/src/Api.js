@@ -70,19 +70,16 @@ export default class Api {
 
   createPost({ img, title, description, userId }) {
     console.log(img, title, description, userId);
+    const formData = new FormData();
+    formData.append('title', JSON.stringify(title));
+    formData.append('description', JSON.stringify(description));
+    formData.append('file', img);
     return fetch('http://localhost:3001/api/posts', {
       method: 'POST',
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
         authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
-        //il faut envoyer du FormData pr les images
       },
-      body: JSON.stringify({
-        img,
-        title,
-        description,
-      }),
+      body: formData,
     }).then(handleApiResponse);
   }
 
