@@ -1,7 +1,7 @@
 const db = require('../models');
 const Post = db.post;
 const fs = require('fs');
-const { getUserIdFromToken } = require('../middleware/auth');
+const { getUserIdFromToken, getRoleFromToken } = require('../middleware/auth');
 
 /*logique metier des routes post*/
 exports.createPost = (req, res, next) => {
@@ -31,6 +31,7 @@ exports.getAllPosts = (req, res, next) => {
    * TODO: Remonter le fait que l'utilisateur ait déjà liké le post
    */
   const userId = getUserIdFromToken(req);
+  const role = getRoleFromToken(req);
   Post.findAll({
     order: [['createdAt', 'DESC']],
     raw: true,
@@ -39,7 +40,10 @@ exports.getAllPosts = (req, res, next) => {
   })
     .then((posts) => {
       const mappedPosts = posts.map((post) => {
-        return { ...post, modifiable: post.userId === userId };
+        return {
+          ...post,
+          modifiable: post.userId === userId || role === 1,
+        };
       });
       res.status(200).json(mappedPosts);
     })
@@ -86,31 +90,32 @@ exports.getOnePost = (req, res, next) => {
 };
 
 exports.modifyPost = (req, res, next) => {
-  // TODO: Si je ne suis pas l'utilisateur ou admin, renvoyer une 401
   const authUserId = getUserIdFromToken(req);
+  const role = getRoleFromToken(req);
   Post.findOne({ where: { id: req.params.id } })
     .then((post) => {
-      if (post.userId !== authUserId) {
+      if (post.userId === authUserId || role === 1) {
+        let newPost = { ...req.body };
+        if (req.file) {
+          const filename = post.imageUrl.split('/images/')[1];
+          fs.unlink(`images/${filename}`, () => {
+            newPost = {
+              ...newPost,
+              imageUrl: `${req.protocol}://${req.get('host')}/images/${
+                req.file.filename
+              }`,
+            };
+          });
+        }
+        post.update({ ...newPost });
+        post
+          .save()
+          .then(() => res.status(200).json({ message: 'Post modifié!' }))
+          .catch((error) => res.status(400).json({ error }));
+      } else {
         res.status(403).end();
         return;
       }
-      let newPost = { ...req.body };
-      if (req.file) {
-        const filename = post.imageUrl.split('/images/')[1];
-        fs.unlink(`images/${filename}`, () => {
-          newPost = {
-            ...newPost,
-            imageUrl: `${req.protocol}://${req.get('host')}/images/${
-              req.file.filename
-            }`,
-          };
-        });
-      }
-      post.update({ ...newPost });
-      post
-        .save()
-        .then(() => res.status(200).json({ message: 'Post modifié!' }))
-        .catch((error) => res.status(400).json({ error }));
     })
     .catch((error) => {
       console.log(error);
@@ -119,21 +124,22 @@ exports.modifyPost = (req, res, next) => {
 };
 
 exports.deletePost = (req, res, next) => {
-  // TODO: Si je ne suis pas l'utilisateur ou admin, renvoyer une 401
   const authUserId = getUserIdFromToken(req);
+  const role = getRoleFromToken(req);
   Post.findOne({ where: { id: req.params.id } })
     .then((post) => {
-      if (post.userId !== authUserId) {
+      if (post.userId === authUserId || role === 1) {
+        const filename = post.imageUrl.split('/images/')[1];
+        console.log(filename, 'here');
+        fs.unlink(`images/${filename}`, () => {
+          Post.destroy({ where: { id: req.params.id } })
+            .then(() => res.status(204).end())
+            .catch((error) => res.status(400).json({ error }));
+        });
+      } else {
         res.status(403).end();
         return;
       }
-      const filename = post.imageUrl.split('/images/')[1];
-      console.log(filename, 'here');
-      fs.unlink(`images/${filename}`, () => {
-        Post.destroy({ where: { id: req.params.id } })
-          .then(() => res.status(204).end())
-          .catch((error) => res.status(400).json({ error }));
-      });
     })
     .catch((error) => {
       res.status(500).json({ error: error });

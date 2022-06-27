@@ -47,6 +47,9 @@ module.exports = (sequelize, DataTypes) => {
       imageUrl: {
         type: DataTypes.STRING,
       },
+      administrator: {
+        type: DataTypes.INTEGER,
+      },
     },
     {
       hooks: {

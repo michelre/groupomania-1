@@ -8,6 +8,14 @@ const getUserIdFromToken = (req) => {
 
 exports.getUserIdFromToken = getUserIdFromToken;
 
+const getRoleFromToken = (req) => {
+  const token = req.headers.authorization.split(' ')[1];
+  const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+  return decodedToken.role;
+};
+
+exports.getRoleFromToken = getRoleFromToken;
+
 module.exports = {
   auth: (req, res, next) => {
     try {
@@ -27,5 +35,10 @@ module.exports = {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     return decodedToken.userId;
+  },
+  getRoleFromToken: (req) => {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    return decodedToken.role;
   },
 };

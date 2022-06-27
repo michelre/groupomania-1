@@ -48,6 +48,8 @@ export default function Wall() {
     });
   };
 
+  console.log(posts);
+
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {
@@ -60,7 +62,7 @@ export default function Wall() {
           navName1={'Mon compte'}
           navPath1={'account'}
           navName2={'Se déconnecter'}
-          navPath2={'logout'}
+          navPath2={'/logout'}
         />
         <main className="container">
           <h2>De quoi souhaitez-vous discuter?</h2>
