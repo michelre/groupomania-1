@@ -1,8 +1,6 @@
 import { handleApiResponse } from './utils';
 
 export default class Api {
-  //constructor() {}
-
   getAllPosts() {
     return fetch('http://localhost:3001/api/posts', {
       method: 'GET',
@@ -68,12 +66,12 @@ export default class Api {
     }).then(handleApiResponse);
   }
 
-  createPost({ img, title, description, userId }) {
-    console.log(img, title, description, userId);
+  createPost({ imageUrl, title, description, userId }) {
+    console.log(imageUrl, title, description, userId);
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);
-    formData.append('file', img);
+    formData.append('file', imageUrl);
     return fetch('http://localhost:3001/api/posts', {
       method: 'POST',
       headers: {
@@ -149,17 +147,7 @@ export default class Api {
         'Content-Type': 'application/json',
         authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
       },
-    })
-      .then((post) => {
-        return post.json();
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    return Promise.resolve();
+    });
   }
 
   modifyUser({ firstName, picture, email, department, id }) {

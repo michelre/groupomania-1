@@ -29,11 +29,8 @@ export default function Account() {
 
   const onDeleteUser = ({ id }) => {
     if (window.confirm('Êtes-vous sûr de vouloir supprimer votre compte?')) {
-      api.deleteUser(id).then(() => {
-        /*const newUsers = user.filter((u) => u.id !== id);
-        setUser(newUsers);*/
-        navigate(`/logout`);
-      });
+      api.deleteUser(id);
+      navigate(`/logout`);
     }
   };
   return (

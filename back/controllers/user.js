@@ -54,7 +54,7 @@ exports.deleteUser = (req, res) => {
   const authUserId = getUserIdFromToken(req);
   User.findOne({ where: { id: req.params.id } })
     .then((user) => {
-      if (user.userId !== authUserId) {
+      if (user.id !== authUserId) {
         res.status(403).end();
         return;
       }

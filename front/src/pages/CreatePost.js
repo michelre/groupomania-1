@@ -10,15 +10,16 @@ const api = new Api();
 
 export default function FormCreatePost() {
   const navigate = useNavigate();
-  function createPost({ title, img, description, userId }) {
+  function createPost({ title, imageUrl, description, userId }) {
     api
       .createPost({
         title,
-        img,
+        imageUrl,
         description,
         userId,
       })
       .then(() => {
+        console.log(imageUrl);
         navigate(`/wall/`);
       });
   }

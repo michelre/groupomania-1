@@ -73,7 +73,7 @@ export default function Wall() {
                 alt={post.alt}
                 title={post.title}
                 description={post.description}
-                img={post.imageUrl}
+                imageUrl={post.imageUrl}
                 id={post.id}
                 key={post.id}
                 likes={post.likes}

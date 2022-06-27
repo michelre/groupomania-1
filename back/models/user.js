@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          isAlpha: { msg: "Le format de votre prénom n'est pas correct" },
           len: {
             args: [1, 25],
           },
@@ -54,12 +53,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       hooks: {
         beforeCreate: async (user) => {
-          if (user.password) {
-            const salt = await bcrypt.genSaltSync(10, 'a');
-            user.password = bcrypt.hashSync(user.password, salt);
-          }
-        },
-        beforeUpdate: async (user) => {
           if (user.password) {
             const salt = await bcrypt.genSaltSync(10, 'a');
             user.password = bcrypt.hashSync(user.password, salt);

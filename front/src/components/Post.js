@@ -20,7 +20,7 @@ export default function Post({
   id,
   alt,
   title,
-  img,
+  imageUrl,
   description,
   likes,
   onDelete,
@@ -38,7 +38,7 @@ export default function Post({
           {firstname} a posté le {new Date(createdAt).toLocaleString('fr-FR')}
         </p>
       </div>
-      <img className="post-img" alt={alt} src={img} />
+      <img className="post-img" alt={alt} src={imageUrl} />
       <h1 className="post-title">{title}</h1>
       <p className="post-description">{description}</p>
       <div className="post-functions">
@@ -53,7 +53,7 @@ Post.propTypes = {
   alt: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string.isRequired,
-  img: PropTypes.string,
+  imageUrl: PropTypes.string,
   likes: PropTypes.number,
   onDeletePost: PropTypes.func,
   onLike: PropTypes.func,
