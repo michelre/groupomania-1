@@ -105,7 +105,7 @@ exports.modifyPost = (req, res, next) => {
             };
           });
         }
-        post.update({ ...newPost });
+        post.update({ ...newPost, imageUrl });
         post
           .save()
           .then(() => res.status(200).json({ message: 'Post modifié!' }))

@@ -6,8 +6,6 @@ export default function FormPost({ onCreatePost }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const userId = JSON.parse(localStorage.getItem('userId'));
-  console.log(userId);
-  console.log(imageUrl);
 
   function handleSubmit(e) {
     e.preventDefault();

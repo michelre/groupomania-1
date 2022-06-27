@@ -23,6 +23,8 @@ exports.signin = (req, res) => {
 exports.login = (req, res) => {
   User.findOne({ where: { email: req.body.email } })
     .then((user) => {
+      console.log(req.body.email);
+      console.log(user);
       if (!user) {
         return res.status(401).json({ error: 'Utilisateur non trouvé !' });
       }
@@ -93,6 +95,7 @@ exports.modifyUser = (req, res) => {
       }
       user.update({
         ...newUser,
+        imageUrl,
       });
       user
         .save()

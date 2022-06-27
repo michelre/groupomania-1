@@ -28,13 +28,20 @@ export default function FormUpdatePost({ post }) {
   }
 
   return (
-    <form className="form-login" onSubmit={handleSubmit}>
+    <form
+      encType="multipart/form-data"
+      method="put"
+      action="/api/posts/:id"
+      className="form-login"
+      onSubmit={handleSubmit}
+    >
       <h2>Modifiez votre post!</h2>
       <input
         type="file"
+        name="file"
         placeholder="Télécharger une image ou vidéo"
-        value={img}
-        onChange={(e) => setImg(e.target.value)}
+        value=""
+        onChange={(e) => setImg(e.target.files[0])}
       />
       <img
         className="post-img-form-update"

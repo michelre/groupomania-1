@@ -28,7 +28,13 @@ export default function UpdateUser({ user }) {
       });
   }
   return (
-    <form className="form-login" onSubmit={handleSubmit}>
+    <form
+      className="form-login"
+      encType="multipart/form-data"
+      onSubmit={handleSubmit}
+      method="put"
+      action="/api/auth/users/:id"
+    >
       <h2>Modifiez votre compte en quelques minutes!</h2>
       <input
         type="text"
@@ -51,9 +57,9 @@ export default function UpdateUser({ user }) {
         type="file"
         placeholder="Photo"
         alt="Photo de l'utilisateur"
-        value={picture}
-        name="picture"
-        onChange={(e) => setPicture(e.target.value)}
+        value=""
+        name="file"
+        onChange={(e) => setPicture(e.target.files[0])}
       />
       <img
         className="post-img-form-update"

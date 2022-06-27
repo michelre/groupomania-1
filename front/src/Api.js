@@ -83,19 +83,16 @@ export default class Api {
 
   modifyPost({ img, title, description, id }) {
     console.log(img, title, description, id);
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('file', img);
     return fetch(`http://localhost:3001/api/posts/${id}`, {
       method: 'PUT',
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
         authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
-        //il faut envoyer du FormData pr les images
       },
-      body: JSON.stringify({
-        img,
-        title,
-        description,
-      }),
+      body: formData,
     }).then(handleApiResponse);
   }
 
@@ -152,20 +149,17 @@ export default class Api {
 
   modifyUser({ firstName, picture, email, department, id }) {
     console.log(firstName, picture, email, department, id);
+    const formData = new FormData();
+    formData.append('firstName', firstName);
+    formData.append('email', email);
+    formData.append('department', department);
+    formData.append('file', picture);
     return fetch(`http://localhost:3001/api/auth/users/${id}`, {
       method: 'PUT',
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
         authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
-        //il faut envoyer du FormData pr les images
       },
-      body: JSON.stringify({
-        firstName,
-        picture,
-        email,
-        department,
-      }),
+      body: formData,
     }).then(handleApiResponse);
   }
 }
