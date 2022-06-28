@@ -135,6 +135,7 @@ export default class Api {
     return Promise.resolve();
   }
 
+  /***ne marche pas */
   deleteUser(id) {
     console.log(id);
     fetch(`http://localhost:3001/api/auth/users/${id}`, {
@@ -147,13 +148,13 @@ export default class Api {
     });
   }
 
-  modifyUser({ firstName, picture, email, department, id }) {
-    console.log(firstName, picture, email, department, id);
+  modifyUser({ firstName, imageUrl, email, department, id }) {
+    console.log(firstName, imageUrl, email, department, id);
     const formData = new FormData();
     formData.append('firstName', firstName);
     formData.append('email', email);
     formData.append('department', department);
-    formData.append('file', picture);
+    formData.append('file', imageUrl);
     return fetch(`http://localhost:3001/api/auth/users/${id}`, {
       method: 'PUT',
       headers: {

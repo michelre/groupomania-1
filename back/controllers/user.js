@@ -76,14 +76,14 @@ exports.deleteUser = (req, res) => {
 exports.modifyUser = (req, res) => {
   const authUserId = getUserIdFromToken(req);
   User.findOne({ where: { id: req.params.id } })
-    .then((user) => {
-      if (user.id !== authUserId) {
+    .then((u) => {
+      if (u.id !== authUserId) {
         res.status(403).json({ message: 'Utilisateur non autorisé!' });
         return;
       }
       let newUser = { ...req.body };
-      if (req.file && user.imageUrl) {
-        const filename = user.imageUrl.split('/images/')[1];
+      if (req.file) {
+        const filename = u.imageUrl.split('/images/')[1];
         fs.unlink(`images/${filename}`, () => {
           newUser = {
             ...newUser,
@@ -92,13 +92,18 @@ exports.modifyUser = (req, res) => {
             }`,
           };
         });
+        const user = {
+          ...newUser,
+          imageUrl: `${req.protocol}://${req.get('host')}/images/${
+            req.file.filename
+          }`,
+        };
+        u.update(user);
+        u.save(user);
       }
-      user.update({
-        ...newUser,
-        imageUrl,
-      });
-      user
-        .save()
+      const user = { ...newUser };
+      u.update(user);
+      u.save(user)
         .then(() => res.status(200).json({ message: 'Utilisateur modifié!' }))
         .catch((error) => res.status(400).json({ error }));
     })

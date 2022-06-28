@@ -80,7 +80,7 @@ export default function Wall() {
                 onDelete={onDeletePost}
                 onLike={onLikePost}
                 firstname={post.user.firstName}
-                picture={post.picture}
+                picture={post.user.imageUrl}
                 createdAt={post.createdAt}
                 modifiable={post.modifiable}
               />

@@ -8,7 +8,7 @@ const api = new Api();
 export default function UpdateUser({ user }) {
   const [firstName, setFirstName] = useState(user.firstName);
   const [email, setEmail] = useState(user.email);
-  const [picture, setPicture] = useState(user.picture);
+  const [imageUrl, setImageUrl] = useState(user.picture);
   const [department, setDepartment] = useState(user.department || '');
   const { id } = useParams();
   const navigate = useNavigate();
@@ -18,8 +18,8 @@ export default function UpdateUser({ user }) {
     api
       .modifyUser({
         firstName,
-        picture,
         department,
+        imageUrl,
         email,
         id,
       })
@@ -59,7 +59,7 @@ export default function UpdateUser({ user }) {
         alt="Photo de l'utilisateur"
         value=""
         name="file"
-        onChange={(e) => setPicture(e.target.files[0])}
+        onChange={(e) => setImageUrl(e.target.files[0])}
       />
       <img
         className="post-img-form-update"

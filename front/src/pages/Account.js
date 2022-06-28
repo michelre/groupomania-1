@@ -44,7 +44,7 @@ export default function Account() {
       />
       <User
         firstName={user.firstName}
-        picture={user.picture}
+        imageUrl={user.imageUrl}
         onDeleteUser={onDeleteUser}
         email={user.email}
         department={user.department}

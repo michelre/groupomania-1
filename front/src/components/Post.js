@@ -29,11 +29,12 @@ export default function Post({
   firstname,
   createdAt,
   modifiable,
+  picture,
 }) {
   return (
     <article className="post-container">
       <div className="post-author">
-        <img alt="utilisateur" src={userId} className="post-author-img" />
+        <img alt="utilisateur" src={picture} className="post-author-img" />
         <p className="post-author-name">
           {firstname} a posté le {new Date(createdAt).toLocaleString('fr-FR')}
         </p>
