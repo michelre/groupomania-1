@@ -8,7 +8,7 @@ const api = new Api();
 export default function UpdateUser({ user }) {
   const [firstName, setFirstName] = useState(user.firstName);
   const [email, setEmail] = useState(user.email);
-  const [imageUrl, setImageUrl] = useState(user.picture);
+  const [imageUrl, setImageUrl] = useState(user.imageUr);
   const [department, setDepartment] = useState(user.department || '');
   const { id } = useParams();
   const navigate = useNavigate();

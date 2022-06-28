@@ -82,7 +82,7 @@ exports.modifyUser = (req, res) => {
         return;
       }
       let newUser = { ...req.body };
-      if (req.file) {
+      if (req.file && u.imageUrl !== null) {
         const filename = u.imageUrl.split('/images/')[1];
         fs.unlink(`images/${filename}`, () => {
           newUser = {
@@ -99,13 +99,33 @@ exports.modifyUser = (req, res) => {
           }`,
         };
         u.update(user);
-        u.save(user);
+        u.save(user)
+          .then(() => res.status(200).json({ message: 'Utilisateur modifié!' }))
+          .catch((error) => res.status(400).json({ error }));
+      } else if (req.file && u.imageUrl == null) {
+        newUser = {
+          ...newUser,
+          imageUrl: `${req.protocol}://${req.get('host')}/images/${
+            req.file.filename
+          }`,
+        };
+        const user = {
+          ...newUser,
+          imageUrl: `${req.protocol}://${req.get('host')}/images/${
+            req.file.filename
+          }`,
+        };
+        u.update(user);
+        u.save(user)
+          .then(() => res.status(200).json({ message: 'Utilisateur modifié!' }))
+          .catch((error) => res.status(400).json({ error }));
+      } else {
+        const user = { ...newUser };
+        u.update(user);
+        u.save(user)
+          .then(() => res.status(200).json({ message: 'Utilisateur modifié!' }))
+          .catch((error) => res.status(400).json({ error }));
       }
-      const user = { ...newUser };
-      u.update(user);
-      u.save(user)
-        .then(() => res.status(200).json({ message: 'Utilisateur modifié!' }))
-        .catch((error) => res.status(400).json({ error }));
     })
     .catch((error) => {
       console.log(error);
