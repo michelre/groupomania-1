@@ -91,11 +91,11 @@ exports.modifyPost = (req, res, next) => {
   const authUserId = getUserIdFromToken(req);
   const role = getRoleFromToken(req);
   Post.findOne({ where: { id: req.params.id } })
-    .then((post) => {
-      if (post.userId === authUserId || role === 1) {
+    .then((p) => {
+      if (p.userId === authUserId || role === 1) {
         let newPost = { ...req.body };
         if (req.file) {
-          const filename = post.imageUrl.split('/images/')[1];
+          const filename = p.imageUrl.split('/images/')[1];
           fs.unlink(`images/${filename}`, () => {
             newPost = {
               ...newPost,
@@ -104,10 +104,18 @@ exports.modifyPost = (req, res, next) => {
               }`,
             };
           });
+          const post = {
+            ...newPost,
+            imageUrl: `${req.protocol}://${req.get('host')}/images/${
+              req.file.filename
+            }`,
+          };
+          p.update(post);
+          p.save(post);
         }
-        post.update({ ...newPost, imageUrl });
-        post
-          .save()
+        const post = { ...newPost };
+        p.update(post);
+        p.save(post)
           .then(() => res.status(200).json({ message: 'Post modifié!' }))
           .catch((error) => res.status(400).json({ error }));
       } else {
