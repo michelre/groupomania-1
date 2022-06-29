@@ -35,19 +35,6 @@ export default function Wall() {
       });
     }
   };
-
-  const onLikePost = ({ id }) => {
-    api.likePost(id).then(() => {
-      const newPosts = posts.map((p) => {
-        if (p.id === id) {
-          return { ...p, likes: p.likes + 1 };
-        }
-        return p;
-      });
-      setPosts(newPosts);
-    });
-  };
-
   console.log(posts);
 
   if (error) {
@@ -78,7 +65,6 @@ export default function Wall() {
                 key={post.id}
                 likes={post.likes}
                 onDelete={onDeletePost}
-                onLike={onLikePost}
                 firstname={post.user.firstName}
                 picture={post.user.imageUrl}
                 createdAt={post.createdAt}

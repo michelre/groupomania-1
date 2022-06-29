@@ -23,9 +23,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
-    usersLiked: {
-      type: DataTypes.STRING,
-    },
     imageUrl: {
       type: DataTypes.STRING,
     },

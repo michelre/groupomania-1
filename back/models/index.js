@@ -46,6 +46,7 @@ db.sequelize = sequelize;
 //Tables
 db.post = require('./post.js')(sequelize, Sequelize);
 db.user = require('./user.js')(sequelize, Sequelize);
+db.like = require('./like.js')(sequelize, Sequelize);
 
 //Associations User & Post (One-To-Many)
 db.user.hasMany(db.post, {
@@ -54,8 +55,8 @@ db.user.hasMany(db.post, {
 });
 db.post.belongsTo(db.user);
 
-//Associations User & Post (Many-To-Many)
-db.user.belongsToMany(db.post, { through: 'Like' });
-db.post.belongsToMany(db.user, { through: 'Like' });
+//Associations User & Post (Many-To-Many) pour gérer les Likes
+db.user.belongsToMany(db.post, { through: db.like });
+db.post.belongsToMany(db.user, { through: db.like });
 
 module.exports = db;

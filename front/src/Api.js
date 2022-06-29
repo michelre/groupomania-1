@@ -108,9 +108,9 @@ export default class Api {
     });
   }
 
-  likePost(id, userId, like) {
-    console.log(id, userId, like);
-    fetch(`http://localhost:3001/api/posts/${id}/like`, {
+  likePost(id, likes) {
+    console.log(id, likes);
+    return fetch(`http://localhost:3001/api/posts/${id}/like`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -118,24 +118,12 @@ export default class Api {
         authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
       },
       body: JSON.stringify({
-        userId,
-        like,
+        id,
+        likes,
       }),
-    })
-      .then((data) => data.json())
-      .then((response) => {
-        try {
-          console.log(response);
-        } catch (error) {
-          alert(
-            'Une erreur est survenue, veuillez recommencer ultérieurement.'
-          );
-        }
-      });
-    return Promise.resolve();
+    }).then(handleApiResponse);
   }
 
-  /***ne marche pas */
   deleteUser(id) {
     console.log(id);
     fetch(`http://localhost:3001/api/auth/users/${id}`, {

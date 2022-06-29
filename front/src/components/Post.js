@@ -25,7 +25,6 @@ export default function Post({
   likes,
   onDelete,
   onLike,
-  userId,
   firstname,
   createdAt,
   modifiable,
@@ -36,14 +35,15 @@ export default function Post({
       <div className="post-author">
         <img alt="utilisateur" src={picture} className="post-author-img" />
         <p className="post-author-name">
-          {firstname} a posté le {new Date(createdAt).toLocaleString('fr-FR')}
+          {firstname} a posté le{' '}
+          {new Date(createdAt).toLocaleDateString('fr-FR')}:
         </p>
       </div>
       <img className="post-img" alt={alt} src={imageUrl} />
       <h1 className="post-title">{title}</h1>
       <p className="post-description">{description}</p>
       <div className="post-functions">
-        <LikePost onLike={() => onLike({ id })} count={likes} />
+        <LikePost onLike={onLike} id={id} likes={likes} />
         <PostButton modifiable={modifiable} onDelete={onDelete} id={id} />
       </div>
     </article>
@@ -60,4 +60,5 @@ Post.propTypes = {
   onLike: PropTypes.func,
   firstname: PropTypes.string,
   picture: PropTypes.string,
+  userId: PropTypes.number,
 };
