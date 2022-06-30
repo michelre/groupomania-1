@@ -23,6 +23,8 @@ export default function Post({
   imageUrl,
   description,
   likes,
+  usersLiked,
+  userId,
   onDelete,
   onLike,
   firstname,
@@ -43,7 +45,13 @@ export default function Post({
       <h1 className="post-title">{title}</h1>
       <p className="post-description">{description}</p>
       <div className="post-functions">
-        <LikePost onLike={onLike} id={id} likes={likes} />
+        <LikePost
+          onLike={onLike}
+          id={id}
+          likes={likes}
+          userId={userId}
+          usersLiked={usersLiked}
+        />
         <PostButton modifiable={modifiable} onDelete={onDelete} id={id} />
       </div>
     </article>

@@ -23,6 +23,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
+    usersLiked: {
+      type: DataTypes.INTEGER,
+      get: function () {
+        return JSON.parse(this.getDataValue('usersLiked'));
+      },
+      set: function (val) {
+        return this.setDataValue('usersLiked', JSON.stringify(val));
+      },
+    },
     imageUrl: {
       type: DataTypes.STRING,
     },

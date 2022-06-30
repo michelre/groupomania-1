@@ -35,6 +35,7 @@ export default function Wall() {
       });
     }
   };
+
   console.log(posts);
 
   if (error) {
@@ -64,6 +65,8 @@ export default function Wall() {
                 id={post.id}
                 key={post.id}
                 likes={post.likes}
+                usersLiked={post.usersLiked}
+                userId={post.userId}
                 onDelete={onDeletePost}
                 firstname={post.user.firstName}
                 picture={post.user.imageUrl}

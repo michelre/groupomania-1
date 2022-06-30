@@ -4,7 +4,6 @@ const User = db.user;
 const Like = db.like;
 const fs = require('fs');
 const { getUserIdFromToken, getRoleFromToken } = require('../middleware/auth');
-const { post } = require('../models');
 
 /*logique metier des routes post*/
 exports.createPost = (req, res, next) => {
@@ -33,6 +32,7 @@ exports.getAllPosts = (req, res, next) => {
    */
   const userId = getUserIdFromToken(req);
   const role = getRoleFromToken(req);
+
   Post.findAll({
     order: [['createdAt', 'DESC']],
     raw: true,
@@ -44,6 +44,9 @@ exports.getAllPosts = (req, res, next) => {
         return {
           ...post,
           modifiable: post.userId === userId || role === 1,
+          usersLiked: Like.findOne({
+            where: { userId: userId, postId: post.id },
+          }),
         };
       });
       res.status(200).json(mappedPosts);
@@ -60,45 +63,54 @@ exports.likePost = (req, res, next) => {
   const post_Id = req.params.id;
   console.log(user_Id);
   console.log(post_Id);
-  /* try {
-    Like.findOne({ where: { userId: user_Id, postId: post_Id } }).then(() => {
-      Like.destroy(
-        { where: { userId: user_Id, postId: post_Id } },
-        { truncate: true, restartIdentity: true }
-      )
-        .then(() => {
-          res.status(204).json({ message: 'Like supprimé ' });
-        })
-        .catch(() => {
-          res.status(404).json({ error: 'Problème like delete' });
+  Like.findOne({
+    where: { userId: user_Id, postId: post_Id },
+  })
+    .then((res) => {
+      if (res) {
+        Like.destroy(
+          { where: { userId: user_Id, postId: post_Id } },
+          { truncate: true, restartIdentity: true }
+        ).then(() => {
+          Post.findOne({ where: { id: post_Id } }).then((p) => {
+            const likes = req.body.likes - 1;
+            console.log(likes);
+            let post = { ...req.body, likes: likes };
+            p.update(post);
+            p.save(post);
+            console.log(post);
+            console.log(Post);
+          });
         });
-    });
-  } catch {*/
-  Like.create({ userId: user_Id, postId: post_Id })
-    .then(() => {
-      Post.findOne({ where: { id: post_Id } })
-        .then((p) => {
-          const likes = req.body.likes + 1;
-          console.log(likes);
-          let post = { ...req.body, likes: likes };
-          p.update(post);
-          p.save(post);
-          console.log(post);
-          console.log(Post);
-        })
-        .catch(() => {
-          res
-            .status(404)
-            .json({ error: 'Problème Like enregistrment ds post' });
+        /*.then(() => {
+            res.status(204).json({ message: 'Like supprimé ' });
+          })
+          .catch(() => {
+            res.status(404).json({ error: 'Problème like delete' });
+          });*/
+      } else {
+        Like.create({ userId: user_Id, postId: post_Id }).then(() => {
+          Post.findOne({ where: { id: post_Id } }).then((p) => {
+            const likes = req.body.likes + 1;
+            console.log(likes);
+            let post = { ...req.body, likes: likes };
+            p.update(post);
+            p.save(post);
+            console.log(post);
+            console.log(Post);
+          });
         });
-    })
-    .then(() => {
-      res.status(201).json({ message: 'Post Liké' });
+        /*.then(() => {
+            res.status(201).json({ message: 'Post Liké' });
+          })
+          .catch(() => {
+            res.status(404).json({ error: 'Problème Like creation' });
+          });*/
+      }
     })
     .catch(() => {
-      res.status(404).json({ error: 'Problème Like creation' });
+      res.status(500).json({ error: 'Erreur serveur' });
     });
-  /*}*/
 };
 
 exports.getOnePost = (req, res, next) => {
