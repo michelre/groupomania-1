@@ -14,7 +14,7 @@ export default function Footer() {
         </a>
         <li>Règles communautaires</li>
         <li>
-          <a href="mailto:moderateur@groupomania.com">Contact</a>
+          <a href="mailto:admin@groupomania.com">Contact</a>
         </li>
       </ul>
       <ul className="footer-social">

@@ -1,8 +1,6 @@
-import {handleApiResponse} from "./utils";
+import { handleApiResponse } from './utils';
 
 export default class Api {
-  //constructor() {}
-
   getAllPosts() {
     return fetch('http://localhost:3001/api/posts', {
       method: 'GET',
@@ -11,9 +9,7 @@ export default class Api {
         'Content-Type': 'application/json',
         authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
       },
-    })
-      .then(handleApiResponse)
-
+    }).then(handleApiResponse);
   }
 
   getPostById(id) {
@@ -24,8 +20,7 @@ export default class Api {
         'Content-Type': 'application/json',
         authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
       },
-    })
-      .then(handleApiResponse);
+    }).then(handleApiResponse);
   }
 
   getUserById(id) {
@@ -50,8 +45,7 @@ export default class Api {
         email,
         password,
       }),
-    })
-      .then(handleApiResponse)
+    }).then(handleApiResponse);
   }
 
   signin({ email, password, firstName }) {
@@ -69,43 +63,37 @@ export default class Api {
       body: JSON.stringify({
         user,
       }),
-    }).then(handleApiResponse)
+    }).then(handleApiResponse);
   }
 
-  createPost({ img, title, description, userId }) {
-    console.log(img, title, description, userId);
+  createPost({ imageUrl, title, description, userId }) {
+    console.log(imageUrl, title, description, userId);
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('file', imageUrl);
     return fetch('http://localhost:3001/api/posts', {
       method: 'POST',
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
         authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
       },
-      body: JSON.stringify({
-        img,
-        title,
-        description,
-      }),
-    })
-      .then(handleApiResponse)
-
+      body: formData,
+    }).then(handleApiResponse);
   }
 
   modifyPost({ img, title, description, id }) {
     console.log(img, title, description, id);
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('file', img);
     return fetch(`http://localhost:3001/api/posts/${id}`, {
       method: 'PUT',
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
         authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
       },
-      body: JSON.stringify({
-        img,
-        title,
-        description,
-      }),
-    }).then(handleApiResponse)
+      body: formData,
+    }).then(handleApiResponse);
   }
 
   deletePost(id) {
@@ -117,12 +105,12 @@ export default class Api {
         'Content-Type': 'application/json',
         authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
       },
-    })
+    });
   }
 
-  likePost(id, userId, like) {
-    console.log(id, userId, like);
-    fetch(`http://localhost:3001/api/posts/${id}/like`, {
+  likePost(id, likes) {
+    console.log(id, likes);
+    return fetch(`http://localhost:3001/api/posts/${id}/like`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -130,21 +118,10 @@ export default class Api {
         authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
       },
       body: JSON.stringify({
-        userId,
-        like,
+        id,
+        likes,
       }),
-    })
-      .then((data) => data.json())
-      .then((response) => {
-        try {
-          console.log(response);
-        } catch (error) {
-          alert(
-            'Une erreur est survenue, veuillez recommencer ultérieurement.'
-          );
-        }
-      });
-    return Promise.resolve();
+    }).then(handleApiResponse);
   }
 
   deleteUser(id) {
@@ -156,35 +133,22 @@ export default class Api {
         'Content-Type': 'application/json',
         authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
       },
-    })
-      .then((post) => {
-        return post.json();
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    return Promise.resolve();
+    });
   }
 
-  modifyUser({ firstName, picture, email, department, id }) {
-    console.log(firstName, picture, email, department, id);
+  modifyUser({ firstName, imageUrl, email, department, id }) {
+    console.log(firstName, imageUrl, email, department, id);
+    const formData = new FormData();
+    formData.append('firstName', firstName);
+    formData.append('email', email);
+    formData.append('department', department);
+    formData.append('file', imageUrl);
     return fetch(`http://localhost:3001/api/auth/users/${id}`, {
       method: 'PUT',
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
         authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
       },
-      body: JSON.stringify({
-        firstName,
-        picture,
-        email,
-        department,
-      }),
-    })
-      .then(handleApiResponse);
+      body: formData,
+    }).then(handleApiResponse);
   }
 }

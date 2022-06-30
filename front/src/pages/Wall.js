@@ -15,13 +15,16 @@ export default function Wall() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    api.getAllPosts().then((posts) => {
-      setIsLoaded(true);
-      setPosts(posts);
-    }).catch((err) => {
-      setIsLoaded(true);
-      setError(error);
-    })
+    api
+      .getAllPosts()
+      .then((posts) => {
+        setIsLoaded(true);
+        setPosts(posts);
+      })
+      .catch((err) => {
+        setIsLoaded(true);
+        setError(err);
+      });
   }, []);
 
   const onDeletePost = ({ id }) => {
@@ -33,17 +36,7 @@ export default function Wall() {
     }
   };
 
-  const onLikePost = ({ id }) => {
-    api.likePost(id).then(() => {
-      const newPosts = posts.map((p) => {
-        if (p.id === id) {
-          return { ...p, likes: p.likes + 1 };
-        }
-        return p;
-      });
-      setPosts(newPosts);
-    });
-  };
+  console.log(posts);
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -57,7 +50,7 @@ export default function Wall() {
           navName1={'Mon compte'}
           navPath1={'account'}
           navName2={'Se déconnecter'}
-          navPath2={'logout'}
+          navPath2={'/logout'}
         />
         <main className="container">
           <h2>De quoi souhaitez-vous discuter?</h2>
@@ -68,14 +61,15 @@ export default function Wall() {
                 alt={post.alt}
                 title={post.title}
                 description={post.description}
-                img={post.imageUrl}
+                imageUrl={post.imageUrl}
                 id={post.id}
                 key={post.id}
                 likes={post.likes}
+                usersLiked={post.usersLiked}
+                userId={post.userId}
                 onDelete={onDeletePost}
-                onLike={onLikePost}
                 firstname={post.user.firstName}
-                picture={post.picture}
+                picture={post.user.imageUrl}
                 createdAt={post.createdAt}
                 modifiable={post.modifiable}
               />

@@ -7,7 +7,7 @@ export default function User({
   id,
   firstName,
   email,
-  picture,
+  imageUrl,
   alt,
   department,
   onDeleteUser,
@@ -16,7 +16,7 @@ export default function User({
     <article className="account-container">
       <h1 className="account-title">Mon compte</h1>
       <div className="account-info">
-        <img src={picture} className="account-img" alt={alt} />
+        <img src={imageUrl} className="account-img" alt={alt} />
         <div className="account-description">
           <h2 className="account-name">
             Salut {firstName}
@@ -53,7 +53,7 @@ User.propTypes = {
   alt: PropTypes.string,
   firstName: PropTypes.string,
   email: PropTypes.string,
-  picture: PropTypes.string,
+  imageUrl: PropTypes.string,
   department: PropTypes.string,
   onDeleteUser: PropTypes.func,
   id: PropTypes.number,

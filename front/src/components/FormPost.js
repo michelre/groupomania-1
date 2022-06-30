@@ -2,16 +2,15 @@ import '../styles/FormLogin.css';
 import { useState } from 'react';
 
 export default function FormPost({ onCreatePost }) {
-  const [img, setImg] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const userId = JSON.parse(localStorage.getItem('userId'));
-  console.log(userId);
 
   function handleSubmit(e) {
     e.preventDefault();
     onCreatePost({
-      img,
+      imageUrl,
       title,
       description,
       userId,
@@ -19,13 +18,21 @@ export default function FormPost({ onCreatePost }) {
   }
 
   return (
-    <form id={userId} className="form-login" onSubmit={handleSubmit}>
+    <form
+      id={userId}
+      encType="multipart/form-data"
+      className="form-login"
+      onSubmit={handleSubmit}
+      action="/api/posts"
+      method="post"
+    >
       <h2>C'est parti! Créez vos posts!</h2>
       <input
         type="file"
         placeholder="Télécharger une image ou vidéo"
-        value={img}
-        onChange={(e) => setImg(e.target.value)}
+        value=""
+        onChange={(e) => setImageUrl(e.target.files[0])}
+        name="file"
       />
       <input
         type="text"

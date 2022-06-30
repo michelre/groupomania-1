@@ -15,7 +15,8 @@ export default function Account() {
   console.log(id);
 
   useEffect(() => {
-    api.getUserById(id)
+    api
+      .getUserById(id)
       .then((response) => {
         console.log(response);
         setUser(response);
@@ -28,11 +29,8 @@ export default function Account() {
 
   const onDeleteUser = ({ id }) => {
     if (window.confirm('Êtes-vous sûr de vouloir supprimer votre compte?')) {
-      api.deleteUser(id).then(() => {
-        /*const newUsers = user.filter((u) => u.id !== id);
-        setUser(newUsers);*/
-        navigate(`/logout`);
-      });
+      api.deleteUser(id);
+      navigate(`/logout`);
     }
   };
   return (
@@ -42,11 +40,11 @@ export default function Account() {
         navName1={'Mur'}
         navPath1={'/wall'}
         navName2={'Se déconnecter'}
-        navPath2={'logout'}
+        navPath2={'/logout'}
       />
       <User
         firstName={user.firstName}
-        picture={user.picture}
+        imageUrl={user.imageUrl}
         onDeleteUser={onDeleteUser}
         email={user.email}
         department={user.department}

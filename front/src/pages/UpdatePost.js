@@ -14,7 +14,8 @@ export default function UpdatePost() {
   const { id } = useParams();
 
   useEffect(() => {
-    api.getPostById(id)
+    api
+      .getPostById(id)
       .then((post) => {
         setPost(post);
       })

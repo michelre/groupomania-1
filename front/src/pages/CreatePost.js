@@ -10,15 +10,16 @@ const api = new Api();
 
 export default function FormCreatePost() {
   const navigate = useNavigate();
-  function createPost({ title, img, description, userId }) {
+  function createPost({ title, imageUrl, description, userId }) {
     api
       .createPost({
         title,
-        img,
+        imageUrl,
         description,
         userId,
       })
       .then(() => {
+        console.log(imageUrl);
         navigate(`/wall/`);
       });
   }
@@ -30,7 +31,7 @@ export default function FormCreatePost() {
         navName1={'Mur'}
         navPath1={'/wall'}
         navName2={'Se déconnecter'}
-        navPath2={'/'}
+        navPath2={'/logout'}
       />
       <FormPost onCreatePost={createPost} />
       <Footer />

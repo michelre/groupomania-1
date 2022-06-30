@@ -15,7 +15,8 @@ export default function UpdateUser() {
   const { id } = useParams();
 
   useEffect(() => {
-    api.getUserById(id)
+    api
+      .getUserById(id)
       .then((response) => {
         console.log(response);
         setUser(response);
