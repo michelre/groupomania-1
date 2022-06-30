@@ -3,21 +3,16 @@ import Api from '../Api';
 
 const api = new Api();
 
-export default function LikePost({ id, likes, userId, usersLiked }) {
-  const onLike = () => {
-    api.likePost(id, likes).then(() => {
-      return;
-    });
-  };
-
+export default function LikePost({ id, likes, onLikePost, userLiked }) {
   /*if (usersLiked.includes(userId)) {
     console.log(userId);
     console.log(usersLiked);*/
+    console.log(userLiked)
   return (
     <div className="like-container">
       <i
-        style={{ color: '#4E5166' }}
-        onClick={onLike}
+        style={{ color: userLiked ? 'red' : '#4E5166' }}
+        onClick={() => onLikePost(id)}
         className="like-icon fas fa-thumbs-up"
       ></i>
       <p style={{ color: '#4E5166' }} className="like-count">

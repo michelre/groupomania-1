@@ -23,7 +23,7 @@ export default function Post({
   imageUrl,
   description,
   likes,
-  usersLiked,
+  userLiked,
   userId,
   onDelete,
   onLike,
@@ -31,17 +31,18 @@ export default function Post({
   createdAt,
   modifiable,
   picture,
+  onLikePost
 }) {
   return (
     <article className="post-container">
       <div className="post-author">
-        <img alt="utilisateur" src={picture} className="post-author-img" />
+        {picture ? <img alt="utilisateur" src={picture} className="post-author-img" /> : ''}
         <p className="post-author-name">
           {firstname} a posté le{' '}
           {new Date(createdAt).toLocaleDateString('fr-FR')}:
         </p>
       </div>
-      <img className="post-img" alt={alt} src={imageUrl} />
+      {imageUrl ? <img className="post-img" alt={alt} src={imageUrl} /> : ''}
       <h1 className="post-title">{title}</h1>
       <p className="post-description">{description}</p>
       <div className="post-functions">
@@ -50,7 +51,8 @@ export default function Post({
           id={id}
           likes={likes}
           userId={userId}
-          usersLiked={usersLiked}
+          userLiked={userLiked}
+          onLikePost={onLikePost}
         />
         <PostButton modifiable={modifiable} onDelete={onDelete} id={id} />
       </div>

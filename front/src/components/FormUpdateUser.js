@@ -9,7 +9,7 @@ export default function UpdateUser({ user }) {
   const [firstName, setFirstName] = useState(user.firstName);
   const [email, setEmail] = useState(user.email);
   const [imageUrl, setImageUrl] = useState(user.imageUr);
-  const [department, setDepartment] = useState(user.department || '');
+  const [department, setDepartment] = useState(user.department || 'Marketing');
   const { id } = useParams();
   const navigate = useNavigate();
 

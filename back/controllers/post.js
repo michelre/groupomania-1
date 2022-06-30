@@ -27,9 +27,6 @@ exports.createPost = (req, res, next) => {
 };
 
 exports.getAllPosts = (req, res, next) => {
-  /**
-   * TODO: Remonter le fait que l'utilisateur ait déjà liké le post
-   */
   const userId = getUserIdFromToken(req);
   const role = getRoleFromToken(req);
 
@@ -40,16 +37,18 @@ exports.getAllPosts = (req, res, next) => {
     include: [{ model: db.user }],
   })
     .then((posts) => {
-      const mappedPosts = posts.map((post) => {
+      const mappedPosts = posts.map(async (post) => {
+        const likes = await Like.count({ where: { postId: post.id } })
+        const userLiked = await Like.count({ where: { postId: post.id, userId } })
         return {
           ...post,
           modifiable: post.userId === userId || role === 1,
-          usersLiked: Like.findOne({
-            where: { userId: userId, postId: post.id },
-          }),
+          likes,
+          userLiked: userLiked > 0
         };
       });
-      res.status(200).json(mappedPosts);
+      Promise.all(mappedPosts).then((posts) => res.status(200).json(posts))
+      //res.status(200).json(mappedPosts);
     })
     .catch((error) => {
       res.status(400).json({
@@ -61,51 +60,25 @@ exports.getAllPosts = (req, res, next) => {
 exports.likePost = (req, res, next) => {
   const user_Id = getUserIdFromToken(req);
   const post_Id = req.params.id;
-  console.log(user_Id);
-  console.log(post_Id);
   Like.findOne({
     where: { userId: user_Id, postId: post_Id },
   })
-    .then((res) => {
-      if (res) {
+    .then((response) => {
+      if (response) {
         Like.destroy(
           { where: { userId: user_Id, postId: post_Id } },
           { truncate: true, restartIdentity: true }
         ).then(() => {
-          Post.findOne({ where: { id: post_Id } }).then((p) => {
-            const likes = req.body.likes - 1;
-            console.log(likes);
-            let post = { ...req.body, likes: likes };
-            p.update(post);
-            p.save(post);
-            console.log(post);
-            console.log(Post);
-          });
-        });
-        /*.then(() => {
-            res.status(204).json({ message: 'Like supprimé ' });
+          Like.count({ where: { postId: post_Id } }).then((likes) => {
+            res.status(200).json({ likes, userLiked: false });
           })
-          .catch(() => {
-            res.status(404).json({ error: 'Problème like delete' });
-          });*/
+        });
       } else {
         Like.create({ userId: user_Id, postId: post_Id }).then(() => {
-          Post.findOne({ where: { id: post_Id } }).then((p) => {
-            const likes = req.body.likes + 1;
-            console.log(likes);
-            let post = { ...req.body, likes: likes };
-            p.update(post);
-            p.save(post);
-            console.log(post);
-            console.log(Post);
-          });
-        });
-        /*.then(() => {
-            res.status(201).json({ message: 'Post Liké' });
+          Like.count({ where: { postId: post_Id } }).then((likes) => {
+            res.status(200).json({ likes, userLiked: true });
           })
-          .catch(() => {
-            res.status(404).json({ error: 'Problème Like creation' });
-          });*/
+        });
       }
     })
     .catch(() => {

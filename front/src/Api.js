@@ -109,7 +109,7 @@ export default class Api {
   }
 
   likePost(id, likes) {
-    console.log(id, likes);
+
     return fetch(`http://localhost:3001/api/posts/${id}/like`, {
       method: 'POST',
       headers: {
@@ -117,10 +117,7 @@ export default class Api {
         'Content-Type': 'application/json',
         authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
       },
-      body: JSON.stringify({
-        id,
-        likes,
-      }),
+      body: JSON.stringify({}),
     }).then(handleApiResponse);
   }
 
