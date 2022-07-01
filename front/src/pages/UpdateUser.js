@@ -18,22 +18,12 @@ export default function UpdateUser() {
     api
       .getUserById(id)
       .then((response) => {
-        console.log(response);
         setUser(response);
       })
       .catch((error) => {
         alert("L'utilisateur n'a pas pu être trouvé");
-        console.log(error);
       });
   }, [id]);
-
-  console.log(id);
-  console.log(user);
-  /*function updateUser(user) {
-    api.modifyUser(user).then(() => {
-      navigate(`/account/`);
-    });
-  }*/
 
   return (
     <div>

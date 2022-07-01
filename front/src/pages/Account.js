@@ -12,18 +12,15 @@ export default function Account() {
   const navigate = useNavigate();
   const [user, setUser] = useState([]);
   const id = JSON.parse(localStorage.getItem('userId'));
-  console.log(id);
 
   useEffect(() => {
     api
       .getUserById(id)
       .then((response) => {
-        console.log(response);
         setUser(response);
       })
       .catch((error) => {
         alert("L'utilisateur n'a pas pu être trouvé");
-        console.log(error);
       });
   }, [id]);
 

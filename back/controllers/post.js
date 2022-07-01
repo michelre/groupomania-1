@@ -135,7 +135,6 @@ exports.modifyPost = (req, res, next) => {
       }
     })
     .catch((error) => {
-      console.log(error);
       res.status(404).json({ status: 'KO', error: error });
     });
 };
@@ -147,7 +146,6 @@ exports.deletePost = (req, res, next) => {
     .then((post) => {
       if (post.userId === authUserId || role === 1) {
         const filename = post.imageUrl.split('/images/')[1];
-        console.log(filename, 'here');
         fs.unlink(`images/${filename}`, () => {
           Post.destroy({ where: { id: req.params.id } })
             .then(() => res.status(204).end())
