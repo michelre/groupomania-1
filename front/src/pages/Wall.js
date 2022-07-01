@@ -36,7 +36,17 @@ export default function Wall() {
     }
   };
 
-  console.log(posts);
+  const onLikePost = (postId) => {
+    api.likePost(postId).then((res) => {
+      const newPosts = posts.map((p) => {
+        if (p.id === postId) {
+          return { ...p, ...res };
+        }
+        return p;
+      });
+      setPosts(newPosts);
+    });
+  };
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -65,9 +75,10 @@ export default function Wall() {
                 id={post.id}
                 key={post.id}
                 likes={post.likes}
-                usersLiked={post.usersLiked}
+                userLiked={post.userLiked}
                 userId={post.userId}
                 onDelete={onDeletePost}
+                onLikePost={onLikePost}
                 firstname={post.user.firstName}
                 picture={post.user.imageUrl}
                 createdAt={post.createdAt}
