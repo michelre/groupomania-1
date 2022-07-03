@@ -33,7 +33,7 @@
 }
 
 .post-img {
-    object-fit: cover;
+    object-fit:  cover;
     border-radius:9px;
     height: 200px;
     width: auto;
@@ -69,12 +69,10 @@
 .post-buttons {
     display: flex;
     gap: 10px;
+    width:100%
 }
 
 .post-button {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
     font-size: 10px;
     background-color:#4E5166;
     border:none;
@@ -84,6 +82,7 @@
     padding: 4px;
     font-family: 'Lato', sans-serif;
     box-shadow: 1px 3px 2px 1px #4E5166;
+    width: 90%;
 }
 
 .post-button:hover {
@@ -134,7 +133,7 @@
     .post-author-name {
         font-size: 28px;
 }
-    .post-author-img {
+   .post-author-img {
         height: 80px;
 }
 

@@ -4,7 +4,6 @@ import Footer from '../components/Footer';
 import '../styles/index.css';
 
 export default function Home() {
-  const h2style = { padding: '20px', maxWidth: '1920px', margin: ' auto' };
   return (
     <div>
       <Banner />
@@ -14,10 +13,15 @@ export default function Home() {
         navName2={'Créer un compte'}
         navPath2={'signin'}
       />
-      <h2 style={h2style}>
-        Bienvenue sur votre réseau social d'entreprise! Un lieu convivial pour
-        échanger entre collègues et apprendre à mieux nous connaitre!
+      <h2 className="home-title">
+        Un lieu convivial pour échanger entre collègues et apprendre à mieux
+        nous connaitre!
       </h2>
+      <img
+        src={'../images/illustration.webp'}
+        alt="illustration network"
+        className="home-illustration"
+      />
       <img src={'../images/office.jpg'} alt="office" className="home-img" />
       <Footer />
     </div>

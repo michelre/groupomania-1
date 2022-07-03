@@ -48,6 +48,11 @@ export default function Account() {
         alt={user.alt}
         id={user.id}
       />
+      <img
+        className="home-illustration"
+        src="../images/compte.jpg"
+        alt="illustratio compte"
+      />
       <Footer />
     </div>
   );
