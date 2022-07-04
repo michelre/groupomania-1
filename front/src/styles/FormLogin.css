@@ -49,6 +49,21 @@ label {
     background: linear-gradient(to right bottom, #091F43, #FD2D01);
 }
 
+span {
+    padding:3px;
+    color: #FD2D01;
+    font-size: 12px;
+    display: none;
+}
+
+input:invalid[focused="true"] {
+    border: 1px solid #FD2D01;
+}
+
+input:invalid[focused="true"] ~ span{
+    display: block;
+}
+
 @media screen and (min-width: 768px) and (max-width: 992px) {
     input {
         font-size:16px;
