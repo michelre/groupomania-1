@@ -13,23 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         notNull: { args: true, msg: 'Votre post est vide' },
-      },
-    },
-    likes: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-    },
-    usersLiked: {
-      type: DataTypes.INTEGER,
-      get: function () {
-        return JSON.parse(this.getDataValue('usersLiked'));
-      },
-      set: function (val) {
-        return this.setDataValue('usersLiked', JSON.stringify(val));
       },
     },
     imageUrl: {

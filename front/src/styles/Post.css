@@ -8,7 +8,7 @@
     border-radius:9px;
     box-sizing: border-box;
     box-shadow: 1px 2px 2px 1px #e6e4e4;
-    max-width: 1920px;    
+    max-width: 1000px;    
 }
 
 .post-author{
@@ -64,6 +64,7 @@
     justify-content: space-between;
     padding-top: 10px;
     align-items: flex-end;
+    gap:30px;
 }
 
 .post-buttons {
@@ -114,6 +115,9 @@
     .post-author-img {
         height: 50px;
 }
+    .post-functions {
+        gap: 200px;
+    }
 
 }
 @media screen and  (min-width: 992px) {    
@@ -136,6 +140,9 @@
 }
    .post-author-img {
         height: 80px;
+}
+.post-functions {
+    gap: 200px;
 }
 
 }
