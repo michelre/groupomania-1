@@ -1,7 +1,6 @@
 import Banner from '../components/Banner';
 import Footer from '../components/Footer';
 import Api from '../Api';
-import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import User from '../components/User';
 import Nav from '../components/Nav';
@@ -9,7 +8,6 @@ import Nav from '../components/Nav';
 const api = new Api();
 
 export default function Account() {
-  const navigate = useNavigate();
   const [user, setUser] = useState([]);
   const id = JSON.parse(localStorage.getItem('userId'));
 
@@ -27,7 +25,6 @@ export default function Account() {
   const onDeleteUser = ({ id }) => {
     if (window.confirm('Êtes-vous sûr de vouloir supprimer votre compte?')) {
       api.deleteUser(id);
-      navigate(`/logout`);
     }
   };
   return (
@@ -51,7 +48,7 @@ export default function Account() {
       <img
         className="home-illustration"
         src="../images/compte.jpg"
-        alt="illustratio compte"
+        alt="illustration compte"
       />
       <Footer />
     </div>

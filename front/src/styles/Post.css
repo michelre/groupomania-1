@@ -73,7 +73,7 @@
 }
 
 .post-button {
-    font-size: 10px;
+    font-size: 12px;
     background-color:#4E5166;
     border:none;
     border-radius:50px;
@@ -83,6 +83,7 @@
     font-family: 'Lato', sans-serif;
     box-shadow: 1px 3px 2px 1px #4E5166;
     width: 90%;
+    max-width: 400px;
 }
 
 .post-button:hover {
@@ -127,7 +128,7 @@
     }
     .post-button {
         flex-direction: row;
-        font-size: 22px;
+        font-size: 18px;
         padding: 12px;
 }
     .post-author-name {
