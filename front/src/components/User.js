@@ -15,7 +15,11 @@ export default function User({
   return (
     <article className="account-container">
       <div className="account-info">
-        <img src={imageUrl} className="account-img" alt={alt} />
+        {imageUrl ? (
+          <img src={imageUrl} className="account-img" alt={alt} />
+        ) : (
+          ''
+        )}
         <div className="account-description">
           <h1 className="account-title">Mon compte</h1>
           <h2 className="account-name">
