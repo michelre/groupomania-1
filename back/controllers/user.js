@@ -58,12 +58,18 @@ exports.deleteUser = (req, res) => {
         res.status(403).end();
         return;
       }
-      const filename = user.imageUrl.split('/images/')[1];
-      fs.unlink(`images/${filename}`, () => {
+      if (user.imageUrl) {
+        const filename = user.imageUrl.split('/images/')[1];
+        fs.unlink(`images/${filename}`, () => {
+          User.destroy({ where: { id: req.params.id } })
+            .then(() => res.status(204).end())
+            .catch((error) => res.status(400).json({ error }));
+        });
+      } else {
         User.destroy({ where: { id: req.params.id } })
           .then(() => res.status(204).end())
           .catch((error) => res.status(400).json({ error }));
-      });
+      }
     })
     .catch((error) => {
       res.status(500).json({ error: error });
