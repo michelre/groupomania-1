@@ -1,5 +1,6 @@
 const db = require('../models');
 const User = db.user;
+const Post = db.post;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
@@ -9,7 +10,6 @@ const { getUserIdFromToken } = require('../middleware/auth');
 //Route Post/Création d'un utilisateur
 exports.signin = (req, res) => {
   const userObject = req.body.user;
-  //delete userObject.id;
   const user = new User({
     ...userObject,
   });
@@ -52,6 +52,20 @@ exports.login = (req, res) => {
 //Route Delete/Supprétion d'un utilisateur
 exports.deleteUser = (req, res) => {
   const authUserId = getUserIdFromToken(req);
+  Post.findAll({ where: { userId: authUserId } }).then((post) => {
+    post.forEach((p) => {
+      if (p.imageUrl) {
+        const filename = p.imageUrl.split('/images/')[1];
+        fs.unlink(`images/${filename}`, (err) => {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log('File deleted successfully');
+          }
+        });
+      }
+    });
+  });
   User.findOne({ where: { id: req.params.id } })
     .then((user) => {
       if (user.id !== authUserId) {
