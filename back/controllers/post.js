@@ -1,6 +1,5 @@
 const db = require('../models');
 const Post = db.post;
-const User = db.user;
 const Like = db.like;
 const fs = require('fs');
 const { getUserIdFromToken, getRoleFromToken } = require('../middleware/auth');
