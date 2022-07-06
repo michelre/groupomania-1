@@ -5,10 +5,18 @@ export default function Signin({ onSignin }) {
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [focused, setFocused] = useState(false);
+  const [invalidF, setInvalidF] = useState(false);
+  const [invalidE, setInvalidE] = useState(false);
+  const [invalidP, setInvalidP] = useState(false);
 
-  const handleFocus = (e) => {
-    setFocused(true);
+  const handleFocusF = (e) => {
+    setInvalidF(true);
+  };
+  const handleFocusE = (e) => {
+    setInvalidE(true);
+  };
+  const handleFocusP = (e) => {
+    setInvalidP(true);
   };
 
   function handleSubmit(e) {
@@ -19,6 +27,7 @@ export default function Signin({ onSignin }) {
       password,
     });
   }
+
   return (
     <form className="form-login" onSubmit={handleSubmit}>
       <img src="../images/team.webp" alt="Team Check" />
@@ -30,9 +39,10 @@ export default function Signin({ onSignin }) {
         name="firstname"
         onChange={(e) => setFirstName(e.target.value)}
         required
-        onBlur={handleFocus}
-        focused={focused.toString()}
+        onBlur={handleFocusF}
+        invalid={invalidF.toString()}
         pattern="([a-zA-ZàâäéèëêîïôöùûüçæœÂÀÄÉÈÊËÎÏÔÖÛÜÙÇÆŒ]{2,})+([-'\s][a-zA-ZàâäéèëêîïôöùûüçæœÂÀÄÉÈÊËÎÏÔÖÛÜÙÇÆŒ]+)?$"
+        title="Veuillez entrer votre prénom!"
       />
       <span>Veuillez entrer votre prénom!</span>
       <input
@@ -41,9 +51,10 @@ export default function Signin({ onSignin }) {
         value={email}
         name="email"
         onChange={(e) => setEmail(e.target.value)}
-        onBlur={handleFocus}
-        focused={focused.toString()}
+        onBlur={handleFocusE}
+        invalid={invalidE.toString()}
         pattern="([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,5})$"
+        title="Veuillez entrer un email valide!"
         required
       />
       <span>Veuillez entrer un email valide!</span>
@@ -53,9 +64,11 @@ export default function Signin({ onSignin }) {
         value={password}
         name="password"
         onChange={(e) => setPassword(e.target.value)}
-        onBlur={handleFocus}
-        focused={focused.toString()}
+        onBlur={handleFocusP}
+        invalid={invalidP.toString()}
         pattern="^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$"
+        title="Veuillez entrer un mot de passe de minimum 8 caratères comprenant au
+        moins 1 majuscule, 1 chiffre, 1 minuscule et 1 caractère spécial!"
         required
       />
       <span>

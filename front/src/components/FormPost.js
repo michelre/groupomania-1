@@ -6,6 +6,11 @@ export default function FormPost({ onCreatePost }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const userId = JSON.parse(localStorage.getItem('userId'));
+  const [invalid, setInvalid] = useState(false);
+
+  const handleFocus = (e) => {
+    setInvalid(true);
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -33,6 +38,7 @@ export default function FormPost({ onCreatePost }) {
         value=""
         onChange={(e) => setImageUrl(e.target.files[0])}
         name="file"
+        accept="image/*"
       />
       <input
         type="text"
@@ -46,7 +52,10 @@ export default function FormPost({ onCreatePost }) {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         required
+        onBlur={handleFocus}
+        invalid={invalid.toString()}
       />
+      <span>Merci de ne pas laisser ce champs vide!</span>
       <button type="submit" className="form-login-btn">
         Publier
       </button>

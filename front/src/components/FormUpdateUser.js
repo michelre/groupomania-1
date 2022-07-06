@@ -12,6 +12,15 @@ export default function UpdateUser({ user }) {
   const [department, setDepartment] = useState(user.department || 'Marketing');
   const { id } = useParams();
   const navigate = useNavigate();
+  const [invalidF, setInvalidF] = useState(false);
+  const [invalidE, setInvalidE] = useState(false);
+
+  const handleFocusF = (e) => {
+    setInvalidF(true);
+  };
+  const handleFocusE = (e) => {
+    setInvalidE(true);
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -42,17 +51,24 @@ export default function UpdateUser({ user }) {
         value={firstName}
         name="firstName"
         onChange={(e) => setFirstName(e.target.value)}
+        onBlur={handleFocusF}
+        invalid={invalidF.toString()}
+        pattern="([a-zA-ZàâäéèëêîïôöùûüçæœÂÀÄÉÈÊËÎÏÔÖÛÜÙÇÆŒ]{2,})+([-'\s][a-zA-ZàâäéèëêîïôöùûüçæœÂÀÄÉÈÊËÎÏÔÖÛÜÙÇÆŒ]+)?$"
         required
       />
+      <span>Veuillez entrer votre prénom!</span>
       <input
         type="email"
         placeholder="Votre email"
         value={email}
         name="email"
         onChange={(e) => setEmail(e.target.value)}
+        onBlur={handleFocusE}
+        invalid={invalidE.toString()}
+        pattern="([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,5})$"
         required
       />
-
+      <span>Veuillez entrer un email valide!</span>
       <input
         type="file"
         placeholder="Photo"
@@ -60,6 +76,7 @@ export default function UpdateUser({ user }) {
         value=""
         name="file"
         onChange={(e) => setImageUrl(e.target.files[0])}
+        accept="image/*"
       />
       <img
         className="post-img-form-update"

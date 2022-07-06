@@ -12,6 +12,11 @@ export default function FormUpdatePost({ post }) {
   const [description, setDescription] = useState(post.description);
   const { id } = useParams();
   const navigate = useNavigate();
+  const [invalid, setInvalid] = useState(false);
+
+  const handleFocus = (e) => {
+    setInvalid(true);
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -42,6 +47,7 @@ export default function FormUpdatePost({ post }) {
         placeholder="Télécharger une image ou vidéo"
         value=""
         onChange={(e) => setImg(e.target.files[0])}
+        accept="image/*"
       />
       <img
         className="post-img-form-update"
@@ -59,8 +65,11 @@ export default function FormUpdatePost({ post }) {
         placeholder="Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
+        onBlur={handleFocus}
+        invalid={invalid.toString()}
         required
       />
+      <span>Merci de ne pas laisser ce champs vide!</span>
       <button type="submit" className="form-login-btn">
         Modifier
       </button>
