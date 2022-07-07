@@ -1,5 +1,6 @@
 const db = require('../models');
 const User = db.user;
+const Post = db.post;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
@@ -9,7 +10,6 @@ const { getUserIdFromToken } = require('../middleware/auth');
 //Route Post/Création d'un utilisateur
 exports.signin = (req, res) => {
   const userObject = req.body.user;
-  //delete userObject.id;
   const user = new User({
     ...userObject,
   });
@@ -23,8 +23,6 @@ exports.signin = (req, res) => {
 exports.login = (req, res) => {
   User.findOne({ where: { email: req.body.email } })
     .then((user) => {
-      console.log(req.body.email);
-      console.log(user);
       if (!user) {
         return res.status(401).json({ error: 'Utilisateur non trouvé !' });
       }
@@ -54,18 +52,38 @@ exports.login = (req, res) => {
 //Route Delete/Supprétion d'un utilisateur
 exports.deleteUser = (req, res) => {
   const authUserId = getUserIdFromToken(req);
+  Post.findAll({ where: { userId: authUserId } }).then((post) => {
+    post.forEach((p) => {
+      if (p.imageUrl) {
+        const filename = p.imageUrl.split('/images/')[1];
+        fs.unlink(`images/${filename}`, (err) => {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log('File deleted successfully');
+          }
+        });
+      }
+    });
+  });
   User.findOne({ where: { id: req.params.id } })
     .then((user) => {
       if (user.id !== authUserId) {
         res.status(403).end();
         return;
       }
-      const filename = user.imageUrl.split('/images/')[1];
-      fs.unlink(`images/${filename}`, () => {
+      if (user.imageUrl) {
+        const filename = user.imageUrl.split('/images/')[1];
+        fs.unlink(`images/${filename}`, () => {
+          User.destroy({ where: { id: req.params.id } })
+            .then(() => res.status(204).end())
+            .catch((error) => res.status(400).json({ error }));
+        });
+      } else {
         User.destroy({ where: { id: req.params.id } })
           .then(() => res.status(204).end())
           .catch((error) => res.status(400).json({ error }));
-      });
+      }
     })
     .catch((error) => {
       res.status(500).json({ error: error });
@@ -128,7 +146,6 @@ exports.modifyUser = (req, res) => {
       }
     })
     .catch((error) => {
-      console.log(error);
       res.status(404).json({ status: 'KO', error: error });
     });
 };

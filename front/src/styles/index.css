@@ -21,3 +21,21 @@ body {
 code {
   font-family: 'Lato', sans-serif;
 }
+
+.home-title{
+  padding: 20px;
+  max-width: 1920px;
+  margin:  auto;
+  box-sizing: border-box;
+}
+
+.home-illustration{
+    padding: 20px;
+    max-width: 600px;
+    margin:  auto;
+    box-sizing: border-box;
+    width: 50%;
+    height: 50%;
+    display: flex;
+
+}

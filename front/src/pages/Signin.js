@@ -15,7 +15,9 @@ export default function Signin() {
         navigate(`/login/`);
       })
       .catch(() => {
-        alert('Une erreur est survenue, veuillez recommencer ultérieurement.');
+        alert(
+          'Cet email est déjà utilisé. Veuillez choisir un email différent!'
+        );
       });
   };
   return (

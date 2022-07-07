@@ -67,7 +67,6 @@ export default class Api {
   }
 
   createPost({ imageUrl, title, description, userId }) {
-    console.log(imageUrl, title, description, userId);
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);
@@ -82,7 +81,6 @@ export default class Api {
   }
 
   modifyPost({ img, title, description, id }) {
-    console.log(img, title, description, id);
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);
@@ -97,7 +95,6 @@ export default class Api {
   }
 
   deletePost(id) {
-    console.log(id);
     return fetch(`http://localhost:3001/api/posts/${id}`, {
       method: 'DELETE',
       headers: {
@@ -108,8 +105,7 @@ export default class Api {
     });
   }
 
-  likePost(id, likes) {
-
+  likePost(id) {
     return fetch(`http://localhost:3001/api/posts/${id}/like`, {
       method: 'POST',
       headers: {
@@ -117,12 +113,11 @@ export default class Api {
         'Content-Type': 'application/json',
         authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')),
       },
-      body: JSON.stringify({}),
+      //body: JSON.stringify({}),
     }).then(handleApiResponse);
   }
 
   deleteUser(id) {
-    console.log(id);
     fetch(`http://localhost:3001/api/auth/users/${id}`, {
       method: 'DELETE',
       headers: {
@@ -134,7 +129,6 @@ export default class Api {
   }
 
   modifyUser({ firstName, imageUrl, email, department, id }) {
-    console.log(firstName, imageUrl, email, department, id);
     const formData = new FormData();
     formData.append('firstName', firstName);
     formData.append('email', email);

@@ -1,6 +1,5 @@
 const db = require('../models');
 const Post = db.post;
-const User = db.user;
 const Like = db.like;
 const fs = require('fs');
 const { getUserIdFromToken, getRoleFromToken } = require('../middleware/auth');
@@ -29,7 +28,6 @@ exports.createPost = (req, res, next) => {
 exports.getAllPosts = (req, res, next) => {
   const userId = getUserIdFromToken(req);
   const role = getRoleFromToken(req);
-
   Post.findAll({
     order: [['createdAt', 'DESC']],
     raw: true,
@@ -38,17 +36,18 @@ exports.getAllPosts = (req, res, next) => {
   })
     .then((posts) => {
       const mappedPosts = posts.map(async (post) => {
-        const likes = await Like.count({ where: { postId: post.id } })
-        const userLiked = await Like.count({ where: { postId: post.id, userId } })
+        const likes = await Like.count({ where: { postId: post.id } });
+        const userLiked = await Like.count({
+          where: { postId: post.id, userId },
+        });
         return {
           ...post,
           modifiable: post.userId === userId || role === 1,
           likes,
-          userLiked: userLiked > 0
+          userLiked: userLiked > 0,
         };
       });
-      Promise.all(mappedPosts).then((posts) => res.status(200).json(posts))
-      //res.status(200).json(mappedPosts);
+      Promise.all(mappedPosts).then((posts) => res.status(200).json(posts));
     })
     .catch((error) => {
       res.status(400).json({
@@ -71,13 +70,13 @@ exports.likePost = (req, res, next) => {
         ).then(() => {
           Like.count({ where: { postId: post_Id } }).then((likes) => {
             res.status(200).json({ likes, userLiked: false });
-          })
+          });
         });
       } else {
         Like.create({ userId: user_Id, postId: post_Id }).then(() => {
           Like.count({ where: { postId: post_Id } }).then((likes) => {
             res.status(200).json({ likes, userLiked: true });
-          })
+          });
         });
       }
     })
@@ -135,7 +134,6 @@ exports.modifyPost = (req, res, next) => {
       }
     })
     .catch((error) => {
-      console.log(error);
       res.status(404).json({ status: 'KO', error: error });
     });
 };
@@ -147,7 +145,6 @@ exports.deletePost = (req, res, next) => {
     .then((post) => {
       if (post.userId === authUserId || role === 1) {
         const filename = post.imageUrl.split('/images/')[1];
-        console.log(filename, 'here');
         fs.unlink(`images/${filename}`, () => {
           Post.destroy({ where: { id: req.params.id } })
             .then(() => res.status(204).end())

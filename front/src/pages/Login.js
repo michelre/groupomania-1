@@ -19,7 +19,7 @@ export default function Login() {
         navigate(`/wall/`);
       })
       .catch(() => {
-        alert('Une erreur est survenue, veuillez recommencer ultérieurement.');
+        alert('Votre email ou mot de passe est érroné, veuillez recommencer!');
       });
   };
   return (

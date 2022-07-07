@@ -8,7 +8,7 @@
     border-radius:9px;
     box-sizing: border-box;
     box-shadow: 1px 2px 2px 1px #e6e4e4;
-    max-width: 1920px;    
+    max-width: 1000px;    
 }
 
 .post-author{
@@ -33,7 +33,7 @@
 }
 
 .post-img {
-    object-fit: cover;
+    object-fit:  cover;
     border-radius:9px;
     height: 200px;
     width: auto;
@@ -64,18 +64,17 @@
     justify-content: space-between;
     padding-top: 10px;
     align-items: flex-end;
+    gap:30px;
 }
 
 .post-buttons {
     display: flex;
     gap: 10px;
+    width:100%
 }
 
 .post-button {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    font-size: 10px;
+    font-size: 12px;
     background-color:#4E5166;
     border:none;
     border-radius:50px;
@@ -84,6 +83,8 @@
     padding: 4px;
     font-family: 'Lato', sans-serif;
     box-shadow: 1px 3px 2px 1px #4E5166;
+    width: 90%;
+    max-width: 400px;
 }
 
 .post-button:hover {
@@ -114,6 +115,9 @@
     .post-author-img {
         height: 50px;
 }
+    .post-functions {
+        gap: 200px;
+    }
 
 }
 @media screen and  (min-width: 992px) {    
@@ -128,14 +132,17 @@
     }
     .post-button {
         flex-direction: row;
-        font-size: 22px;
+        font-size: 20px;
         padding: 12px;
 }
     .post-author-name {
         font-size: 28px;
 }
-    .post-author-img {
+   .post-author-img {
         height: 80px;
+}
+.post-functions {
+    gap: 200px;
 }
 
 }

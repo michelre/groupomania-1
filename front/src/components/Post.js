@@ -27,16 +27,20 @@ export default function Post({
   userId,
   onDelete,
   onLike,
+  onLikePost,
   firstname,
   createdAt,
   modifiable,
   picture,
-  onLikePost
 }) {
   return (
     <article className="post-container">
       <div className="post-author">
-        {picture ? <img alt="utilisateur" src={picture} className="post-author-img" /> : ''}
+        {picture ? (
+          <img alt="utilisateur" src={picture} className="post-author-img" />
+        ) : (
+          ''
+        )}
         <p className="post-author-name">
           {firstname} a posté le{' '}
           {new Date(createdAt).toLocaleDateString('fr-FR')}:

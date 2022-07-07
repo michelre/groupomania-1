@@ -14,36 +14,32 @@ export default function User({
 }) {
   return (
     <article className="account-container">
-      <h1 className="account-title">Mon compte</h1>
       <div className="account-info">
-        <img src={imageUrl} className="account-img" alt={alt} />
+        {imageUrl ? (
+          <img src={imageUrl} className="account-img" alt={alt} />
+        ) : (
+          ''
+        )}
         <div className="account-description">
+          <h1 className="account-title">Mon compte</h1>
           <h2 className="account-name">
-            Salut {firstName}
-            <i className="user-icon far fa-smile-beam"></i>!
+            Salut {firstName} <i className="user-icon far fa-smile-beam"></i>!
           </h2>
           <br />
           <div className="account-icon">
             <i className="user-icon fas fa-at"></i>
-            <p className="account-email">
-              Email:
-              <br />
-              {email}
-            </p>
+            <p className="account-data">Email: {email}</p>
           </div>
           <br />
           <div className="account-icon">
             <i className="user-icon fas fa-building"></i>
-            <p className="account-department">
-              Département: <br />
-              {department}
-            </p>
+            <p className="account-data">Département: {department}</p>
+          </div>
+          <div className="account-functions">
+            <ModifyUser userId={id} />
+            <DeleteUser userId={id} onDeleteUser={() => onDeleteUser({ id })} />
           </div>
         </div>
-      </div>
-      <div className="account-functions">
-        <ModifyUser userId={id} />
-        <DeleteUser userId={id} onDeleteUser={() => onDeleteUser({ id })} />
       </div>
     </article>
   );

@@ -1,7 +1,6 @@
 import Banner from '../components/Banner';
 import Footer from '../components/Footer';
 import Api from '../Api';
-import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import User from '../components/User';
 import Nav from '../components/Nav';
@@ -9,28 +8,23 @@ import Nav from '../components/Nav';
 const api = new Api();
 
 export default function Account() {
-  const navigate = useNavigate();
   const [user, setUser] = useState([]);
   const id = JSON.parse(localStorage.getItem('userId'));
-  console.log(id);
 
   useEffect(() => {
     api
       .getUserById(id)
       .then((response) => {
-        console.log(response);
         setUser(response);
       })
       .catch((error) => {
         alert("L'utilisateur n'a pas pu être trouvé");
-        console.log(error);
       });
   }, [id]);
 
   const onDeleteUser = ({ id }) => {
     if (window.confirm('Êtes-vous sûr de vouloir supprimer votre compte?')) {
       api.deleteUser(id);
-      navigate(`/logout`);
     }
   };
   return (
@@ -50,6 +44,11 @@ export default function Account() {
         department={user.department}
         alt={user.alt}
         id={user.id}
+      />
+      <img
+        className="home-illustration"
+        src="../images/compte.jpg"
+        alt="illustration compte"
       />
       <Footer />
     </div>

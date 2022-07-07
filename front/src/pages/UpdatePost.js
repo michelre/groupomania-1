@@ -21,12 +21,8 @@ export default function UpdatePost() {
       })
       .catch((error) => {
         alert("Le post n'a pas pu être trouvé");
-        console.log(error);
       });
   }, [id]);
-
-  console.log(id);
-  console.log(post);
 
   return (
     <div>

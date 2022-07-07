@@ -19,7 +19,6 @@ export default function FormCreatePost() {
         userId,
       })
       .then(() => {
-        console.log(imageUrl);
         navigate(`/wall/`);
       });
   }
