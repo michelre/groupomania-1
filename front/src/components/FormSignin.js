@@ -10,13 +10,13 @@ export default function Signin({ onSignin }) {
   const [invalidP, setInvalidP] = useState(false);
 
   const handleFocusF = (e) => {
-    setInvalidF(true);
+    setInvalidF(!e.target.validity.valid);
   };
   const handleFocusE = (e) => {
-    setInvalidE(true);
+    setInvalidE(!e.target.validity.valid);
   };
   const handleFocusP = (e) => {
-    setInvalidP(true);
+    setInvalidP(!e.target.validity.valid);
   };
 
   function handleSubmit(e) {
@@ -34,47 +34,47 @@ export default function Signin({ onSignin }) {
       <h2>Créez votre compte en quelques minutes!</h2>
       <input
         type="text"
+        className={invalidF ? 'error' : ''}
         placeholder="Votre prénom"
         value={firstName}
         name="firstname"
         onChange={(e) => setFirstName(e.target.value)}
         required
         onBlur={handleFocusF}
-        invalid={invalidF.toString()}
         pattern="([a-zA-ZàâäéèëêîïôöùûüçæœÂÀÄÉÈÊËÎÏÔÖÛÜÙÇÆŒ]{2,})+([-'\s][a-zA-ZàâäéèëêîïôöùûüçæœÂÀÄÉÈÊËÎÏÔÖÛÜÙÇÆŒ]+)?$"
         title="Veuillez entrer votre prénom!"
       />
-      <span>Veuillez entrer votre prénom!</span>
+        {invalidF ? <span>Veuillez entrer votre prénom!</span> : null}
       <input
         type="email"
+        className={invalidE ? 'error' : ''}
         placeholder="Votre email"
         value={email}
         name="email"
         onChange={(e) => setEmail(e.target.value)}
         onBlur={handleFocusE}
-        invalid={invalidE.toString()}
         pattern="([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,5})$"
         title="Veuillez entrer un email valide!"
         required
       />
-      <span>Veuillez entrer un email valide!</span>
+        {invalidE ? <span>Veuillez entrer un email valide!</span> : null}
       <input
         type="password"
         placeholder="Votre mot de passe"
+        className={invalidP ? 'error' : ''}
         value={password}
         name="password"
         onChange={(e) => setPassword(e.target.value)}
         onBlur={handleFocusP}
-        invalid={invalidP.toString()}
         pattern="^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$"
         title="Veuillez entrer un mot de passe de minimum 8 caratères comprenant au
         moins 1 majuscule, 1 chiffre, 1 minuscule et 1 caractère spécial!"
         required
       />
-      <span>
+        {invalidP ? <span>
         Veuillez entrer un mot de passe de minimum 8 caratères comprenant au
         moins 1 majuscule, 1 chiffre, 1 minuscule et 1 caractère spécial!
-      </span>
+      </span> : null}
       <button type="submit" className="form-login-btn">
         Créer un compte
       </button>

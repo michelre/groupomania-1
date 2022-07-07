@@ -4,7 +4,7 @@
     max-width:520px;
     margin: 10px auto;
     padding: 20px;
-    gap: 10px;  
+    gap: 10px;
     box-sizing: border-box;
 }
 
@@ -30,7 +30,7 @@ label {
 
 
 .form-login-btn {
-    cursor: pointer; 
+    cursor: pointer;
     border-radius:50px;
     border:none;
     background: linear-gradient(to left top, #091F43, #FD2D01);
@@ -53,10 +53,13 @@ span {
     padding:3px;
     color: #FD2D01;
     font-size: 12px;
-    display: none;
 }
 
-input:invalid[invalid="true"] {
+input.error, textarea.error {
+    border: 1px solid #FD2D01;
+}
+
+/*input:invalid[invalid="true"] {
     border: 1px solid #FD2D01;
 }
 
@@ -78,7 +81,7 @@ input:invalid[invalid="false"] {
 
 input:invalid[invalid="false"]~span{
     display: none;
-}
+}*/
 
 @media screen and (min-width: 768px) and (max-width: 992px) {
     input {
@@ -104,4 +107,4 @@ input:invalid[invalid="false"]~span{
     h2 {
         font-size:50px;
     }
-}    
+}
